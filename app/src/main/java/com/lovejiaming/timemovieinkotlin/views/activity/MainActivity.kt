@@ -10,7 +10,7 @@ import android.support.v7.widget.SearchView
 import android.view.Menu
 import com.lovejiaming.timemovieinkotlin.R
 import com.lovejiaming.timemovieinkotlin.views.fragments.HotMovieFragment
-import com.lovejiaming.timemovieinkotlin.views.fragments.TrailerNewsFragment
+import com.lovejiaming.timemovieinkotlin.views.fragments.FindFunnyFragment
 import com.zhy.autolayout.AutoLayoutActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -29,13 +29,14 @@ class MainActivity : AutoLayoutActivity() {
         navigation_main.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.drawer_menu_1 -> setDisplayFragment(HotMovieFragment.newInstance())
-                R.id.drawer_menu_2 -> setDisplayFragment(TrailerNewsFragment.newInstance())
+                R.id.drawer_menu_2 -> setDisplayFragment(FindFunnyFragment.newInstance())
                 else -> {
                 }
             }
             drawer.closeDrawer(GravityCompat.START)
             return@setNavigationItemSelectedListener true
         }
+        navigation_main.setItemTextAppearance(R.style.SnackbarTextStyle)
     }
 
     fun setDisplayFragment(fragment: Fragment) = supportFragmentManager.beginTransaction().replace(R.id.containerall, fragment).commit()

@@ -7,7 +7,7 @@
     <item
         android:id="@+id/drawer_menu_2"
         android:checkable="true"
-        android:title="MTIME-新闻预告片" />
+        android:title="MTIME-发现" />
     <item
         android:id="@+id/drawer_menu_3"
         android:checkable="true"
