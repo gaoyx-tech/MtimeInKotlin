@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/search_cover"
+        android:layout_width="110px"
+        android:layout_height="145px"
+        android:layout_centerHorizontal="true"
+        android:scaleType="fitXY" />
+
+    <TextView
+        android:id="@+id/search_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search_cover"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="3px"
+        android:maxLines="1"
+        android:textColor="#fff"
+        android:textSize="11sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/search_director"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search_name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="3px"
+        android:maxLines="1"
+        android:textColor="#fff"
+        android:textSize="11sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/search_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search_director"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="3px"
+        android:maxLines="1"
+        android:textColor="#fff"
+        android:textSize="11sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/search_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/search_type"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="3px"
+        android:maxLines="1"
+        android:textColor="#fff"
+        android:textSize="11sp"
+        android:textStyle="bold" />
+</RelativeLayout>

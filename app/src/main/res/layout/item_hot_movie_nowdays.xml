@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/touch_bg"
+    tools:ignore="PxUsage">
+
+    <ImageView
+        android:id="@+id/hotnowadays_haveseen"
+        android:layout_width="20px"
+        android:layout_height="20px"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10px"
+        android:layout_marginTop="5px"
+        android:src="@drawable/haveseen_unselect" />
+
+    <ImageView
+        android:id="@+id/hotnowadays_cover"
+        android:layout_width="100px"
+        android:layout_height="150px"
+        android:layout_marginLeft="10px"
+        android:layout_marginTop="10px"
+        android:scaleType="centerCrop" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15px"
+        android:layout_toRightOf="@id/hotnowadays_cover"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/hotnowadays_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:textSize="14px"
+            android:textStyle="italic|bold" />
+
+        <TextView
+            android:id="@+id/hotnowadays_actor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10px"
+            android:textColor="#000"
+            android:textSize="13px"
+            android:textStyle="italic|bold" />
+
+        <TextView
+            android:id="@+id/hotnowadays_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10px"
+            android:textColor="#000"
+            android:textSize="13px"
+            android:textStyle="italic|bold" />
+
+        <TextView
+            android:id="@+id/hotnowadays_wantcount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10px"
+            android:textColor="@color/colorPrimary"
+            android:textSize="13px"
+            android:textStyle="italic|bold" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@id/hotnowadays_cover"
+        android:layout_marginTop="10px"
+        android:background="#fff" />
+</RelativeLayout>

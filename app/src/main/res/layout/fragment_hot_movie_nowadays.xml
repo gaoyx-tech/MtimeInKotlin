@@ -1,0 +1,56 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/itembkg"
+    android:orientation="vertical"
+    tools:context="com.lovejiaming.timemovieinkotlin.views.fragments.HotMovie_NowadaysFragment"
+    tools:ignore="PxUsage">
+
+    <RelativeLayout
+        android:id="@+id/layoutchoise"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5px"
+        android:layout_marginTop="5px">
+
+        <com.lovejiaming.timemovieinkotlin.views.ownerdraw.CustomLabelView
+            android:id="@+id/labelScore"
+            android:layout_width="60px"
+            android:layout_height="23px" />
+
+        <com.lovejiaming.timemovieinkotlin.views.ownerdraw.CustomLabelView
+            android:id="@+id/labelHot"
+            android:layout_width="60px"
+            android:layout_height="23px"
+            android:layout_marginLeft="5px"
+            android:layout_toRightOf="@id/labelScore" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@id/layoutchoise"
+        android:layout_marginTop="5px"
+        android:background="#fff" />
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/layoutchoise"
+        android:layout_marginTop="10px">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/nowadays_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/snack_container_now"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" />
+</RelativeLayout>

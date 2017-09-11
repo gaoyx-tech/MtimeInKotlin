@@ -1,0 +1,39 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="searchViewStyle">@style/SearchViewStyle</item>
+        <item name="actionMenuTextColor">#ffff</item>
+    </style>
+
+    <!--修改searchView样式-->
+    <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <item name="searchIcon">@drawable/icon_search_white</item>
+        <item name="searchHintIcon">@null</item>
+    </style>
+
+    <!-- toolbar标题样式 -->
+    <style name="ToolbarTitle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textColor">#ffff</item>
+        <item name="android:textStyle">bold|italic</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColorSecondary">@android:color/white</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+    <style name="TabLayoutTextStyle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="SnackbarTextStyle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textColor">#ffff</item>
+        <item name="android:textStyle">italic|bold</item>
+        <item name="android:textSize">14sp</item>>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+</resources>

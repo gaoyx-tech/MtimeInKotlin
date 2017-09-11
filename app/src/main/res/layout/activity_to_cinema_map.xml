@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.lovejiaming.timemovieinkotlin.views.activity.ToCinemaMapActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/cinema_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:title="导航到电影院 "
+        app:titleTextAppearance="@style/ToolbarTitle" />
+
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/mapview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/cinema_toolbar" />
+
+    <RelativeLayout
+        android:id="@+id/bottominfo"
+        android:layout_width="match_parent"
+        android:layout_height="75px"
+        android:layout_alignParentBottom="true"
+        android:background="#cf212121">
+
+        <TextView
+            android:id="@+id/cinema_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15px"
+            android:layout_marginTop="15px"
+            android:textColor="#fff"
+            android:textSize="13sp"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:id="@+id/cinema_feature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cinema_name"
+            android:layout_marginLeft="15px"
+            android:layout_marginTop="10px"
+            android:textColor="#ffff"
+            android:textSize="12sp"
+            android:textStyle="italic|bold" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

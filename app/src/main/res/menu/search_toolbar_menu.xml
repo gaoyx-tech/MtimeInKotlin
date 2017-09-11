@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/searchitem_sortscore"
+        android:title="评分排序"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/searchitem_sortyear"
+        android:title="年代排序"
+        app:showAsAction="ifRoom" />
+</menu>

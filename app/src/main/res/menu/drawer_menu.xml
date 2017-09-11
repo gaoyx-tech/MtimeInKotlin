@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/drawer_menu_1"
+        android:checkable="true"
+        android:title="MTIME-热映" />
+    <item
+        android:id="@+id/drawer_menu_2"
+        android:checkable="true"
+        android:title="MTIME-新闻预告片" />
+    <item
+        android:id="@+id/drawer_menu_3"
+        android:checkable="true"
+        android:title="MTIME-榜单" />
+
+</menu>

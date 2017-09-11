@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/touch_bg"
+    android:orientation="vertical"
+    tools:ignore="PxUsage">
+
+    <TextView
+        android:id="@+id/come_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15px"
+        android:layout_marginTop="15px"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/come_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20px"
+        android:layout_marginTop="15px"
+        android:text="更多 "
+        android:textColor="@color/colorAccent"
+        android:textSize="13sp"
+        android:textStyle="bold|italic" />
+
+    <LinearLayout
+        android:id="@+id/layoutline1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/come_title"
+        android:layout_marginTop="10px"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <LinearLayout
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_cover1"
+                android:layout_width="match_parent"
+                android:layout_height="180px"
+                android:scaleType="centerCrop"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/iv_iwannasee1"
+                android:layout_width="20px"
+                android:layout_height="20px"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5px"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_name1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5px"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="#000"
+                android:textSize="12sp"
+                android:textStyle="bold|bold"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_wanna1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5px"
+                android:maxLines="1"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp"
+                android:textStyle="bold|bold"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5px"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_cover2"
+                android:layout_width="match_parent"
+                android:layout_height="180px"
+                android:scaleType="centerCrop"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/iv_iwannasee2"
+                android:layout_width="20px"
+                android:layout_height="20px"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5px"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_name2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5px"
+                android:maxLines="1"
+                android:textColor="#000"
+                android:textSize="12sp"
+                android:textStyle="bold|bold"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_wanna2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5px"
+                android:maxLines="1"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp"
+                android:textStyle="bold|bold"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5px"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_cover3"
+                android:layout_width="match_parent"
+                android:layout_height="180px"
+                android:scaleType="centerCrop"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/iv_iwannasee3"
+                android:layout_width="20px"
+                android:layout_height="20px"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5px"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_name3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5px"
+                android:maxLines="1"
+                android:textColor="#000"
+                android:textSize="12sp"
+                android:textStyle="bold|bold"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_wanna3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5px"
+                android:maxLines="1"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp"
+                android:textStyle="bold|bold"
+                android:visibility="gone" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutline2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layoutline1"
+        android:layout_marginTop="10px"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_cover4"
+                android:layout_width="match_parent"
+                android:layout_height="180px"
+                android:scaleType="centerCrop"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/iv_iwannasee4"
+                android:layout_width="20px"
+                android:layout_height="20px"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5px"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_name4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5px"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="#000"
+                android:textSize="12sp"
+                android:textStyle="bold|bold"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_wanna4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5px"
+                android:maxLines="1"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp"
+                android:textStyle="bold|bold"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5px"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_cover5"
+                android:layout_width="match_parent"
+                android:layout_height="180px"
+                android:scaleType="centerCrop"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/iv_iwannasee5"
+                android:layout_width="20px"
+                android:layout_height="20px"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5px"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_name5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5px"
+                android:maxLines="1"
+                android:textColor="#000"
+                android:textSize="12sp"
+                android:textStyle="bold|bold"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_wanna5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5px"
+                android:maxLines="1"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp"
+                android:textStyle="bold|bold"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5px"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/iv_cover6"
+                android:layout_width="match_parent"
+                android:layout_height="180px"
+                android:scaleType="centerCrop"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/iv_iwannasee6"
+                android:layout_width="20px"
+                android:layout_height="20px"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5px"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_name6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5px"
+                android:maxLines="1"
+                android:textColor="#000"
+                android:textSize="12sp"
+                android:textStyle="bold|bold"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_wanna6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5px"
+                android:maxLines="1"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp"
+                android:textStyle="bold|bold"
+                android:visibility="gone" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@id/layoutline2"
+        android:layout_marginTop="10px"
+        android:background="#fff" />
+
+</RelativeLayout>

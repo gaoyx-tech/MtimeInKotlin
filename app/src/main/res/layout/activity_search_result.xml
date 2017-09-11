@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#212121"
+    tools:context="com.lovejiaming.timemovieinkotlin.views.activity.SearchResultActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:title="搜索结果  "
+        app:titleTextAppearance="@style/ToolbarTitle" />
+
+    <TextView
+        android:id="@+id/types"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:layout_marginLeft="10px"
+        android:layout_marginTop="3px"
+        android:text="电影类型："
+        android:textColor="#fff"
+        android:textSize="14sp"
+        android:textStyle="bold|italic" />
+
+    <GridView
+        android:id="@+id/gridview_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/types"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="10px"
+        android:layout_marginTop="3px"
+        android:horizontalSpacing="1dp"
+        android:numColumns="8"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="1dp" />
+
+    <TextView
+        android:id="@+id/years"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/gridview_type"
+        android:layout_marginLeft="10px"
+        android:layout_marginTop="3px"
+        android:text="电影年代："
+        android:textColor="#fff"
+        android:textSize="14sp"
+        android:textStyle="bold|italic" />
+
+    <GridView
+        android:id="@+id/gridview_year"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/years"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="10px"
+        android:layout_marginTop="3px"
+        android:horizontalSpacing="1dp"
+        android:numColumns="8"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="1dp" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="4px"
+        android:layout_below="@id/gridview_year"
+        android:layout_marginTop="2px"
+        android:background="@color/colorPrimary" />
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_search"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/line"
+        android:layout_marginTop="2px">
+
+        <GridView
+            android:id="@+id/gridview_result_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#212121"
+            android:listSelector="@null"
+            android:numColumns="3"
+            android:verticalSpacing="5dp" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</RelativeLayout>

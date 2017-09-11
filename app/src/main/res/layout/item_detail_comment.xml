@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/touch_bg">
+
+    <ImageView
+        android:id="@+id/comment_head"
+        android:layout_width="35px"
+        android:layout_height="35px"
+        android:layout_marginLeft="10px"
+        android:layout_marginTop="10px" />
+
+    <TextView
+        android:id="@+id/comment_name_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15px"
+        android:layout_marginTop="10px"
+        android:layout_toRightOf="@id/comment_head"
+        android:textColor="#000"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/comment_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/comment_head"
+        android:layout_marginLeft="10px"
+        android:layout_marginTop="10px"
+        android:lineSpacingMultiplier="1.5"
+        android:maxLines="10"
+        android:textColor="#000"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/comment_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/comment_info"
+        android:layout_marginLeft="10px"
+        android:layout_marginTop="10px"
+        android:textColor="#000"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/comment_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/comment_info"
+        android:layout_marginRight="15px"
+        android:layout_marginTop="10px"
+        android:textColor="#000"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@id/comment_score"
+        android:layout_marginTop="10px"
+        android:background="#fff" />
+</RelativeLayout>
