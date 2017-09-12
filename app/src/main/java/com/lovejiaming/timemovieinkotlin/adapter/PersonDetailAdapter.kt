@@ -13,6 +13,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.lovejiaming.timemovieinkotlin.R
+import com.lovejiaming.timemovieinkotlin.mTimeDisplayImage
 import com.lovejiaming.timemovieinkotlin.networkbusiness.AwardDetailItem
 import com.lovejiaming.timemovieinkotlin.networkbusiness.PersonAllMovie
 import com.lovejiaming.timemovieinkotlin.networkbusiness.PersonDetailResponse
@@ -106,7 +107,7 @@ class PersonDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.
             when (getItemViewType(position)) {
                 HEAD_TYPE -> {
                     with(holder as HeadViewHolder) {
-                        Glide.with(ctx).load(mData?.image).skipMemoryCache(true).centerCrop().into(head).onDestroy()
+                        head?.mTimeDisplayImage(ctx, mData?.image)
                         name?.text = mData?.nameCn ?: mData?.nameEn
                         birthday?.text = "${mData?.birthYear}-${mData?.birthMonth}-${mData?.birthDay} "
                         job?.text = mData?.profession
@@ -124,7 +125,7 @@ class PersonDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.
                         person_hotmovie_name?.text = "${mData?.hotMovie?.movieTitleCn} "
                         person_hotmovie_rating?.text = "${mData?.hotMovie?.ratingFinal.toString()}分 "
                         person_hotmovie_type?.text = "${mData?.hotMovie?.type} "
-                        Glide.with(ctx).load(mData?.hotMovie?.movieCover).centerCrop().skipMemoryCache(true).into(person_hotmovie_cover).onDestroy()
+                        person_hotmovie_cover?.mTimeDisplayImage(ctx, mData?.hotMovie?.movieCover ?: "")
                         //
                         itemView.setOnClickListener {
                             val intent = Intent(ctx, MovieDetailActivity::class.java)
@@ -223,7 +224,7 @@ class PersonDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.
                 with(holder!!) {
                     person_job?.text = g_listWinAwards[position].awardName ?: ""
                     person_name?.text = g_listWinAwards[position].movieTitle ?: ""
-                    Glide.with(ctx).load(g_listWinAwards[position].image ?: "").centerCrop().skipMemoryCache(true).into(person_head).onDestroy()
+                    person_head?.mTimeDisplayImage(ctx, g_listWinAwards[position].image ?: "")
                     itemView?.setOnClickListener {
                         val intent = Intent(ctx, MovieDetailActivity::class.java)
                         intent.putExtra("movieid", g_listWinAwards[position].movieId)
@@ -266,7 +267,7 @@ class PersonDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.
                 with(holder!!) {
                     person_name?.text = g_listNominageAwards[position].movieTitle ?: ""
                     person_job?.text = g_listNominageAwards[position].awardName ?: ""
-                    Glide.with(ctx).load(g_listNominageAwards[position].image ?: "").centerCrop().skipMemoryCache(true).into(person_head).onDestroy()
+                    person_head?.mTimeDisplayImage(ctx, g_listNominageAwards[position].image ?: "")
                     itemView?.setOnClickListener {
                         val intent = Intent(ctx, MovieDetailActivity::class.java)
                         intent.putExtra("movieid", g_listNominageAwards[position].movieId)
@@ -301,7 +302,7 @@ class PersonDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.
             with(holder!!) {
                 person_job?.text = g_listAllMovies[position].offices?.map { it.name }?.joinToString()
                 person_name?.text = g_listAllMovies[position].name ?: ""
-                Glide.with(ctx).load(g_listAllMovies[position].image ?: "").skipMemoryCache(true).centerCrop().into(person_head).onDestroy()
+                person_head?.mTimeDisplayImage(ctx, g_listAllMovies[position].image ?: "")
                 itemView?.setOnClickListener {
                     val intent = Intent(ctx, MovieDetailActivity::class.java)
                     intent.putExtra("movieid", g_listAllMovies[position].id)

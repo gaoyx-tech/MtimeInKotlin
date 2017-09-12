@@ -13,6 +13,7 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.lovejiaming.timemovieinkotlin.R
 import com.lovejiaming.timemovieinkotlin.databasebusiness.MovieRoomOperate
+import com.lovejiaming.timemovieinkotlin.mTimeDisplayImage
 import com.lovejiaming.timemovieinkotlin.networkbusiness.HotMovieNowadaysItemData
 import com.lovejiaming.timemovieinkotlin.views.activity.MovieDetailActivity
 import com.lovejiaming.timemovieinkotlin.views.fragments.HotMovie_NowadaysFragment
@@ -93,7 +94,7 @@ class HotMovieNowadaysAdapter(val ctx: Context, val action: HotMovie_NowadaysFra
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: InnerViewHolder?, position: Int) {
         with(holder!!) {
-            Glide.with(ctx).load(m_listHotNowadays[position].img).centerCrop().skipMemoryCache(true).into(iv_Cover).onDestroy()
+            iv_Cover.mTimeDisplayImage(ctx, m_listHotNowadays[position].img)
             tv_Name.text = "片名：<< ${m_listHotNowadays[position].tCn} >>"
             tv_Actor.text = "演员：${m_listHotNowadays[position].actors} "
             tv_Score.text = "评分：${m_listHotNowadays[position].r} 分 "

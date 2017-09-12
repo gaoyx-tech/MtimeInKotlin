@@ -12,6 +12,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.lovejiaming.timemovieinkotlin.R
+import com.lovejiaming.timemovieinkotlin.mTimeDisplayImage
 import com.lovejiaming.timemovieinkotlin.networkbusiness.HotMovieSoonComeItemData
 import com.lovejiaming.timemovieinkotlin.views.activity.MovieDetailActivity
 import com.zhy.autolayout.utils.AutoUtils
@@ -69,7 +70,7 @@ class HotMovieSoonComeOfAllAdapter(val ctx: Context) : RecyclerView.Adapter<Recy
                     comeallname?.text = "<< ${mAllListData[position - exclude.size].title} >> "
                     comeallwannacount?.text = "${mAllListData[position - exclude.size].wantedCount}人想看 "
                     comealltype?.text = "${mAllListData[position - exclude.size].type} "
-                    Glide.with(ctx.applicationContext).load(mAllListData[position - exclude.size].image).centerCrop().skipMemoryCache(true).into(comeallcover).onDestroy()
+                    comeallcover?.mTimeDisplayImage(ctx, mAllListData[position - exclude.size].image ?: "")
                     //
                     itemView.setOnClickListener {
                         val intent = Intent(ctx, MovieDetailActivity::class.java)

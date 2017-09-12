@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.lovejiaming.timemovieinkotlin.R
+import com.lovejiaming.timemovieinkotlin.mTimeDisplayImage
 import com.lovejiaming.timemovieinkotlin.networkbusiness.MovieSearchResultList
 import com.zhy.autolayout.utils.AutoUtils
 import kotlinx.android.synthetic.main.item_search_result_content.view.*
@@ -56,18 +57,15 @@ class MovieSearchAdapter(val ctx: Context) : BaseAdapter() {
             convertView?.tag = holder
         }
         holder.apply {
-            Glide.with(ctx).load(m_listResult[p0].images.large).skipMemoryCache(true).centerCrop().into(iv_Cover)
+            iv_Cover.mTimeDisplayImage(ctx, m_listResult[p0].images.large)
             tv_Name.text = "<< ${m_listResult[p0].title} >>"
             tv_Score.text = "${m_listResult[p0].rating.average}分  ${m_listResult[p0].year}年"
             //
             val strDire = m_listResult[p0].directors.map { it.name }.joinToString(",", "", "")
             tv_Director.text = "导演 $strDire"
             //
-            val sbType = StringBuilder()
-            m_listResult[p0].genres.forEach {
-                sbType.append("$it ")
-            }
-            tv_Type.text = "类型 $sbType"
+            val strType = m_listResult[p0].genres.joinToString(separator = ",")
+            tv_Type.text = "类型 $strType"
         }
         AutoUtils.autoSize(convertView)
         return convertView!!

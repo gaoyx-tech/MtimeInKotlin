@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.lovejiaming.timemovieinkotlin.R
+import com.lovejiaming.timemovieinkotlin.mTimeDisplayImage
 import com.lovejiaming.timemovieinkotlin.networkbusiness.PersonDetail
 import com.lovejiaming.timemovieinkotlin.networkbusiness.PersonDetailAll
 import com.lovejiaming.timemovieinkotlin.views.activity.PersonDetailActivity
@@ -80,7 +81,7 @@ class MovieDetailAllPersonAdapter(val ctx: Context, person: PersonDetailAll) : R
                     val forsize = m_arrTypeNameIndex.filter { position > it }
                     name?.text = m_arrRealPersonInfo[position - forsize.size].name
                     nameEn?.text = m_arrRealPersonInfo[position - forsize.size].nameEn
-                    Glide.with(ctx).load(m_arrRealPersonInfo[position - forsize.size].image).centerCrop().skipMemoryCache(true).into(head)
+                    head?.mTimeDisplayImage(ctx, m_arrRealPersonInfo[position - forsize.size].image)
                     //
                     itemView.setOnClickListener {
                         val intent = Intent(ctx, PersonDetailActivity::class.java)

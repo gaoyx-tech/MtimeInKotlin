@@ -13,6 +13,7 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.lovejiaming.timemovieinkotlin.R
+import com.lovejiaming.timemovieinkotlin.mTimeDisplayImage
 import com.lovejiaming.timemovieinkotlin.networkbusiness.DetailCommentItem
 import com.lovejiaming.timemovieinkotlin.networkbusiness.MovieDetailInfo
 import com.lovejiaming.timemovieinkotlin.networkbusiness.PersonDetailAll
@@ -63,7 +64,7 @@ class MovieDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.V
                     head_director?.text = "导演：${mMovieDetail?.director?.directorName} "
                     head_runtime?.text = "时长：${mMovieDetail?.runTime} "
                     head_year?.text = "年代：${mMovieDetail?.year} "
-                    Glide.with(ctx).load(mMovieDetail?.image).centerCrop().skipMemoryCache(true).into(head_cover).onDestroy()
+                    head_cover?.mTimeDisplayImage(ctx, mMovieDetail?.image)
                     //
                     rating?.setRating(mMovieDetail?.rating?.toFloat()?.times(10f) ?: 0f)
                     //
@@ -78,7 +79,7 @@ class MovieDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.V
                 mMovieDetail?.let {
                     val size = mMovieDetail?.images?.size ?: 0
                     (0 until minOf(size, 4)).forEach {
-                        Glide.with(ctx).load(mMovieDetail?.images?.get(it)).centerCrop().skipMemoryCache(true).into((holder as ImageInfoViewHolder).listImages[it]).onDestroy()
+                        (holder as ImageInfoViewHolder).listImages[it]?.mTimeDisplayImage(ctx, mMovieDetail?.images?.get(it))
                     }
                 }
             }
@@ -88,7 +89,7 @@ class MovieDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.V
                     with(holder as VideoInfoViewHolder) {
                         (0 until minOf(size, 3)).forEach {
                             listVLayouts[it]?.visibility = View.VISIBLE
-                            Glide.with(ctx).load(mMovieDetail?.videos?.get(it)?.image).skipMemoryCache(true).centerCrop().into(listVImages[it]).onDestroy()
+                            listVImages[it]?.mTimeDisplayImage(ctx, mMovieDetail?.videos?.get(it)?.image)
                             listVNames[it]?.text = mMovieDetail?.videos?.get(it)?.title
                             //跳转
                             val strPath = mMovieDetail?.videos?.get(it)?.url
@@ -246,7 +247,7 @@ class MovieDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.V
             with(holder!!) {
                 when (position) {
                     0 -> {
-                        Glide.with(ctx).load(mPersonAll?.types?.get(0)?.persons?.get(0)?.image).centerCrop().skipMemoryCache(true).into(head).onDestroy()
+                        head?.mTimeDisplayImage(ctx, mPersonAll?.types?.get(0)?.persons?.get(0)?.image)
                         job?.text = "${mPersonAll?.types?.get(0)?.typeName}: "
                         name?.text = "${mPersonAll?.types?.get(0)?.persons?.get(0)?.name} "
                         itemView.setOnClickListener {
@@ -257,7 +258,7 @@ class MovieDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.V
                         }
                     }
                     else -> {
-                        Glide.with(ctx).load(mPersonAll?.types?.get(1)?.persons?.get(position - 1)?.image).centerCrop().skipMemoryCache(true).into(head).onDestroy()
+                        head?.mTimeDisplayImage(ctx, mPersonAll?.types?.get(1)?.persons?.get(position - 1)?.image)
                         job?.text = "${mPersonAll?.types?.get(1)?.typeName}: "
                         name?.text = "${mPersonAll?.types?.get(1)?.persons?.get(position - 1)?.name} "
                         itemView.setOnClickListener {
@@ -305,7 +306,7 @@ class MovieDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.V
         @SuppressLint("SetTextI18n")
         override fun onBindViewHolder(holder: MovieDetailCommentAdapter.ViewHolder?, position: Int) {
             holder?.apply {
-                Glide.with(ctx).load(m_listComment?.get(position)?.caimg).centerCrop().skipMemoryCache(true).into(comment_head).onDestroy()
+                comment_head?.mTimeDisplayImage(ctx, m_listComment?.get(position)?.caimg)
                 comment_name_address?.text = "${m_listComment?.get(position)?.ca}    (${m_listComment?.get(position)?.cal})"
                 comment_info?.text = m_listComment?.get(position)?.ce
                 comment_score?.text = "打分 ${m_listComment?.get(position)?.cr}"
@@ -331,5 +332,4 @@ class MovieDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.V
             val comment_score = itemView?.findViewById<TextView>(R.id.comment_score)
         }
     }
-
 }
