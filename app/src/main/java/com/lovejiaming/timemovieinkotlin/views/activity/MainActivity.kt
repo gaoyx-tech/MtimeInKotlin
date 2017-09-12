@@ -17,6 +17,11 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AutoLayoutActivity() {
     //
     lateinit var toggle: ActionBarDrawerToggle
+    //
+    val m_listFragments: ArrayList<Fragment> by lazy {
+        arrayListOf(HotMovieFragment.newInstance(), FindFunnyFragment.newInstance())
+    }
+    var m_nCurrentIndex: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,12 +29,12 @@ class MainActivity : AutoLayoutActivity() {
         //toolbar和drawer产生联动
         setToolbarDrawer()
         //设置初始显示
-        setDisplayFragment(HotMovieFragment.newInstance())
+        switchDisplayFragment(0)
         //
         navigation_main.setNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.drawer_menu_1 -> setDisplayFragment(HotMovieFragment.newInstance())
-                R.id.drawer_menu_2 -> setDisplayFragment(FindFunnyFragment.newInstance())
+                R.id.drawer_menu_1 -> switchDisplayFragment(0)
+                R.id.drawer_menu_2 -> switchDisplayFragment(1)
                 else -> {
                 }
             }
@@ -39,7 +44,23 @@ class MainActivity : AutoLayoutActivity() {
         navigation_main.setItemTextAppearance(R.style.SnackbarTextStyle)
     }
 
-    fun setDisplayFragment(fragment: Fragment) = supportFragmentManager.beginTransaction().replace(R.id.containerall, fragment).commit()
+    fun switchDisplayFragment(nDisplayIndex: Int) {
+        val mgr = supportFragmentManager.beginTransaction()
+        //
+        if (m_nCurrentIndex == nDisplayIndex) {
+            if (!m_listFragments[nDisplayIndex].isAdded)
+            //就是当前，但是还没添加进栈
+                mgr.add(R.id.containerall, m_listFragments[nDisplayIndex]).show(m_listFragments[nDisplayIndex])
+        } else {
+            if (m_listFragments[nDisplayIndex].isAdded) {
+                mgr.hide(m_listFragments[m_nCurrentIndex]).show(m_listFragments[nDisplayIndex])
+            } else {
+                mgr.hide(m_listFragments[m_nCurrentIndex]).add(R.id.containerall, m_listFragments[nDisplayIndex]).show(m_listFragments[nDisplayIndex])
+            }
+        }
+        mgr.commit()
+        m_nCurrentIndex = nDisplayIndex
+    }
 
     fun setToolbarDrawer() {
         toggle = ActionBarDrawerToggle(this, drawer, toolbar, 0, 0)

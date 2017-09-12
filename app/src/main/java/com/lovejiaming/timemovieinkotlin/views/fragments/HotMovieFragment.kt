@@ -24,7 +24,7 @@ class HotMovieFragment : Fragment() {
     val mArrTitles: List<String> by lazy {
         listOf("  正在热映  ", "  即将热映  ", "  本地影院  ")
     }
-    //fragments
+    //m_listFragments
     val mArrFragments: List<Fragment> by lazy {
         listOf(HotMovie_NowadaysFragment.newInstance(),
                 HotMovie_SoonComeFragment.newInstance(),
