@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <ImageView
         android:id="@+id/iv_pic1_newscover1"
         android:layout_width="match_parent"
-        android:layout_height="120px"
+        android:layout_height="180px"
         android:layout_margin="5px"
         android:scaleType="centerCrop" />
 
@@ -15,6 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10px"
+        android:layout_below="@id/iv_pic1_newscover1"
         android:gravity="center"
         android:textColor="#000"
         android:textSize="13sp"
@@ -26,6 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10px"
         android:gravity="center"
+        android:layout_below="@id/tv_pic1_newstitle"
         android:textColor="@color/tabitembkg"
         android:textSize="12sp"
         android:textStyle="bold|italic" />
@@ -40,4 +43,4 @@
         android:layout_marginTop="5px"
         android:textColor="@color/tabitembkg"
         android:textSize="10sp" />
-</LinearLayout>
+</RelativeLayout>

@@ -34,6 +34,9 @@ class NetWorkRealCall_Time private constructor() {
     //
     fun getPersonDetailService() = mRetrofit.create(IMoviePersonDetailService::class.java)!!
 
+    //
+    fun getFindFunnyService() = mRetrofit.create(IFindFunnyService::class.java)!!
+
     //single instance
     companion object {
         //

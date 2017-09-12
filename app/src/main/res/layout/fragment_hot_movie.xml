@@ -9,7 +9,7 @@
         android:id="@+id/titletablayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabGravity="fill"
+        app:tabGravity="center"
         app:tabIndicatorHeight="2dp"
         app:tabMode="fixed"
         app:tabSelectedTextColor="@color/colorPrimary"

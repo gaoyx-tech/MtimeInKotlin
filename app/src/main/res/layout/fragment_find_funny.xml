@@ -10,7 +10,7 @@
         android:id="@+id/findfunny_tablayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabGravity="fill"
+        app:tabGravity="center"
         app:tabIndicatorColor="@color/colorPrimary"
         app:tabIndicatorHeight="2dp"
         app:tabSelectedTextColor="@color/colorPrimary"

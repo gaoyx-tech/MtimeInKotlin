@@ -5,13 +5,11 @@ import android.content.Context
 import android.content.Intent
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import com.bumptech.glide.Glide
 import com.lovejiaming.timemovieinkotlin.R
 import com.lovejiaming.timemovieinkotlin.mTimeDisplayImage
 import com.lovejiaming.timemovieinkotlin.networkbusiness.AwardDetailItem
@@ -21,7 +19,6 @@ import com.lovejiaming.timemovieinkotlin.views.activity.MovieDetailActivity
 import com.lovejiaming.timemovieinkotlin.views.activity.SimpleItemDecorationHor
 import com.lovejiaming.timemovieinkotlin.views.ownerdraw.CustomRatingView
 import com.zhy.autolayout.utils.AutoUtils
-import javax.microedition.khronos.opengles.GL
 
 /**
  * Created by xiaoxin on 2017/9/7.
