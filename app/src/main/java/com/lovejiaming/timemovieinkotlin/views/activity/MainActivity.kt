@@ -35,8 +35,6 @@ class MainActivity : AutoLayoutActivity() {
             when (it.itemId) {
                 R.id.drawer_menu_1 -> switchDisplayFragment(0)
                 R.id.drawer_menu_2 -> switchDisplayFragment(1)
-                else -> {
-                }
             }
             drawer.closeDrawer(GravityCompat.START)
             return@setNavigationItemSelectedListener true
