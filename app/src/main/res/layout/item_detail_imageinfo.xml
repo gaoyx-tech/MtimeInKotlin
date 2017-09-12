@@ -36,9 +36,9 @@
                 android:scaleType="centerCrop" />
 
             <View
-                android:layout_width="2px"
+                android:layout_width="4px"
                 android:layout_height="match_parent"
-                android:background="#000" />
+                android:background="#fff" />
 
             <ImageView
                 android:id="@+id/image2"
@@ -51,9 +51,9 @@
         <View
             android:id="@+id/decor1"
             android:layout_width="match_parent"
-            android:layout_height="2px"
+            android:layout_height="4px"
             android:layout_below="@id/line1"
-            android:background="#000" />
+            android:background="#fff" />
 
         <LinearLayout
             android:id="@+id/line2"
@@ -71,9 +71,9 @@
                 android:scaleType="centerCrop" />
 
             <View
-                android:layout_width="2px"
+                android:layout_width="4px"
                 android:layout_height="match_parent"
-                android:background="#000" />
+                android:background="#fff" />
 
             <ImageView
                 android:id="@+id/image4"
