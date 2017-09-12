@@ -44,6 +44,10 @@ class MovieDetailOfTrailerActivity : AutoLayoutActivity() {
     }
 
     fun initViews() {
+        setSupportActionBar(toolbar_detailalltrailer)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        toolbar_detailalltrailer.setNavigationOnClickListener { finish() }
+        //
         recyclerview_moretrailer.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recyclerview_moretrailer.adapter = mAdapter
         //
@@ -52,11 +56,10 @@ class MovieDetailOfTrailerActivity : AutoLayoutActivity() {
                 super.onScrollStateChanged(recyclerView, newState)
                 val layoutManager = recyclerView?.layoutManager
                 if (layoutManager is LinearLayoutManager) {
-                    val lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition()
-                    val visibleItemCount = layoutManager.childCount
+                    val lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition()//可见的最后一个的索引
+                    val visibleItemCount = layoutManager.childCount//可见范围内有多少个
                     if ((visibleItemCount > 0 && newState == RecyclerView.SCROLL_STATE_IDLE &&
-                            (lastVisibleItemPosition) >= layoutManager.itemCount - 1) && m_nCurrentPageIndex != m_nPageTotal) {
-                        Log.i("bottom", "isbottom")
+                            (lastVisibleItemPosition) == layoutManager.itemCount-1) && m_nCurrentPageIndex != m_nPageTotal) {
                         ++m_nCurrentPageIndex
                         m_sAcitonType = "loadmore"
                         startRequestAllTrailers()

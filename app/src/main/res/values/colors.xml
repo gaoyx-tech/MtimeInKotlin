@@ -3,5 +3,6 @@
     <color name="colorPrimary">#bf360c</color>
     <color name="colorPrimaryDark">#d84315</color>
     <color name="colorAccent">#bf360c</color>
-    <color name="itembkg">#e0e0e0</color>
+    <color name="itembkg">#f0f0f0</color>
+    <color name="tabitembkg">#a0a0a0</color>
 </resources>

@@ -1,9 +1,7 @@
 package com.lovejiaming.timemovieinkotlin.views.fragments
 
-
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentPagerAdapter
 import android.support.v4.app.FragmentStatePagerAdapter
 import android.view.LayoutInflater
 import android.view.View
@@ -22,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_hot_movie.*
 class HotMovieFragment : Fragment() {
     //titles
     val mArrTitles: List<String> by lazy {
-        listOf("  正在热映  ", "  即将热映  ", "  本地影院  ")
+        listOf("正在热映 ", "即将热映 ", "本地影院 ")
     }
     //m_listFragments
     val mArrFragments: List<Fragment> by lazy {

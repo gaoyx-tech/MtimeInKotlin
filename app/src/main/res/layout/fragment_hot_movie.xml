@@ -9,12 +9,11 @@
         android:id="@+id/titletablayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabGravity="center"
+        app:tabGravity="fill"
         app:tabIndicatorHeight="2dp"
         app:tabMode="fixed"
         app:tabSelectedTextColor="@color/colorPrimary"
-        app:tabTextAppearance="@style/TabLayoutTextStyle"
-        app:tabTextColor="#a0a0a0" />
+        app:tabTextAppearance="@style/TabLayoutTextStyle" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/titleviewpager"

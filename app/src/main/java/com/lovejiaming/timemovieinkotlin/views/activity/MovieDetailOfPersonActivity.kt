@@ -21,6 +21,11 @@ class MovieDetailOfPersonActivity : AutoLayoutActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie_detail_of_person)
         recyclerview_allperson.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        //
+        setSupportActionBar(toolbar_detailallperson)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        toolbar_detailallperson.setNavigationOnClickListener { finish() }
+
         setAllData()
     }
 
