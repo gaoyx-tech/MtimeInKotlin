@@ -5,7 +5,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 /**
- * Created by gaoyx on 2017/9/8.
+ * Created by xiaoxin on 2017/9/8.
  */
 //
 data class AwardDetailItem(val festivalEventYear: String?, val awardName: String?, val movieId: Int?, val movieTitle: String?, val movieYear: String?, val image: String?)

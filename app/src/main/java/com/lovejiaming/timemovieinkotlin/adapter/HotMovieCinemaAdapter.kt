@@ -14,7 +14,7 @@ import com.lovejiaming.timemovieinkotlin.views.activity.ToCinemaMapActivity
 import com.zhy.autolayout.utils.AutoUtils
 
 /**
- * Created by choujiaming on 2017/8/25.
+ * Created by xiaoxin on 2017/8/25.
  */
 
 class HotMovieCinemaAdapter(val ctx: Context) : RecyclerView.Adapter<HotMovieCinemaAdapter.InnerViewHolder>() {

@@ -24,7 +24,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 /**
- * Created by choujiaming on 2017/9/1.
+ * Created by xiaoxin on 2017/9/1.
  */
 class MovieDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     //detail数据

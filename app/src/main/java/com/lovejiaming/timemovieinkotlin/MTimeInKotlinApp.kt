@@ -1,6 +1,5 @@
 package com.lovejiaming.timemovieinkotlin
 
-import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.widget.ImageView
@@ -9,14 +8,14 @@ import com.baidu.mapapi.SDKInitializer
 import com.bumptech.glide.Glide
 import com.lovejiaming.timemovieinkotlin.networkbusiness.HotMovieSoonComeItemData
 
+/**
+ * Created by xiaoxin on 2017/8/28.
+ */
 //ImageView扩展函数
 fun ImageView.mTimeDisplayImage(activity: Context, strUrl: String?) {
     Glide.with(activity).load(strUrl).skipMemoryCache(true).centerCrop().into(this).onDestroy()
 }
 
-/**
- * Created by choujiaming on 2017/8/28.
- */
 class MTimeInKotlinApp : Application() {
     //
     var mComeSoonMonData: List<HotMovieSoonComeItemData>? = null

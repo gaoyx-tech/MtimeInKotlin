@@ -24,7 +24,7 @@ import com.zhy.autolayout.utils.AutoUtils
 import javax.microedition.khronos.opengles.GL
 
 /**
- * Created by choujiaming on 2017/9/7.
+ * Created by xiaoxin on 2017/9/7.
  */
 class PersonDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     //内部类也要用的，但是不能inner OOM

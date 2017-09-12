@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.item_search_result_content.view.*
 import java.lang.StringBuilder
 
 /**
- * Created by choujiaming on 2017/8/29.
+ * Created by xiaoxin on 2017/8/29.
  */
 class MovieSearchAdapter(val ctx: Context) : BaseAdapter() {
     //

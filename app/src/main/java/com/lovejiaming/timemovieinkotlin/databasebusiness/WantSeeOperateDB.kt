@@ -3,7 +3,7 @@ package com.lovejiaming.timemovieinkotlin.databasebusiness
 import android.arch.persistence.room.*
 
 /**
- * Created by choujiaming on 2017/8/31.
+ * Created by xiaoxin on 2017/8/31.
  */
 
 @Entity(tableName = "WantSee")

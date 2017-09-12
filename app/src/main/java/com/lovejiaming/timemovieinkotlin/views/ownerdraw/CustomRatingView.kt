@@ -13,7 +13,7 @@ import android.view.animation.OvershootInterpolator
 
 
 /**
- * Created by choujiaming on 2017/9/7.
+ * Created by xiaoxin on 2017/9/7.
  */
 class CustomRatingView(val ctx: Context, val attr: AttributeSet) : View(ctx, attr) {
 

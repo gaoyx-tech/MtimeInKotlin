@@ -18,7 +18,7 @@ import com.lovejiaming.timemovieinkotlin.views.activity.PlayVideoActivity
 import com.zhy.autolayout.utils.AutoUtils
 
 /**
- * Created by choujiaming on 2017/9/6.
+ * Created by xiaoxin on 2017/9/6.
  */
 class MovieDetailAllTrailerAdapter(val ctx: Context) : RecyclerView.Adapter<MovieDetailAllTrailerAdapter.AllTrailerViewHolder>() {
 

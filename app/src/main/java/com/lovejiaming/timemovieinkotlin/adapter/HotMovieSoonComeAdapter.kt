@@ -25,7 +25,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 /**
- * Created by choujiaming on 2017/8/25.
+ * Created by xiaoxin on 2017/8/25.
  * 数据库策略是，首先载入所有数据库数据，当点击桃心时，先insert和delete，然后立即从新load数据并填充缓存，
  * 并notify，这样，数据都是新的，桃心变色也是数据库数据，而不是先变色，再操作db
  */

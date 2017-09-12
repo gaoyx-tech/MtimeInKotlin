@@ -5,7 +5,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 /**
- * Created by choujiaming on 2017/8/28.
+ * Created by xiaoxin on 2017/8/28.
  * douban search movie interface
  * http://api.douban.com/v2/movie/search?q=战狼
  * http://api.douban.com/v2/movie/search?tag=惊悚 or 2017

@@ -6,7 +6,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 /**
- * Created by choujiaming on 2017/8/29.
+ * Created by xiaoxin on 2017/8/29.
  */
 class NetWorkRealCall_Douban private constructor() {
     private var mRetrofit: Retrofit? = null

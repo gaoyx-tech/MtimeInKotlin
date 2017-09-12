@@ -18,7 +18,7 @@ import com.lovejiaming.timemovieinkotlin.views.activity.MovieDetailActivity
 import com.zhy.autolayout.utils.AutoUtils
 
 /**
- * Created by choujiaming on 2017/9/5.
+ * Created by xiaoxin on 2017/9/5.
  * 某个月的所有即将放映
  */
 class HotMovieSoonComeOfAllAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {

@@ -24,7 +24,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 /**
- * Created by choujiaming on 2017/8/24.
+ * Created by xiaoxin on 2017/8/24.
  */
 
 class HotMovieNowadaysAdapter(val ctx: Context, val action: HotMovie_NowadaysFragment.IClickHaveSeenBtn) : RecyclerView.Adapter<HotMovieNowadaysAdapter.InnerViewHolder>() {

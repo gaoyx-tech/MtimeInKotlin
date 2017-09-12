@@ -11,7 +11,7 @@ import android.view.MotionEvent
 import android.view.View
 
 /**
- * Created by choujiaming on 2017/8/30.
+ * Created by xiaoxin on 2017/8/30.
  */
 class CustomLabelView(ctx: Context, val attr: AttributeSet) : View(ctx, attr) {
     //框

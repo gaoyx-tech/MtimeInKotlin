@@ -18,7 +18,7 @@ import com.lovejiaming.timemovieinkotlin.views.activity.PersonDetailActivity
 import com.zhy.autolayout.utils.AutoUtils
 
 /**
- * Created by choujiaming on 2017/9/7.
+ * Created by xiaoxin on 2017/9/7.
  */
 class MovieDetailAllPersonAdapter(val ctx: Context, person: PersonDetailAll) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     //应显示项目个数，职责名称+具体人数

@@ -7,7 +7,7 @@ import android.arch.persistence.room.RoomDatabase
 import android.content.Context
 
 /**
- * Created by choujiaming on 2017/8/31.
+ * Created by xiaoxin on 2017/8/31.
  */
 @Database(entities = arrayOf(WantSeeEntity::class, HaveSeenEntity::class), version = 1)
 abstract class AppDataBase : RoomDatabase() {
