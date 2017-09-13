@@ -36,8 +36,8 @@ class PlayVideoActivity : AutoLayoutActivity() {
             mGestureDetector.onTouchEvent(motionEvent)
             when (motionEvent.action) {
                 MotionEvent.ACTION_UP -> {
-                    m_bIsHandScroll = false
                     videoview.start()
+                    videoscrolltime.visibility = View.GONE
                     return@setOnTouchListener true
                 }
                 else -> {
@@ -49,14 +49,15 @@ class PlayVideoActivity : AutoLayoutActivity() {
 
     @SuppressLint("SimpleDateFormat")
     fun setTimerProgress() {
+        videoscrolltime.visibility = View.GONE
         disposble = Observable.interval(100, TimeUnit.MILLISECONDS).observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
-                    if (m_bIsHandScroll == false) {
-                        playprogress.max = videoview.duration
-                        playprogress.progress = videoview.currentPosition
-                        currenttime.text = SimpleDateFormat("mm:ss").format(videoview.currentPosition)
-                        alltime.text = SimpleDateFormat("mm:ss").format(videoview.duration)
-                    }
+                    playprogress.max = videoview.duration
+                    playprogress.progress = videoview.currentPosition
+                    currenttime.text = SimpleDateFormat("mm:ss").format(videoview.currentPosition)
+                    alltime.text = SimpleDateFormat("mm:ss").format(videoview.duration)
+                    //明显显示
+                    videoscrolltime.text = SimpleDateFormat("mm:ss").format(videoview.currentPosition)
                 }
         playprogress.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(p0: SeekBar?, p1: Int, p2: Boolean) {
@@ -95,7 +96,6 @@ class PlayVideoActivity : AutoLayoutActivity() {
         disposble.dispose()
     }
 
-    var m_bIsHandScroll = false
     //
     val gestureListener = object : GestureDetector.OnGestureListener {
         override fun onShowPress(p0: MotionEvent?) {
@@ -106,8 +106,8 @@ class PlayVideoActivity : AutoLayoutActivity() {
         }
 
         override fun onDown(p0: MotionEvent?): Boolean {
-            m_bIsHandScroll = true
             videoview.pause()
+            videoscrolltime.visibility = View.VISIBLE
             return true
         }
 
@@ -116,12 +116,10 @@ class PlayVideoActivity : AutoLayoutActivity() {
         }
 
         override fun onScroll(p0: MotionEvent?, p1: MotionEvent?, p2: Float, p3: Float): Boolean {
-            Log.i("distancex == ", p2.toString())
-            m_bIsHandScroll = true
             if (p2 < 0) {
-                videoview.seekTo(videoview.currentPosition + 50)
+                videoview.seekTo(videoview.currentPosition + 300)
             } else {
-                videoview.seekTo(videoview.currentPosition - 150)
+                videoview.seekTo(videoview.currentPosition - 300)
             }
             return true
         }

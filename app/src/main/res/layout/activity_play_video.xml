@@ -26,9 +26,20 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/prepareprogress"
         android:layout_centerHorizontal="true"
-        android:text="视频加载中"
+        android:text="视频加载中--左右滑动可调节进度"
         android:textColor="#fff"
         android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/videoscrolltime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="#1f000000"
+        android:padding="10px"
+        android:textColor="#fff"
+        android:textSize="25sp"
+        android:textStyle="bold|italic" />
 
     <TextView
         android:id="@+id/videotitle"
