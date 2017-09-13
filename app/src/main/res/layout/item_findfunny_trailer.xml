@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/touch_bg">
+
+    <ImageView
+        android:id="@+id/funnytrailer_cover"
+        android:layout_width="match_parent"
+        android:layout_height="200px"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/funnytrailer_allinfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/funnytrailer_cover"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8px"
+        android:gravity="center"
+        android:lineSpacingMultiplier="1.5"
+        android:textColor="#000"
+        android:textSize="12sp"
+        android:textStyle="italic|bold" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@id/funnytrailer_allinfo"
+        android:layout_marginTop="10px"
+        android:background="#fff" />
+
+</RelativeLayout>
