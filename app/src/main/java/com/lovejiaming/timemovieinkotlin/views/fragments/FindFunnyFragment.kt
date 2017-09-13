@@ -18,8 +18,8 @@ import kotlinx.android.synthetic.main.fragment_find_funny.*
 class FindFunnyFragment : Fragment() {
     //
     val m_listFragments: List<Fragment> by lazy {
-        arrayListOf(FindFunny_NewsFragment.newInstance("", ""),
-                FindFunny_TrailersFragment.newInstance("", ""),
+        arrayListOf(FindFunny_NewsFragment.newInstance(),
+                FindFunny_TrailersFragment.newInstance(),
                 FindFunny_ReviewFragment.newInstance("", ""))
     }
 
@@ -39,7 +39,7 @@ class FindFunnyFragment : Fragment() {
     }
 
     fun initViews() {
-        val arrTitleName = arrayListOf("发现新闻", "发现预告片", "发现影评")
+        val arrTitleName = arrayListOf("MTIME新闻", "MTIME预告片", "MTIME影评")
         funny_viewpager.adapter = object : FragmentStatePagerAdapter(childFragmentManager) {
             override fun getItem(position: Int): Fragment = m_listFragments[position]
             override fun getCount(): Int = 3

@@ -15,8 +15,8 @@
         android:id="@+id/tv_pic1_newstitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10px"
         android:layout_below="@id/iv_pic1_newscover1"
+        android:layout_marginTop="10px"
         android:gravity="center"
         android:textColor="#000"
         android:textSize="13sp"
@@ -26,9 +26,9 @@
         android:id="@+id/tv_pic1_newstitle2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/tv_pic1_newstitle"
         android:layout_marginTop="10px"
         android:gravity="center"
-        android:layout_below="@id/tv_pic1_newstitle"
         android:textColor="@color/tabitembkg"
         android:textSize="12sp"
         android:textStyle="bold|italic" />
@@ -43,4 +43,12 @@
         android:layout_marginTop="5px"
         android:textColor="@color/tabitembkg"
         android:textSize="10sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@id/tv_pic1_newstime"
+        android:layout_marginTop="10px"
+        android:background="#fff" />
+
 </RelativeLayout>

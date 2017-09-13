@@ -83,5 +83,12 @@
         android:layout_marginRight="5px"
         android:layout_marginTop="5px"
         android:textColor="@color/tabitembkg"
-        android:textSize="10sp" />
+        android:textSize="11sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@id/tv_pic3_newstime"
+        android:layout_marginTop="10px"
+        android:background="#fff" />
 </RelativeLayout>
