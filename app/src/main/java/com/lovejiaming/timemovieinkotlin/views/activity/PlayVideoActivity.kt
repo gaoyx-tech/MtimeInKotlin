@@ -37,6 +37,7 @@ class PlayVideoActivity : AutoLayoutActivity() {
             when (motionEvent.action) {
                 MotionEvent.ACTION_UP -> {
                     m_bIsHandScroll = false
+                    videoview.start()
                     return@setOnTouchListener true
                 }
                 else -> {
@@ -106,6 +107,7 @@ class PlayVideoActivity : AutoLayoutActivity() {
 
         override fun onDown(p0: MotionEvent?): Boolean {
             m_bIsHandScroll = true
+            videoview.pause()
             return true
         }
 
