@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import com.lovejiaming.timemovieinkotlin.R
 import com.lovejiaming.timemovieinkotlin.adapter.FindFunnyTrailersAdapter
 import com.lovejiaming.timemovieinkotlin.networkbusiness.NetWorkRealCall_Time
@@ -56,6 +57,11 @@ class FindFunny_TrailersFragment : Fragment() {
         } else {
             onStop()
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Glide.get(activity).clearMemory()
     }
 
     companion object {

@@ -9,7 +9,6 @@ import android.util.Log
 import android.view.View
 import com.bumptech.glide.Glide
 import com.lovejiaming.timemovieinkotlin.R
-import com.lovejiaming.timemovieinkotlin.R.id.*
 import com.lovejiaming.timemovieinkotlin.adapter.MovieDetailAdapter
 import com.lovejiaming.timemovieinkotlin.networkbusiness.NetWorkRealCall_Time
 import com.zhy.autolayout.AutoLayoutActivity

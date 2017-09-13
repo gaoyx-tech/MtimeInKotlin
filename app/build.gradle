@@ -36,13 +36,6 @@ android {
     }
 }
 
-repositories {
-    mavenCentral()
-    flatDir {
-        dirs 'libs' /**在libs文件夹下找aar文件*/
-    }
-}
-
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
