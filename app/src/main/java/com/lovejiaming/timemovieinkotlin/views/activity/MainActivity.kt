@@ -40,6 +40,7 @@ class MainActivity : AutoLayoutActivity() {
             return@setNavigationItemSelectedListener true
         }
         navigation_main.setItemTextAppearance(R.style.SnackbarTextStyle)
+        navigation_main.itemIconTintList = null
     }
 
     fun switchDisplayFragment(nDisplayIndex: Int) {

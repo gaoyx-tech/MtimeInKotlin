@@ -3,14 +3,17 @@
     <item
         android:id="@+id/drawer_menu_1"
         android:checkable="true"
+        android:icon="@drawable/navigation_icon"
         android:title="MTIME-热映" />
     <item
         android:id="@+id/drawer_menu_2"
         android:checkable="true"
+        android:icon="@drawable/navigation_icon"
         android:title="MTIME-发现" />
     <item
         android:id="@+id/drawer_menu_3"
         android:checkable="true"
+        android:icon="@drawable/navigation_icon"
         android:title="MTIME-榜单" />
 
 </menu>

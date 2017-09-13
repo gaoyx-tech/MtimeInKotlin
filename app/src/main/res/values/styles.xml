@@ -33,8 +33,9 @@
 
     <style name="SnackbarTextStyle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textColor">#ffff</item>
-        <item name="android:textStyle">italic|bold</item>
+        <item name="android:textStyle">bold|italic</item>
         <item name="android:textSize">14sp</item>>
+        <item name="android:padding">8px</item>>
         <item name="android:layout_centerVertical">true</item>
     </style>
 </resources>
