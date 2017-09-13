@@ -45,7 +45,7 @@ class FindFunnyFragment : Fragment() {
             override fun getCount(): Int = 3
             override fun getPageTitle(position: Int): CharSequence = arrTitleName[position]
         }
-        funny_viewpager.offscreenPageLimit = 3
+        funny_viewpager.offscreenPageLimit = 0
         findfunny_tablayout.setupWithViewPager(funny_viewpager)
     }
 

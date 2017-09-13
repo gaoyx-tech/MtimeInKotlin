@@ -15,6 +15,7 @@ import com.lovejiaming.timemovieinkotlin.views.activity.SimpleItemDecorationVer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_find_funny_trailers.*
+import java.util.concurrent.TimeUnit
 
 class FindFunny_TrailersFragment : Fragment() {
 
@@ -37,15 +38,27 @@ class FindFunny_TrailersFragment : Fragment() {
         recycler_all_trailer.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         recycler_all_trailer.addItemDecoration(SimpleItemDecorationVer())
         recycler_all_trailer.adapter = mAdapter
+    }
 
-        //
-        NetWorkRealCall_Time.newInstance().getFindFunnyService()
-                .requestFunnyTrailerList()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe {
-                    mAdapter.insertAllTrailers(it)
-                }
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        recycler_all_trailer?.let {
+            recycler_all_trailer.visibility = View.GONE
+            recycler_all_trailer.scrollToPosition(0)
+        }
+
+        if (isVisibleToUser) {
+            NetWorkRealCall_Time.newInstance().getFindFunnyService()
+                    .requestFunnyTrailerList()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe {
+                        mAdapter.insertAllTrailers(it)
+                        recycler_all_trailer.visibility = View.VISIBLE
+                    }
+        } else {
+            onStop()
+        }
     }
 
     companion object {

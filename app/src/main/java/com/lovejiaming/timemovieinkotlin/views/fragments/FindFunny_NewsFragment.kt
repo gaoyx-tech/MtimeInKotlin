@@ -42,13 +42,26 @@ class FindFunny_NewsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         recycler_news.layoutManager = LinearLayoutManager(this.activity, LinearLayoutManager.VERTICAL, false)
         recycler_news.adapter = mAdapter
-        NetWorkRealCall_Time.newInstance().getFindFunnyService()
-                .requestFunnyNewsList(1)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe {
-                    mAdapter.insertNewsData(it)
-                }
+    }
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        recycler_news?.let {
+            recycler_news.visibility = View.GONE
+            recycler_news.scrollToPosition(0)
+        }
+        if (isVisibleToUser) {
+            NetWorkRealCall_Time.newInstance().getFindFunnyService()
+                    .requestFunnyNewsList(1)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe {
+                        mAdapter.insertNewsData(it)
+                        recycler_news.visibility = View.VISIBLE
+                    }
+        } else {
+            onStop()
+        }
     }
 
     companion object {

@@ -1,10 +1,13 @@
 package com.lovejiaming.timemovieinkotlin.adapter
 
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.View
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import com.lovejiaming.timemovieinkotlin.R
@@ -24,9 +27,12 @@ class FindFunnyNewsAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView
     val PICS_ONE = 2
     //
     var m_listNewsData: List<NewsItem>? = null
+    //
+    private var mLastPosition = -1
 
     fun insertNewsData(data: NewsArray) {
         this.m_listNewsData = data.newsList
+        mLastPosition = -1
         notifyDataSetChanged()
     }
 
@@ -56,7 +62,7 @@ class FindFunnyNewsAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView
                     iv_pic1_newscover1?.mTimeDisplayImage(ctx, m_listNewsData?.get(position)?.image)
                     tv_pic1_newstitle?.text = m_listNewsData?.get(position)?.title
                     tv_pic1_newstitle2?.text = m_listNewsData?.get(position)?.title2
-                    tv_pic1_newstime?.text = "${ SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss").format(Date(m_listNewsData?.get(position)?.publishTime?.times(1000)!!)) }"
+                    tv_pic1_newstime?.text = "${SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss").format(Date(m_listNewsData?.get(position)?.publishTime?.times(1000)!!))}"
                 }
             }
             PICS_THREE -> {
@@ -66,9 +72,15 @@ class FindFunnyNewsAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView
                     iv_pic3_newscover3?.mTimeDisplayImage(ctx, m_listNewsData?.get(position)?.images?.get(2)?.url1 ?: "")
                     tv_pic3_newstitle?.text = m_listNewsData?.get(position)?.title
                     tv_pic3_newstitle2?.text = m_listNewsData?.get(position)?.title2
-                    tv_pic3_newstime?.text = "${ SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss").format(Date(m_listNewsData?.get(position)?.publishTime?.times(1000)!!)) }"
+                    tv_pic3_newstime?.text = "${SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss").format(Date(m_listNewsData?.get(position)?.publishTime?.times(1000)!!))}"
                 }
             }
+        }
+        //
+        if (position > mLastPosition) {
+            val tmpItem = holder?.itemView
+            val ani = AnimationUtils.loadAnimation(ctx, R.anim.item_bottom_in)
+            tmpItem?.startAnimation(ani)
         }
     }
 

@@ -1,11 +1,16 @@
 package com.lovejiaming.timemovieinkotlin.adapter
 
+import android.animation.ObjectAnimator
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.AnimationUtils
+import android.view.animation.AnticipateOvershootInterpolator
 import android.widget.ImageView
 import android.widget.TextView
 import com.lovejiaming.timemovieinkotlin.R
@@ -41,6 +46,10 @@ class FindFunnyTrailersAdapter(val ctx: Context) : RecyclerView.Adapter<FindFunn
                     intent.putExtra("path", m_listTrailers?.get(position)?.hightUrl)
                     ctx.startActivity(intent)
                 }
+                //animator
+                val ani = AnimationUtils.loadAnimation(ctx, R.anim.item_left_in)
+                ani.interpolator = AnticipateOvershootInterpolator()
+                itemView?.startAnimation(ani)
             }
         }
     }
