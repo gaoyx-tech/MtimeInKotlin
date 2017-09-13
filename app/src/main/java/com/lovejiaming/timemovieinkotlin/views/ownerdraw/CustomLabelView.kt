@@ -49,6 +49,11 @@ class CustomLabelView(ctx: Context, val attr: AttributeSet) : View(ctx, attr) {
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+        val bounds = Rect()
+        textPaint.getTextBounds(m_sText, 0, m_sText.length, bounds)
+        //
+        if (bounds.width() > measuredWidth)
+            setMeasuredDimension(bounds.width().times(2), measuredHeight)
     }
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {

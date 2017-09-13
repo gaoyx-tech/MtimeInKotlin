@@ -2,12 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/touch_bg">
+    android:background="@color/itembkg">
 
     <ImageView
         android:id="@+id/funnytrailer_cover"
         android:layout_width="match_parent"
         android:layout_height="200px"
+        android:layout_margin="6px"
         android:scaleType="centerCrop" />
 
     <ImageView
