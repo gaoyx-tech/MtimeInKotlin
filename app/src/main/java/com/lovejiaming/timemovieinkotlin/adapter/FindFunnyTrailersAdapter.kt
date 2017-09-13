@@ -1,6 +1,7 @@
 package com.lovejiaming.timemovieinkotlin.adapter
 
 import android.content.Context
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import com.lovejiaming.timemovieinkotlin.R
 import com.lovejiaming.timemovieinkotlin.mTimeDisplayImage
 import com.lovejiaming.timemovieinkotlin.networkbusiness.TrailerItem
 import com.lovejiaming.timemovieinkotlin.networkbusiness.TrailersDataArray
+import com.lovejiaming.timemovieinkotlin.views.activity.PlayVideoActivity
 import com.zhy.autolayout.utils.AutoUtils
 
 /**
@@ -32,6 +34,13 @@ class FindFunnyTrailersAdapter(val ctx: Context) : RecyclerView.Adapter<FindFunn
             with(holder!!) {
                 funnytrailer_cover?.mTimeDisplayImage(ctx, m_listTrailers?.get(position)?.coverImg)
                 funnytrailer_allinfo?.text = "<< ${m_listTrailers?.get(position)?.videoTitle} >>——${m_listTrailers?.get(position)?.summary} "
+                //
+                itemView.setOnClickListener {
+                    val intent = Intent(ctx, PlayVideoActivity::class.java)
+                    intent.putExtra("name", m_listTrailers?.get(position)?.videoTitle)
+                    intent.putExtra("path", m_listTrailers?.get(position)?.hightUrl)
+                    ctx.startActivity(intent)
+                }
             }
         }
     }

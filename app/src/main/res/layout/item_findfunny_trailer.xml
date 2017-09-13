@@ -10,6 +10,12 @@
         android:layout_height="200px"
         android:scaleType="centerCrop" />
 
+    <ImageView
+        android:layout_width="35px"
+        android:layout_height="35px"
+        android:layout_centerInParent="true"
+        android:src="@drawable/icon_video_play" />
+
     <TextView
         android:id="@+id/funnytrailer_allinfo"
         android:layout_width="match_parent"
