@@ -3,16 +3,16 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/touch_bg"
-    card_view:cardElevation="24dp"
+    android:layout_height="wrap_content"
+    card_view:cardBackgroundColor="@color/itembkg"
+    card_view:cardCornerRadius="2dp"
+    card_view:cardElevation="7dp"
     tools:ignore="PxUsage">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10px"
-        android:orientation="vertical">
+        android:layout_marginLeft="10px">
 
         <TextView
             android:id="@+id/funny_review_title"
@@ -23,8 +23,10 @@
             android:textStyle="italic|bold" />
 
         <View
-            android:layout_width="20px"
+            android:id="@+id/review_line"
+            android:layout_width="180px"
             android:layout_height="1px"
+            android:layout_below="@id/funny_review_title"
             android:layout_marginTop="10px"
             android:background="@color/colorPrimary" />
 
@@ -32,40 +34,42 @@
             android:id="@+id/funny_review_summary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/review_line"
             android:layout_marginTop="10px"
-            android:lineSpacingMultiplier="1.6"
+            android:lineSpacingMultiplier="1.5"
             android:textColor="#000"
             android:textSize="12sp"
             android:textStyle="bold" />
 
         <RelativeLayout
+            android:id="@+id/review_related"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10px"
-            android:background="#fff">
+            android:layout_below="@id/funny_review_summary"
+            android:layout_marginTop="10px">
 
             <ImageView
                 android:id="@+id/funny_review_movie_cover"
-                android:layout_width="50px"
-                android:layout_height="80px"
-                android:layout_margin="15px"
+                android:layout_width="80px"
+                android:layout_height="110px"
                 android:scaleType="centerCrop" />
 
             <TextView
-                android:id="@+id/funny_review_movie_year"
+                android:id="@+id/funny_review_movie_nameyear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="10px"
+                android:layout_marginLeft="5px"
                 android:layout_toRightOf="@id/funny_review_movie_cover"
-                android:textColor="#fff"
-                android:textSize="11sp"
-                android:textStyle="bold" />
+                android:textColor="#000"
+                android:textSize="12sp"
+                android:textStyle="bold|italic" />
         </RelativeLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/review_related"
             android:layout_marginTop="10px"
             android:gravity="center_vertical"
             android:orientation="horizontal">
@@ -95,5 +99,5 @@
                 android:textStyle="bold" />
 
         </LinearLayout>
-    </LinearLayout>
+    </RelativeLayout>
 </android.support.v7.widget.CardView>
