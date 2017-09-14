@@ -53,7 +53,7 @@ class CustomLabelView(ctx: Context, val attr: AttributeSet) : View(ctx, attr) {
         textPaint.getTextBounds(m_sText, 0, m_sText.length, bounds)
         //
         if (bounds.width() > measuredWidth)
-            setMeasuredDimension(bounds.width().times(2), measuredHeight)
+            setMeasuredDimension(bounds.width().plus(20), bounds.height() + 30)
     }
 
     override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {

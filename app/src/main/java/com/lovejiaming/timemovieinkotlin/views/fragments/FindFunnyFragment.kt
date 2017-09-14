@@ -20,7 +20,7 @@ class FindFunnyFragment : Fragment() {
     val m_listFragments: List<Fragment> by lazy {
         arrayListOf(FindFunny_NewsFragment.newInstance(),
                 FindFunny_TrailersFragment.newInstance(),
-                FindFunny_ReviewFragment.newInstance("", ""))
+                FindFunny_ReviewFragment.newInstance())
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

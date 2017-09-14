@@ -4,11 +4,16 @@
     android:layout_height="match_parent"
     tools:context="com.lovejiaming.timemovieinkotlin.views.fragments.FindFunny_TrailersFragment">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_all_trailer"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_funnytrailer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="5px"
-        android:background="#fff" />
+        android:layout_margin="5px">
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_all_trailer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#fff" />
+    </android.support.v4.widget.SwipeRefreshLayout>
 </RelativeLayout>

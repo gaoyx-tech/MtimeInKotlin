@@ -36,13 +36,16 @@ class FindFunny_TrailersFragment : Fragment() {
         recycler_all_trailer.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         recycler_all_trailer.addItemDecoration(SimpleItemDecorationVer())
         recycler_all_trailer.adapter = mAdapter
+        swipe_refresh_funnytrailer.isRefreshing = true
     }
 
+    //setUserVisibleHint(boolean isVisibleToUser)在Fragment OnCreateView()方法之前调用的
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
         recycler_all_trailer?.let {
             recycler_all_trailer.visibility = View.GONE
             recycler_all_trailer.scrollToPosition(0)
+            swipe_refresh_funnytrailer.isRefreshing = true
         }
 
         if (isVisibleToUser) {
@@ -53,6 +56,7 @@ class FindFunny_TrailersFragment : Fragment() {
                     .subscribe {
                         mAdapter.insertAllTrailers(it)
                         recycler_all_trailer.visibility = View.VISIBLE
+                        swipe_refresh_funnytrailer.isRefreshing = false
                     }
         } else {
             onStop()
