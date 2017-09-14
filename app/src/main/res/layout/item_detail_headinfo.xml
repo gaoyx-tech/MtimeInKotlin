@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    card_view:cardElevation="5dp"
     card_view:cardBackgroundColor="@color/itembkg"
     tools:ignore="PxUsage">
 
