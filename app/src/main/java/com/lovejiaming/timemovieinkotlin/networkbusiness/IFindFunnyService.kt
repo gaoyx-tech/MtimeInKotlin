@@ -18,7 +18,7 @@ data class TrailersDataArray(val trailers: List<TrailerItem>)
 
 //review
 data class ReviewItemRelated(val id: Int?, val Image: String?, val title: String?, val year: Int?)
-data class ReviewItem(val id: Int?, val nickname: String?, val rating: Int?, val summary: String?, val title: String?, val userImage: String?, val relatedObj: ReviewItemRelated?)
+data class ReviewItem(val id: Int?, val nickname: String?, val rating: Double?, val summary: String?, val title: String?, val userImage: String?, val relatedObj: ReviewItemRelated?)
 
 interface IFindFunnyService {
     @GET("News/NewsList.api?")

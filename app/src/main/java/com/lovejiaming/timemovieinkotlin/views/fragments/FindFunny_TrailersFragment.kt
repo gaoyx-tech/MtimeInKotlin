@@ -59,7 +59,7 @@ class FindFunny_TrailersFragment : Fragment() {
                         swipe_refresh_funnytrailer.isRefreshing = false
                     }
         } else {
-            onStop()
+            onPause()
         }
     }
 

@@ -43,7 +43,7 @@ class FindFunny_NewsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         recycler_news.layoutManager = LinearLayoutManager(this.activity, LinearLayoutManager.VERTICAL, false)
         recycler_news.adapter = mAdapter
-        swipe_refresh_funnynews.isRefreshing = true//第一次
+        swipe_refresh_funnynews.isRefreshing = true
     }
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
@@ -51,7 +51,7 @@ class FindFunny_NewsFragment : Fragment() {
         recycler_news?.let {
             recycler_news.visibility = View.GONE
             recycler_news.scrollToPosition(0)
-            swipe_refresh_funnynews.isRefreshing = true//除了第一次
+            swipe_refresh_funnynews.isRefreshing = true
         }
         if (isVisibleToUser) {
             NetWorkRealCall_Time.newInstance().getFindFunnyService()
@@ -64,7 +64,7 @@ class FindFunny_NewsFragment : Fragment() {
                         swipe_refresh_funnynews.isRefreshing = false
                     }
         } else {
-            onStop()
+            onPause()
         }
     }
 
