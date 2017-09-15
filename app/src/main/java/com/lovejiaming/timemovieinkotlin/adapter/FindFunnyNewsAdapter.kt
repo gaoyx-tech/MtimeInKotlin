@@ -1,9 +1,9 @@
 package com.lovejiaming.timemovieinkotlin.adapter
 
 import android.content.Context
+import android.graphics.Color
 import android.support.v4.view.PagerAdapter
 import android.support.v4.view.ViewPager
-import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -37,12 +37,19 @@ class FindFunnyNewsAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView
     fun insertAdvertiseData(data: MutableList<AdvertiseItem>) {
         //
         BannerViewHolder.g_listAdvertiseImages.clear()
+        BannerViewHolder.g_listViews.clear()
+        //
         (0 until data.size).forEachIndexed { index, _ ->
+            //
             val iv_adv = ImageView(ctx)
             iv_adv.mTimeDisplayImage(ctx, data[index].img)
             iv_adv.scaleType = ImageView.ScaleType.CENTER_CROP
             BannerViewHolder.g_listAdvertiseImages.add(iv_adv)
-            BannerViewHolder.gAdapter.notifyDataSetChanged()
+            //
+            val view = View(ctx)
+            view.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1f)
+            view.setBackgroundColor(Color.WHITE)
+            BannerViewHolder.g_listViews.add(view)
         }
     }
 
@@ -50,6 +57,7 @@ class FindFunnyNewsAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView
         this.m_listNewsData = data.newsList
         mLastPosition = -1
         notifyDataSetChanged()
+        BannerViewHolder.gAdapter.notifyDataSetChanged()
     }
 
     //
@@ -144,7 +152,10 @@ class FindFunnyNewsAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView
 
         //
         companion object {
+            //
             var g_listAdvertiseImages: MutableList<ImageView> = mutableListOf()
+            var g_listViews: MutableList<View> = mutableListOf()
+            //
             val gAdapter = object : PagerAdapter() {
                 override fun isViewFromObject(view: View?, view1: Any?): Boolean = view == view1
 
@@ -168,6 +179,11 @@ class FindFunnyNewsAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView
             //
             news_vp_advertise?.adapter = gAdapter
             news_vp_advertise?.currentItem = 0
+            //
+            g_listViews.forEachIndexed { index, _ ->
+                layout_indcator?.addView(g_listViews[index])
+            }
         }
+
     }
 }
