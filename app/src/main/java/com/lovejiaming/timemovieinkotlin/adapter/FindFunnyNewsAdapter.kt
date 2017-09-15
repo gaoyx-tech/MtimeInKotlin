@@ -30,24 +30,19 @@ class FindFunnyNewsAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView
     private val PICS_ONE = 2
     private val BANNER_ADVERTISE = 3
 
-    //
-    companion object {
-        var g_listAdvertiseData: MutableList<AdvertiseItem>? = null
-        var g_listAdvertiseImages: MutableList<ImageView> = mutableListOf()
-    }
-
     var m_listNewsData: List<NewsItem>? = null
     //
     private var mLastPosition = -1
 
     fun insertAdvertiseData(data: MutableList<AdvertiseItem>) {
-        g_listAdvertiseData?.clear()
-        g_listAdvertiseData = data
         //
-        g_listAdvertiseImages.clear()
-        (0 until g_listAdvertiseData!!.size).forEach {
+        BannerViewHolder.g_listAdvertiseImages.clear()
+        (0 until data.size).forEachIndexed { index, _ ->
             val iv_adv = ImageView(ctx)
-            g_listAdvertiseImages.add(iv_adv)
+            iv_adv.mTimeDisplayImage(ctx, data[index].img)
+            iv_adv.scaleType = ImageView.ScaleType.CENTER_CROP
+            BannerViewHolder.g_listAdvertiseImages.add(iv_adv)
+            BannerViewHolder.gAdapter.notifyDataSetChanged()
         }
     }
 
@@ -70,23 +65,18 @@ class FindFunnyNewsAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView
             }
             BANNER_ADVERTISE -> {
                 val view = LayoutInflater.from(ctx).inflate(R.layout.item_findfunny_news_banner, null)
-                return BannerViewHolder(ctx, view)
+                return BannerViewHolder(view)
             }
         }
         return null!!
     }
 
-    override fun getItemCount(): Int {
-        m_listNewsData?.let {
-            return m_listNewsData?.size?.plus(1)!!
-        }
-        return 0
-    }
+    override fun getItemCount(): Int = m_listNewsData?.size ?: 0 + 1
 
     override fun getItemViewType(position: Int): Int {
         if (position == 0)
             return BANNER_ADVERTISE
-        else if (m_listNewsData?.get(position)?.images?.size!! > 0)
+        else if (m_listNewsData?.get(position - 1)?.images?.size!! > 0)
             return PICS_THREE
         else
             return PICS_ONE
@@ -96,20 +86,20 @@ class FindFunnyNewsAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView
         when (getItemViewType(position)) {
             PICS_ONE -> {
                 with(holder!! as PicOneViewHolder) {
-                    iv_pic1_newscover1?.mTimeDisplayImage(ctx, m_listNewsData?.get(position)?.image)
-                    tv_pic1_newstitle?.text = m_listNewsData?.get(position)?.title
-                    tv_pic1_newstitle2?.text = m_listNewsData?.get(position)?.title2
+                    iv_pic1_newscover1?.mTimeDisplayImage(ctx, m_listNewsData?.get(position - 1)?.image)
+                    tv_pic1_newstitle?.text = m_listNewsData?.get(position - 1)?.title
+                    tv_pic1_newstitle2?.text = m_listNewsData?.get(position - 1)?.title2
                     tv_pic1_newstime?.text = "${SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss").format(Date(m_listNewsData?.get(position)?.publishTime?.times(1000)!!))}"
                 }
             }
             PICS_THREE -> {
                 with(holder!! as PicThreeViewHolder) {
-                    iv_pic3_newscover1?.mTimeDisplayImage(ctx, m_listNewsData?.get(position)?.images?.get(0)?.url1 ?: "")
-                    iv_pic3_newscover2?.mTimeDisplayImage(ctx, m_listNewsData?.get(position)?.images?.get(1)?.url1 ?: "")
-                    iv_pic3_newscover3?.mTimeDisplayImage(ctx, m_listNewsData?.get(position)?.images?.get(2)?.url1 ?: "")
-                    tv_pic3_newstitle?.text = m_listNewsData?.get(position)?.title
-                    tv_pic3_newstitle2?.text = m_listNewsData?.get(position)?.title2
-                    tv_pic3_newstime?.text = "${SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss").format(Date(m_listNewsData?.get(position)?.publishTime?.times(1000)!!))}"
+                    iv_pic3_newscover1?.mTimeDisplayImage(ctx, m_listNewsData?.get(position - 1)?.images?.get(0)?.url1 ?: "")
+                    iv_pic3_newscover2?.mTimeDisplayImage(ctx, m_listNewsData?.get(position - 1)?.images?.get(1)?.url1 ?: "")
+                    iv_pic3_newscover3?.mTimeDisplayImage(ctx, m_listNewsData?.get(position - 1)?.images?.get(2)?.url1 ?: "")
+                    tv_pic3_newstitle?.text = m_listNewsData?.get(position - 1)?.title
+                    tv_pic3_newstitle2?.text = m_listNewsData?.get(position - 1)?.title2
+                    tv_pic3_newstime?.text = "${SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss").format(Date(m_listNewsData?.get(position - 1)?.publishTime?.times(1000)!!))}"
                 }
             }
         }
@@ -146,24 +136,24 @@ class FindFunnyNewsAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView
         val tv_pic1_newstime = itemView?.findViewById<TextView>(R.id.tv_pic1_newstime)
     }
 
-    class BannerViewHolder(val ctx: Context, itemView: View?) : RecyclerView.ViewHolder(itemView) {
+    class BannerViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
         //
         val news_vp_advertise = itemView?.findViewById<ViewPager>(R.id.news_vp_advertise)
+        //
         val layout_indcator = itemView?.findViewById<LinearLayout>(R.id.layout_indcator)
 
-        init {
-            AutoUtils.autoSize(itemView)
-            //
-            news_vp_advertise?.adapter = object : PagerAdapter() {
+        //
+        companion object {
+            var g_listAdvertiseImages: MutableList<ImageView> = mutableListOf()
+            val gAdapter = object : PagerAdapter() {
                 override fun isViewFromObject(view: View?, view1: Any?): Boolean = view == view1
 
                 override fun destroyItem(container: ViewGroup?, position: Int, `object`: Any?) {
-                    super.destroyItem(container, position, `object`)
                     container?.removeView(g_listAdvertiseImages[position])
                 }
 
                 override fun instantiateItem(container: ViewGroup?, position: Int): Any {
-                    g_listAdvertiseImages[position].mTimeDisplayImage(ctx, g_listAdvertiseData?.get(position)?.img)
+                    container?.addView(g_listAdvertiseImages[position])
                     return g_listAdvertiseImages[position]
                 }
 
@@ -171,6 +161,13 @@ class FindFunnyNewsAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView
                     return g_listAdvertiseImages.size
                 }
             }
+        }
+
+        init {
+            AutoUtils.autoSize(itemView)
+            //
+            news_vp_advertise?.adapter = gAdapter
+            news_vp_advertise?.currentItem = 0
         }
     }
 }
