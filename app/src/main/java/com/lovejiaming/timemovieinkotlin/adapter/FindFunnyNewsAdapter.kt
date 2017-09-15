@@ -18,8 +18,11 @@ import com.lovejiaming.timemovieinkotlin.networkbusiness.AdvertiseItem
 import com.lovejiaming.timemovieinkotlin.networkbusiness.NewsArray
 import com.lovejiaming.timemovieinkotlin.networkbusiness.NewsItem
 import com.zhy.autolayout.utils.AutoUtils
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 /**
  * Created by xiaoxin on 2017/9/12.
@@ -48,9 +51,10 @@ class FindFunnyNewsAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView
             //
             val view = View(ctx)
             view.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1f)
-            view.setBackgroundColor(Color.WHITE)
+            view.setBackgroundColor(Color.BLACK)
             BannerViewHolder.g_listViews.add(view)
         }
+        BannerViewHolder.g_listViews[0].setBackgroundColor(Color.WHITE)
     }
 
     fun insertNewsData(data: NewsArray) {
@@ -110,6 +114,13 @@ class FindFunnyNewsAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView
                     tv_pic3_newstime?.text = "${SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss").format(Date(m_listNewsData?.get(position - 1)?.publishTime?.times(1000)!!))}"
                 }
             }
+            BANNER_ADVERTISE -> {
+                with(holder!! as BannerViewHolder) {
+                    BannerViewHolder.g_listViews.forEach {
+                        layout_indcator?.addView(it)
+                    }
+                }
+            }
         }
         //
         if (position > mLastPosition) {
@@ -149,6 +160,7 @@ class FindFunnyNewsAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView
         val news_vp_advertise = itemView?.findViewById<ViewPager>(R.id.news_vp_advertise)
         //
         val layout_indcator = itemView?.findViewById<LinearLayout>(R.id.layout_indcator)
+        var m_nIndex = 0
 
         //
         companion object {
@@ -178,12 +190,32 @@ class FindFunnyNewsAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView
             AutoUtils.autoSize(itemView)
             //
             news_vp_advertise?.adapter = gAdapter
-            news_vp_advertise?.currentItem = 0
             //
-            g_listViews.forEachIndexed { index, _ ->
-                layout_indcator?.addView(g_listViews[index])
+            Observable.interval(3, TimeUnit.SECONDS).observeOn(AndroidSchedulers.mainThread()).subscribe {
+                if (g_listAdvertiseImages.size > 0) {
+                    news_vp_advertise?.currentItem = m_nIndex
+                    if (++m_nIndex == g_listAdvertiseImages.size) {
+                        m_nIndex = 0
+                    }
+                }
             }
-        }
+            //
+            news_vp_advertise?.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+                override fun onPageScrollStateChanged(state: Int) {
+                }
 
+                override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+                }
+
+                override fun onPageSelected(position: Int) {
+                    g_listViews.forEachIndexed { index, view ->
+                        if (index == position)
+                            view.setBackgroundColor(Color.WHITE)
+                        else
+                            view.setBackgroundColor(Color.BLACK)
+                    }
+                }
+            })
+        }
     }
 }
