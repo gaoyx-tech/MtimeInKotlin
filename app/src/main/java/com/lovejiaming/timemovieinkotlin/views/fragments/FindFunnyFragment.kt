@@ -39,7 +39,7 @@ class FindFunnyFragment : Fragment() {
     }
 
     fun initViews() {
-        val arrTitleName = arrayListOf("MTIME新闻", "MTIME预告片", "MTIME影评")
+        val arrTitleName = arrayListOf("MTIME新闻 ", "MTIME预告片 ", "MTIME影评 ")
         funny_viewpager.adapter = object : FragmentStatePagerAdapter(childFragmentManager) {
             override fun getItem(position: Int): Fragment = m_listFragments[position]
             override fun getCount(): Int = 3

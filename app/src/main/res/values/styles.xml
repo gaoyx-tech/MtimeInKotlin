@@ -26,7 +26,7 @@
     </style>
 
     <style name="TabLayoutTextStyle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
-        <item name="android:textStyle">bold</item>
+        <item name="android:textStyle">bold|italic</item>
         <item name="android:textSize">15sp</item>
         <item name="android:textColor">@color/tabitembkg</item>>
     </style>

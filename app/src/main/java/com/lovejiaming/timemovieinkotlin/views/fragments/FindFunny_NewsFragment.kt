@@ -46,6 +46,29 @@ class FindFunny_NewsFragment : Fragment() {
         swipe_refresh_funnynews.isRefreshing = true
     }
 
+    fun startRequestNewsList() {
+        NetWorkRealCall_Time.newInstance().getFindFunnyService()
+                .requestFunnyNewsList(1)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe {
+                    mAdapter.insertNewsData(it)
+                    recycler_news.visibility = View.VISIBLE
+                    swipe_refresh_funnynews.isRefreshing = false
+                }
+    }
+
+    fun startRequestAdvertisementList() {
+        NetWorkRealCall_Time.newInstance().getFindFunnyService()
+                .requestFunnyAdvertise()
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe {
+                    mAdapter.insertAdvertiseData(it.topPosters)
+                    startRequestNewsList()
+                }
+    }
+
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
         recycler_news?.let {
@@ -54,15 +77,7 @@ class FindFunny_NewsFragment : Fragment() {
             swipe_refresh_funnynews.isRefreshing = true
         }
         if (isVisibleToUser) {
-            NetWorkRealCall_Time.newInstance().getFindFunnyService()
-                    .requestFunnyNewsList(1)
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.io())
-                    .subscribe {
-                        mAdapter.insertNewsData(it)
-                        recycler_news.visibility = View.VISIBLE
-                        swipe_refresh_funnynews.isRefreshing = false
-                    }
+            startRequestAdvertisementList()//first request advertise
         } else {
             onPause()
         }
