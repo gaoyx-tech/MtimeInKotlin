@@ -40,7 +40,7 @@ class MainActivity : AutoLayoutActivity() {
             return@setNavigationItemSelectedListener true
         }
         navigation_main.setItemTextAppearance(R.style.SnackbarTextStyle)
-        navigation_main.itemIconTintList = null
+        navigation_main.itemIconTintList = null//使navigationbar中图片保持原色
     }
 
     fun switchDisplayFragment(nDisplayIndex: Int) {
@@ -48,7 +48,7 @@ class MainActivity : AutoLayoutActivity() {
         //
         if (m_nCurrentIndex == nDisplayIndex) {
             if (!m_listFragments[nDisplayIndex].isAdded)
-            //就是当前，但是还没添加进栈
+                 //就是当前，但是还没添加进栈
                 mgr.add(R.id.containerall, m_listFragments[nDisplayIndex]).show(m_listFragments[nDisplayIndex])
         } else {
             if (m_listFragments[nDisplayIndex].isAdded) {

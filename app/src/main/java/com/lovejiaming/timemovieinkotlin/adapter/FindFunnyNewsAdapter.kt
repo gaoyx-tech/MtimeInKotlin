@@ -53,6 +53,8 @@ class FindFunnyNewsAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView
             view.setBackgroundColor(Color.BLACK)
             BannerViewHolder.g_listViews.add(view)
         }
+        //初始化第一个为白
+        BannerViewHolder.g_listViews[0].setBackgroundColor(Color.WHITE)
     }
 
     fun insertNewsData(data: NewsArray) {
@@ -121,6 +123,7 @@ class FindFunnyNewsAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView
                     }
                 }
             }
+
         }
         //
         if (position > mLastPosition) {
@@ -192,7 +195,7 @@ class FindFunnyNewsAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView
         init {
             AutoUtils.autoSize(itemView)
             news_vp_advertise?.adapter = gAdapter
-            //
+            //只create一次
             Observable.interval(2, TimeUnit.SECONDS).observeOn(AndroidSchedulers.mainThread()).subscribe {
                 news_vp_advertise?.currentItem = BannerViewHolder.g_nPlayIndex
                 if (++BannerViewHolder.g_nPlayIndex == BannerViewHolder.g_listAdvertiseImages.size) {
