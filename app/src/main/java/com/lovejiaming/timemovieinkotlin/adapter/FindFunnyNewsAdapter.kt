@@ -28,11 +28,10 @@ import java.util.concurrent.TimeUnit
  * Created by xiaoxin on 2017/9/12.
  */
 class FindFunnyNewsAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
     private val PICS_THREE = 1
     private val PICS_ONE = 2
     private val BANNER_ADVERTISE = 3
-
+    //
     var m_listNewsData: List<NewsItem>? = null
     //
     private var mLastPosition = -1
@@ -54,7 +53,6 @@ class FindFunnyNewsAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView
             view.setBackgroundColor(Color.BLACK)
             BannerViewHolder.g_listViews.add(view)
         }
-        BannerViewHolder.g_listViews[0].setBackgroundColor(Color.WHITE)
     }
 
     fun insertNewsData(data: NewsArray) {
@@ -117,8 +115,9 @@ class FindFunnyNewsAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView
             BANNER_ADVERTISE -> {
                 with(holder!! as BannerViewHolder) {
                     layout_indcator?.removeAllViews()
-                    BannerViewHolder.g_listViews.forEach {
-                        layout_indcator?.addView(it)
+                    BannerViewHolder.g_listViews.forEachIndexed { _, view ->
+                        if (view.parent == null)
+                            layout_indcator?.addView(view)
                     }
                 }
             }
@@ -128,6 +127,7 @@ class FindFunnyNewsAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView
             val tmpItem = holder?.itemView
             val ani = AnimationUtils.loadAnimation(ctx, R.anim.item_bottom_in)
             tmpItem?.startAnimation(ani)
+            mLastPosition = position
         }
     }
 
@@ -161,11 +161,10 @@ class FindFunnyNewsAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView
         val news_vp_advertise = itemView?.findViewById<ViewPager>(R.id.news_vp_advertise)
         //
         val layout_indcator = itemView?.findViewById<LinearLayout>(R.id.layout_indcator)
-        var m_nIndex = 0
 
-        //
         companion object {
             //
+            var g_nPlayIndex = 0
             var g_listAdvertiseImages: MutableList<ImageView> = mutableListOf()
             var g_listViews: MutableList<View> = mutableListOf()
             //
@@ -177,7 +176,10 @@ class FindFunnyNewsAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView
                 }
 
                 override fun instantiateItem(container: ViewGroup?, position: Int): Any {
-                    container?.addView(g_listAdvertiseImages[position])
+                    if (g_listAdvertiseImages[position].parent == null) {
+                        (container as? ViewPager)?.addView(g_listAdvertiseImages[position])
+                    } else
+                        (container as? ViewPager)?.removeView(g_listAdvertiseImages[position])
                     return g_listAdvertiseImages[position]
                 }
 
@@ -189,15 +191,12 @@ class FindFunnyNewsAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView
 
         init {
             AutoUtils.autoSize(itemView)
-            //
             news_vp_advertise?.adapter = gAdapter
             //
-            Observable.interval(3, TimeUnit.SECONDS).observeOn(AndroidSchedulers.mainThread()).subscribe {
-                if (g_listAdvertiseImages.size > 0) {
-                    news_vp_advertise?.currentItem = m_nIndex
-                    if (++m_nIndex == g_listAdvertiseImages.size) {
-                        m_nIndex = 0
-                    }
+            Observable.interval(2, TimeUnit.SECONDS).observeOn(AndroidSchedulers.mainThread()).subscribe {
+                news_vp_advertise?.currentItem = BannerViewHolder.g_nPlayIndex
+                if (++BannerViewHolder.g_nPlayIndex == BannerViewHolder.g_listAdvertiseImages.size) {
+                    BannerViewHolder.g_nPlayIndex = 0
                 }
             }
             //

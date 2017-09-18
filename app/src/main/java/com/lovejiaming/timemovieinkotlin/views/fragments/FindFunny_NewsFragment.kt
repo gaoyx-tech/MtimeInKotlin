@@ -6,7 +6,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.bumptech.glide.Glide
 
 import com.lovejiaming.timemovieinkotlin.R
 import com.lovejiaming.timemovieinkotlin.adapter.FindFunnyNewsAdapter
@@ -25,7 +24,7 @@ import kotlinx.android.synthetic.main.fragment_find_funny_news.*
  */
 class FindFunny_NewsFragment : Fragment() {
 
-    private val mAdapter: FindFunnyNewsAdapter by lazy {
+    private val mAdapter: FindFunnyNewsAdapter? by lazy {
         FindFunnyNewsAdapter(activity)
     }
 
@@ -44,6 +43,7 @@ class FindFunny_NewsFragment : Fragment() {
         recycler_news.layoutManager = LinearLayoutManager(this.activity, LinearLayoutManager.VERTICAL, false)
         recycler_news.adapter = mAdapter
         swipe_refresh_funnynews.isRefreshing = true
+        startRequestAdvertisementList()
     }
 
     fun startRequestNewsList() {
@@ -52,7 +52,7 @@ class FindFunny_NewsFragment : Fragment() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe {
-                    mAdapter.insertNewsData(it)
+                    mAdapter?.insertNewsData(it)
                     recycler_news.visibility = View.VISIBLE
                     swipe_refresh_funnynews.isRefreshing = false
                 }
@@ -64,28 +64,9 @@ class FindFunny_NewsFragment : Fragment() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe {
-                    mAdapter.insertAdvertiseData(it.topPosters)
+                    mAdapter?.insertAdvertiseData(it.topPosters)
                     startRequestNewsList()
                 }
-    }
-
-    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-        super.setUserVisibleHint(isVisibleToUser)
-        recycler_news?.let {
-            recycler_news.visibility = View.GONE
-            recycler_news.scrollToPosition(0)
-            swipe_refresh_funnynews.isRefreshing = true
-        }
-        if (isVisibleToUser) {
-            startRequestAdvertisementList()//first request advertise
-        } else {
-            onPause()
-        }
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Glide.get(activity).clearMemory()
     }
 
     companion object {
