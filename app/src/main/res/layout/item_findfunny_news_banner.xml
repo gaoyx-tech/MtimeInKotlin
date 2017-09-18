@@ -11,7 +11,7 @@
     <LinearLayout
         android:id="@+id/layout_indcator"
         android:layout_width="match_parent"
-        android:layout_height="5px"
+        android:layout_height="3px"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal" />
 

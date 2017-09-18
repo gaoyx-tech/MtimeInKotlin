@@ -31,7 +31,7 @@ class FindFunnyReviewAdapter(val ctx: Context) : RecyclerView.Adapter<FindFunnyR
                 //
                 val objResult = m_listReviewData?.get(position)
                 //
-                funny_review_title?.text = objResult?.title
+                funny_review_title?.text = "${objResult?.title} "
                 funny_review_summary?.text = objResult?.summary?.trim()
                 funny_review_movie_cover?.mTimeDisplayImage(ctx, objResult?.relatedObj?.image)
                 funny_review_movie_nameyear?.text = "${objResult?.relatedObj?.title}  (${objResult?.relatedObj?.year})"

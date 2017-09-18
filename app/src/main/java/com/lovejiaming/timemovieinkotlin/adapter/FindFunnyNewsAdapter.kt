@@ -116,6 +116,7 @@ class FindFunnyNewsAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView
             }
             BANNER_ADVERTISE -> {
                 with(holder!! as BannerViewHolder) {
+                    layout_indcator?.removeAllViews()
                     BannerViewHolder.g_listViews.forEach {
                         layout_indcator?.addView(it)
                     }

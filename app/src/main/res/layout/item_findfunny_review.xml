@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    card_view:cardBackgroundColor="@color/itembkg"
+    card_view:cardBackgroundColor="#fff"
     card_view:cardCornerRadius="2dp"
     card_view:cardElevation="7dp"
     tools:ignore="PxUsage">
