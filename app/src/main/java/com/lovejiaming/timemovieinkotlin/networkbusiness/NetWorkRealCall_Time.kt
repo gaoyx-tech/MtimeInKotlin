@@ -37,6 +37,9 @@ class NetWorkRealCall_Time private constructor() {
     //
     fun getFindFunnyService() = mRetrofit.create(IFindFunnyService::class.java)!!
 
+    //
+    fun getRankListService() = mRetrofit.create(IRankListService::class.java)!!
+
     //single instance
     companion object {
         //
