@@ -32,7 +32,6 @@ class PersonDetailActivity : AutoLayoutActivity() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     swipe_person.isRefreshing = false
-                    recycler_persondetail.adapter = mAdapter
                     mAdapter.insertPersonDetailData(it)
                     recycler_persondetail.scrollToPosition(0)
                 }, { Log.i("error", "neterror") })
@@ -56,6 +55,7 @@ class PersonDetailActivity : AutoLayoutActivity() {
 
         recycler_persondetail.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recycler_persondetail.addItemDecoration(SimpleItemDecorationVer())
+        recycler_persondetail.adapter = mAdapter
         //
         toolbar_persondetail.title = "${intent.getStringExtra("personname")} "
         setSupportActionBar(toolbar_persondetail)

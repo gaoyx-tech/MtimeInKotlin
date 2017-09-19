@@ -154,28 +154,28 @@ class MovieDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.V
     override fun getItemCount(): Int = 6
 
     class HeadInfoViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
-        val head_name = itemView?.findViewById<TextView>(R.id.head_name)
-        val head_year = itemView?.findViewById<TextView>(R.id.head_year)
-        val head_runtime = itemView?.findViewById<TextView>(R.id.head_runtime)
-        val head_director = itemView?.findViewById<TextView>(R.id.head_director)
-        val head_actor = itemView?.findViewById<TextView>(R.id.head_actor)
-        val head_type = itemView?.findViewById<TextView>(R.id.head_type)
-        val head_cover = itemView?.findViewById<ImageView>(R.id.head_cover)
-        val rating = itemView?.findViewById<CustomRatingView>(R.id.rating)
+        val head_name by lazy { itemView?.findViewById<TextView>(R.id.head_name) }
+        val head_year by lazy { itemView?.findViewById<TextView>(R.id.head_year) }
+        val head_runtime by lazy { itemView?.findViewById<TextView>(R.id.head_runtime) }
+        val head_director by lazy { itemView?.findViewById<TextView>(R.id.head_director) }
+        val head_actor by lazy { itemView?.findViewById<TextView>(R.id.head_actor) }
+        val head_type by lazy { itemView?.findViewById<TextView>(R.id.head_type) }
+        val head_cover by lazy { itemView?.findViewById<ImageView>(R.id.head_cover) }
+        val rating by lazy { itemView?.findViewById<CustomRatingView>(R.id.rating) }
     }
 
     class VideoInfoViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
-        val v_image1 = itemView?.findViewById<ImageView>(R.id.v_image1)
-        val v_image2 = itemView?.findViewById<ImageView>(R.id.v_image2)
-        val v_image3 = itemView?.findViewById<ImageView>(R.id.v_image3)
+        val v_image1 by lazy { itemView?.findViewById<ImageView>(R.id.v_image1) }
+        val v_image2 by lazy { itemView?.findViewById<ImageView>(R.id.v_image2) }
+        val v_image3 by lazy { itemView?.findViewById<ImageView>(R.id.v_image3) }
         //
-        val v_name1 = itemView?.findViewById<TextView>(R.id.v_name1)
-        val v_name2 = itemView?.findViewById<TextView>(R.id.v_name2)
-        val v_name3 = itemView?.findViewById<TextView>(R.id.v_name3)
+        val v_name1 by lazy { itemView?.findViewById<TextView>(R.id.v_name1) }
+        val v_name2 by lazy { itemView?.findViewById<TextView>(R.id.v_name2) }
+        val v_name3 by lazy { itemView?.findViewById<TextView>(R.id.v_name3) }
         //
-        val layout1 = itemView?.findViewById<RelativeLayout>(R.id.layout_image1)
-        val layout2 = itemView?.findViewById<RelativeLayout>(R.id.layout_image2)
-        val layout3 = itemView?.findViewById<RelativeLayout>(R.id.layout_image3)
+        val layout1 by lazy { itemView?.findViewById<RelativeLayout>(R.id.layout_image1) }
+        val layout2 by lazy { itemView?.findViewById<RelativeLayout>(R.id.layout_image2) }
+        val layout3 by lazy { itemView?.findViewById<RelativeLayout>(R.id.layout_image3) }
         //
         val moretrailer = itemView?.findViewById<TextView>(R.id.more_trailer)
         //
@@ -195,10 +195,10 @@ class MovieDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.V
     }
 
     class ImageInfoViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
-        val image1 = itemView?.findViewById<ImageView>(R.id.image1)
-        val image2 = itemView?.findViewById<ImageView>(R.id.image2)
-        val image3 = itemView?.findViewById<ImageView>(R.id.image3)
-        val image4 = itemView?.findViewById<ImageView>(R.id.image4)
+        val image1 by lazy { itemView?.findViewById<ImageView>(R.id.image1) }
+        val image2 by lazy { itemView?.findViewById<ImageView>(R.id.image2) }
+        val image3 by lazy { itemView?.findViewById<ImageView>(R.id.image3) }
+        val image4 by lazy { itemView?.findViewById<ImageView>(R.id.image4) }
         val listImages: MutableList<ImageView?>
 
         init {
@@ -281,8 +281,8 @@ class MovieDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.V
 
     //comment list
     class CommentViewHolder(val ctx: Context, itemView: View?) : RecyclerView.ViewHolder(itemView) {
-        val recyclerView = itemView?.findViewById<RecyclerView>(R.id.detail_recyclerview_persons)
-        val more_person = itemView?.findViewById<TextView>(R.id.more_person)
+        val recyclerView by lazy { itemView?.findViewById<RecyclerView>(R.id.detail_recyclerview_persons) }
+        val more_person by lazy { itemView?.findViewById<TextView>(R.id.more_person) }
         val mAdapter: MovieDetailCommentAdapter by lazy {
             MovieDetailCommentAdapter(ctx)
         }
@@ -324,11 +324,11 @@ class MovieDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.V
         }
 
         class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
-            val comment_head = itemView?.findViewById<ImageView>(R.id.comment_head)
-            val comment_name_address = itemView?.findViewById<TextView>(R.id.comment_name_address)
-            val comment_info = itemView?.findViewById<TextView>(R.id.comment_info)
-            val comment_time = itemView?.findViewById<TextView>(R.id.comment_time)
-            val comment_score = itemView?.findViewById<TextView>(R.id.comment_score)
+            val comment_head by lazy { itemView?.findViewById<ImageView>(R.id.comment_head) }
+            val comment_name_address by lazy { itemView?.findViewById<TextView>(R.id.comment_name_address) }
+            val comment_info by lazy { itemView?.findViewById<TextView>(R.id.comment_info) }
+            val comment_time by lazy { itemView?.findViewById<TextView>(R.id.comment_time) }
+            val comment_score by lazy { itemView?.findViewById<TextView>(R.id.comment_score) }
         }
     }
 }

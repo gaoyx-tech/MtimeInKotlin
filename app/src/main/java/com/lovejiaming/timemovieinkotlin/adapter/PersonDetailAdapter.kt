@@ -132,6 +132,11 @@ class PersonDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.
                         }
                     }
                 }
+                ALLMOVIE_TYPE, NOMINATE_TYPE, WINAWARD_TYPE -> {
+                    with(holder as HorizontalViewHolder) {
+                        recyclerview?.adapter = mAdapter
+                    }
+                }
                 else -> {
                 }
             }
@@ -147,12 +152,12 @@ class PersonDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.
         }
 
         //
-        val head = itemView?.findViewById<ImageView>(R.id.head)
-        val name = itemView?.findViewById<TextView>(R.id.name)
-        val birthday = itemView?.findViewById<TextView>(R.id.birthday)
-        val job = itemView?.findViewById<TextView>(R.id.job)
-        val address = itemView?.findViewById<TextView>(R.id.address)
-        val ratingbar = itemView?.findViewById<CustomRatingView>(R.id.ratingbar)
+        val head by lazy { itemView?.findViewById<ImageView>(R.id.head) }
+        val name by lazy { itemView?.findViewById<TextView>(R.id.name) }
+        val birthday by lazy { itemView?.findViewById<TextView>(R.id.birthday) }
+        val job by lazy { itemView?.findViewById<TextView>(R.id.job) }
+        val address by lazy { itemView?.findViewById<TextView>(R.id.address) }
+        val ratingbar by lazy { itemView?.findViewById<CustomRatingView>(R.id.ratingbar) }
     }
 
     //介绍viewholder
@@ -179,14 +184,11 @@ class PersonDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.
     //所有movie，两个award (来自不同的adapter，也就是来自不同的数据集，可复用一个viewholder也就是一个布局)
     class HorizontalViewHolder(val ctx: Context, val type: Int, itemView: View?) : RecyclerView.ViewHolder(itemView) {
         //
-        var more_person: TextView? = null
-        var recyclerview: RecyclerView? = null
+        val more_person by lazy { itemView?.findViewById<TextView>(R.id.more_person) }
+        val recyclerview by lazy { itemView?.findViewById<RecyclerView>(R.id.detail_recyclerview_persons) }
         var mAdapter: RecyclerView.Adapter<out RecyclerView.ViewHolder>? = null//形变，子类
 
         init {
-            more_person = itemView?.findViewById<TextView>(R.id.more_person)
-            //
-            recyclerview = itemView?.findViewById<RecyclerView>(R.id.detail_recyclerview_persons)
             recyclerview?.layoutManager = LinearLayoutManager(ctx, LinearLayoutManager.HORIZONTAL, false)
             recyclerview?.addItemDecoration(SimpleItemDecorationHor())
             AutoUtils.autoSize(itemView)
@@ -195,20 +197,14 @@ class PersonDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.
                 PersonDetailAdapter.WINAWARD_TYPE -> {
                     more_person?.text = "所有获奖 "
                     mAdapter = WinAwardAdapter(ctx)
-                    recyclerview?.adapter = mAdapter
-                    mAdapter?.notifyDataSetChanged()
                 }
                 PersonDetailAdapter.NOMINATE_TYPE -> {
                     more_person?.text = "所有提名 "
                     mAdapter = NominatAwardAdapter(ctx)
-                    recyclerview?.adapter = mAdapter
-                    mAdapter?.notifyDataSetChanged()
                 }
                 PersonDetailAdapter.ALLMOVIE_TYPE -> {
                     more_person?.text = "所有相关电影 "
                     mAdapter = AllMovieAdapter(ctx)
-                    recyclerview?.adapter = mAdapter
-                    mAdapter?.notifyDataSetChanged()
                 }
             }
         }
@@ -244,9 +240,9 @@ class PersonDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.
                 AutoUtils.autoSize(itemView)
             }
 
-            val person_job = itemView?.findViewById<TextView>(R.id.person_job)
-            val person_head = itemView?.findViewById<ImageView>(R.id.person_head)
-            val person_name = itemView?.findViewById<TextView>(R.id.person_name)
+            val person_job by lazy { itemView?.findViewById<TextView>(R.id.person_job) }
+            val person_head by lazy { itemView?.findViewById<ImageView>(R.id.person_head) }
+            val person_name by lazy { itemView?.findViewById<TextView>(R.id.person_name) }
         }
     }
 
@@ -280,9 +276,9 @@ class PersonDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.
                 AutoUtils.autoSize(itemView)
             }
 
-            val person_job = itemView?.findViewById<TextView>(R.id.person_job)
-            val person_head = itemView?.findViewById<ImageView>(R.id.person_head)
-            val person_name = itemView?.findViewById<TextView>(R.id.person_name)
+            val person_job by lazy { itemView?.findViewById<TextView>(R.id.person_job) }
+            val person_head by lazy { itemView?.findViewById<ImageView>(R.id.person_head) }
+            val person_name by lazy { itemView?.findViewById<TextView>(R.id.person_name) }
         }
     }
 
@@ -314,9 +310,9 @@ class PersonDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.
                 AutoUtils.autoSize(itemView)
             }
 
-            val person_job = itemView?.findViewById<TextView>(R.id.person_job)
-            val person_head = itemView?.findViewById<ImageView>(R.id.person_head)
-            val person_name = itemView?.findViewById<TextView>(R.id.person_name)
+            val person_job by lazy { itemView?.findViewById<TextView>(R.id.person_job) }
+            val person_head by lazy { itemView?.findViewById<ImageView>(R.id.person_head) }
+            val person_name by lazy { itemView?.findViewById<TextView>(R.id.person_name) }
         }
     }
 }
