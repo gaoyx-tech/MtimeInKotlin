@@ -11,6 +11,7 @@ import android.view.Menu
 import com.lovejiaming.timemovieinkotlin.R
 import com.lovejiaming.timemovieinkotlin.views.fragments.HotMovieFragment
 import com.lovejiaming.timemovieinkotlin.views.fragments.FindFunnyFragment
+import com.lovejiaming.timemovieinkotlin.views.fragments.RankListFragment
 import com.zhy.autolayout.AutoLayoutActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -19,7 +20,7 @@ class MainActivity : AutoLayoutActivity() {
     lateinit var toggle: ActionBarDrawerToggle
     //
     val m_listFragments: ArrayList<Fragment> by lazy {
-        arrayListOf(HotMovieFragment.newInstance(), FindFunnyFragment.newInstance())
+        arrayListOf(HotMovieFragment.newInstance(), FindFunnyFragment.newInstance(), RankListFragment.newInstance())
     }
     var m_nCurrentIndex: Int = 0
 
@@ -35,6 +36,7 @@ class MainActivity : AutoLayoutActivity() {
             when (it.itemId) {
                 R.id.drawer_menu_1 -> switchDisplayFragment(0)
                 R.id.drawer_menu_2 -> switchDisplayFragment(1)
+                R.id.drawer_menu_3 -> switchDisplayFragment(2)
             }
             drawer.closeDrawer(GravityCompat.START)
             return@setNavigationItemSelectedListener true
@@ -48,7 +50,7 @@ class MainActivity : AutoLayoutActivity() {
         //
         if (m_nCurrentIndex == nDisplayIndex) {
             if (!m_listFragments[nDisplayIndex].isAdded)
-                 //就是当前，但是还没添加进栈
+                //就是当前，但是还没添加进栈
                 mgr.add(R.id.containerall, m_listFragments[nDisplayIndex]).show(m_listFragments[nDisplayIndex])
         } else {
             if (m_listFragments[nDisplayIndex].isAdded) {

@@ -81,17 +81,9 @@ class PersonDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.
                     val view = LayoutInflater.from(ctx).inflate(R.layout.item_person_detail_hot_movie, null)
                     HotMovieViewHolder(view)
                 }
-                ALLMOVIE_TYPE -> {
+                ALLMOVIE_TYPE, WINAWARD_TYPE, NOMINATE_TYPE -> {
                     val view = LayoutInflater.from(ctx).inflate(R.layout.item_detail_recyclerperson, null)//复用
-                    HorizontalViewHolder(ctx, ALLMOVIE_TYPE, view)
-                }
-                WINAWARD_TYPE -> {
-                    val view = LayoutInflater.from(ctx).inflate(R.layout.item_detail_recyclerperson, null)//复用
-                    HorizontalViewHolder(ctx, WINAWARD_TYPE, view)
-                }
-                NOMINATE_TYPE -> {
-                    val view = LayoutInflater.from(ctx).inflate(R.layout.item_detail_recyclerperson, null)//复用
-                    HorizontalViewHolder(ctx, NOMINATE_TYPE, view)
+                    HorizontalViewHolder(ctx, viewType, view)
                 }
                 else -> {
                     null!!

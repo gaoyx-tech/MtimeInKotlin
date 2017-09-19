@@ -71,7 +71,9 @@
             android:screenOrientation="portrait" />
         <activity android:name=".views.activity.MovieDetailOfTrailerActivity" />
         <activity android:name=".views.activity.MovieDetailOfPersonActivity" />
-        <activity android:name=".views.activity.PersonDetailActivity"></activity>
+        <activity
+            android:name=".views.activity.PersonDetailActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
