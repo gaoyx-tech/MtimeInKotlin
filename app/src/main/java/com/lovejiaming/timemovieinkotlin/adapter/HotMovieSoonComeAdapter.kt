@@ -10,14 +10,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
-import com.lovejiaming.timemovieinkotlin.R
 import com.lovejiaming.timemovieinkotlin.MTimeInKotlinApp
+import com.lovejiaming.timemovieinkotlin.R
 import com.lovejiaming.timemovieinkotlin.databasebusiness.MovieRoomOperate
 import com.lovejiaming.timemovieinkotlin.networkbusiness.HotMovieSoonComeAllData
 import com.lovejiaming.timemovieinkotlin.networkbusiness.HotMovieSoonComeItemData
 import com.lovejiaming.timemovieinkotlin.views.activity.AllComeSoonMovieActivity
 import com.lovejiaming.timemovieinkotlin.views.activity.MovieDetailActivity
-import com.lovejiaming.timemovieinkotlin.views.fragments.HotMovie_SoonComeFragment
 import com.zhy.autolayout.utils.AutoUtils
 import io.reactivex.Observable
 import io.reactivex.ObservableOnSubscribe
@@ -31,7 +30,7 @@ import io.reactivex.schedulers.Schedulers
  */
 
 @Suppress("IMPLICIT_CAST_TO_ANY")
-class HotMovieSoonComeAdapter(val ctx: Context, val wannaListener: HotMovie_SoonComeFragment.IWannaSeeListener) : RecyclerView.Adapter<HotMovieSoonComeAdapter.InnerViewHolder>() {
+class HotMovieSoonComeAdapter(val ctx: Context, val wannaListener: (String) -> Unit) : RecyclerView.Adapter<HotMovieSoonComeAdapter.InnerViewHolder>() {
     //总数据
     var mAllData: HotMovieSoonComeAllData? = null
     //attention
@@ -129,10 +128,10 @@ class HotMovieSoonComeAdapter(val ctx: Context, val wannaListener: HotMovie_Soon
                             listIwanna?.get(i)?.setOnClickListener {
                                 if (bIsWant) {
                                     deleteIWantSeeEntity(mAttentionData?.get(i)?.id!!)
-                                    wannaListener.wannaSee("影片：<< ${mAttentionData?.get(i)?.title!!} >> 已取消想看")
+                                    wannaListener("影片：<< ${mAttentionData?.get(i)?.title!!} >> 已取消想看")
                                 } else {
                                     insertIWantSeeEntity(mAttentionData?.get(i)?.id!!)
-                                    wannaListener.wannaSee("影片：<< ${mAttentionData?.get(i)?.title!!} >> 已加入想看")
+                                    wannaListener("影片：<< ${mAttentionData?.get(i)?.title!!} >> 已加入想看")
                                 }
                             }
                             //
@@ -193,10 +192,10 @@ class HotMovieSoonComeAdapter(val ctx: Context, val wannaListener: HotMovie_Soon
                             listIwanna?.get(i)?.setOnClickListener {
                                 if (bIsWant) {
                                     deleteIWantSeeEntity(listAllMonth[i].id!!)
-                                    wannaListener.wannaSee("影片：<< ${listAllMonth[i].title!!} >> 已取消想看")
+                                    wannaListener("影片：<< ${listAllMonth[i].title!!} >> 已取消想看")
                                 } else {
                                     insertIWantSeeEntity(listAllMonth[i].id!!)
-                                    wannaListener.wannaSee("影片：<< ${listAllMonth[i].title!!} >> 已加入想看")
+                                    wannaListener("影片：<< ${listAllMonth[i].title!!} >> 已加入想看")
                                 }
                             }
                             listCover?.get(i)?.setOnClickListener {

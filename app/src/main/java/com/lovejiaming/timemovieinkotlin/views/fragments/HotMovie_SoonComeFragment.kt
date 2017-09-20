@@ -27,20 +27,18 @@ class HotMovie_SoonComeFragment : Fragment() {
     //
     val mAdapter: HotMovieSoonComeAdapter by lazy {
         //点击想看回调
-        HotMovieSoonComeAdapter(activity, object : IWannaSeeListener {
-            override fun wannaSee(action: String) {
-                val snackbar = Snackbar.make(snack_container, action, Snackbar.LENGTH_SHORT)
-                snackbar.view.setBackgroundColor(Color.parseColor("#bf360c"))
-                snackbar.view.findViewById<TextView>(R.id.snackbar_text).setTextAppearance(R.style.SnackbarTextStyle)
-                snackbar.show()
-            }
+        HotMovieSoonComeAdapter(activity, { action ->
+            val snackbar = Snackbar.make(snack_container, action, Snackbar.LENGTH_SHORT)
+            snackbar.view.setBackgroundColor(Color.parseColor("#bf360c"))
+            snackbar.view.findViewById<TextView>(R.id.snackbar_text).setTextAppearance(R.style.SnackbarTextStyle)
+            snackbar.show()
         })
     }
 
-    //想看，snackbar
-    interface IWannaSeeListener {
-        fun wannaSee(action: String)
-    }
+    //想看，snackbar------------>SAM转化掉了
+//    interface IWannaSeeListener {
+//        fun wannaSee(action: String)
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

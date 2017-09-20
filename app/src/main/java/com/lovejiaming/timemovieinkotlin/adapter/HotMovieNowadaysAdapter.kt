@@ -27,7 +27,7 @@ import io.reactivex.schedulers.Schedulers
  * Created by xiaoxin on 2017/8/24.
  */
 
-class HotMovieNowadaysAdapter(val ctx: Context, val action: HotMovie_NowadaysFragment.IClickHaveSeenBtn) : RecyclerView.Adapter<HotMovieNowadaysAdapter.InnerViewHolder>() {
+class HotMovieNowadaysAdapter(val ctx: Context, val actionListener: (String) -> Unit/*HotMovie_NowadaysFragment.IClickHaveSeenBtn*/) : RecyclerView.Adapter<HotMovieNowadaysAdapter.InnerViewHolder>() {
     //数据集
     var m_listHotNowadays: MutableList<HotMovieNowadaysItemData> = mutableListOf()
     //看过数据
@@ -112,10 +112,10 @@ class HotMovieNowadaysAdapter(val ctx: Context, val action: HotMovie_NowadaysFra
             iv_HaveSeen.setOnClickListener {
                 m_nClickChangePos = position
                 if (bIsHaveSeen) {
-                    action.click("影片：<< ${m_listHotNowadays[position].tCn} >> 已取消看过")
+                    actionListener("影片：<< ${m_listHotNowadays[position].tCn} >> 已取消看过")
                     deleteHaveSeenRecord(m_listHotNowadays[position].id!!)
                 } else {
-                    action.click("影片：<< ${m_listHotNowadays[position].tCn} >> 已加入看过")
+                    actionListener("影片：<< ${m_listHotNowadays[position].tCn} >> 已加入看过")
                     insertHaveSeenRecord(m_listHotNowadays[position].id!!)
                 }
             }

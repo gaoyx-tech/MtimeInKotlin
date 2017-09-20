@@ -6,16 +6,15 @@ import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
-
 import com.lovejiaming.timemovieinkotlin.R
 import com.lovejiaming.timemovieinkotlin.adapter.HotMovieNowadaysAdapter
-import com.lovejiaming.timemovieinkotlin.networkbusiness.HotMovieNowadaysArrayData
 import com.lovejiaming.timemovieinkotlin.networkbusiness.HotMovieNowadaysItemData
 import com.lovejiaming.timemovieinkotlin.networkbusiness.NetWorkRealCall_Time
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_hot_movie_nowadays.*
 
@@ -28,19 +27,17 @@ import kotlinx.android.synthetic.main.fragment_hot_movie_nowadays.*
  * create an instance of this fragment.
  */
 class HotMovie_NowadaysFragment : Fragment() {
-    //
-    interface IClickHaveSeenBtn {
-        fun click(action: String)
-    }
+    //SAM转换
+//    interface IClickHaveSeenBtn {
+//        fun click(action: String)
+//    }
 
     val mHotAdapter: HotMovieNowadaysAdapter by lazy {
-        HotMovieNowadaysAdapter(activity, object : IClickHaveSeenBtn {
-            override fun click(action: String) {
-                val snackbar = Snackbar.make(snack_container_now, action, Snackbar.LENGTH_SHORT)
-                snackbar.view.setBackgroundColor(Color.parseColor("#bf360c"))
-                snackbar.view.findViewById<TextView>(R.id.snackbar_text).setTextAppearance(R.style.SnackbarTextStyle)
-                snackbar.show()
-            }
+        HotMovieNowadaysAdapter(activity, { action ->
+            val snackbar = Snackbar.make(snack_container_now, action, Snackbar.LENGTH_SHORT)
+            snackbar.view.setBackgroundColor(Color.parseColor("#bf360c"))
+            snackbar.view.findViewById<TextView>(R.id.snackbar_text).setTextAppearance(R.style.SnackbarTextStyle)
+            snackbar.show()
         })
     }
     lateinit var m_listResponse: List<HotMovieNowadaysItemData>
