@@ -27,12 +27,16 @@ class RankListFragment : Fragment() {
     //
     lateinit var m_listWeeklyFocus: MutableList<WeeklyMostFocusItem>
     lateinit var m_listWeeklyExpect: MutableList<WeeklyMostFocusItem>
+    lateinit var m_listChHighestRating: MutableList<WeeklyMostFocusItem>
     //
     val m_listWeeklyFocusCover: MutableList<ImageView> by lazy {
         MutableList(m_listWeeklyFocus.size, { ImageView(activity) })
     }
     val m_listWeeklyExpectCover: MutableList <ImageView> by lazy {
         MutableList(m_listWeeklyExpect.size, { ImageView(activity) })
+    }
+    val m_listChHighestRatingCover: MutableList<ImageView> by lazy {
+        MutableList(10, { ImageView(activity) })
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,6 +53,47 @@ class RankListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         requestWeeklyFocus()
         requestWeeklyMostExpect()
+        requestChHighestRating()
+    }
+
+    fun requestChHighestRating() {
+        NetWorkRealCall_Time.newInstance().getRankListService()
+                .requestTopList(2066)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe {
+                    title_highestrating_ch.text = it.topList.summary
+                    m_listChHighestRating = it.movies
+                    initChHighestRatingViews()
+                }
+    }
+
+    fun initChHighestRatingViews() {
+        m_listChHighestRatingCover.forEachIndexed { index, view ->
+            view.mTimeDisplayImage(activity, m_listChHighestRating[index].posterUrl)
+        }
+        //
+        viewpager_highestrating_ch.pageMargin = 5
+        viewpager_highestrating_ch.offscreenPageLimit = 10
+        viewpager_highestrating_ch.setPageTransformer(false, MtimeViewPagerTransform())
+        highestrating_container_ch.setOnTouchListener { view, motionEvent ->
+            viewpager_highestrating_ch.dispatchTouchEvent(motionEvent)
+        }
+        //
+        viewpager_highestrating_ch.adapter = object : PagerAdapter() {
+            override fun isViewFromObject(view: View?, view1: Any?): Boolean = view == view1
+
+            override fun getCount(): Int = 10
+
+            override fun instantiateItem(container: ViewGroup?, position: Int): Any {
+                container?.addView(m_listChHighestRatingCover[position])
+                return m_listChHighestRatingCover[position]
+            }
+
+            override fun destroyItem(container: ViewGroup?, position: Int, `object`: Any?) {
+                container?.removeView(m_listChHighestRatingCover[position])
+            }
+        }
     }
 
     fun requestWeeklyMostExpect() {

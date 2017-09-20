@@ -1,12 +1,13 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context="com.lovejiaming.timemovieinkotlin.views.fragments.RankListFragment">
 
     <LinearLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context="com.lovejiaming.timemovieinkotlin.views.fragments.RankListFragment"
         tools:ignore="PxUsage">
 
         <LinearLayout
@@ -63,6 +64,35 @@
                 android:layout_marginRight="115px"
                 android:layout_marginTop="10px"
                 android:clipChildren="false" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/highestrating_container_ch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipChildren="false"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/title_highestrating_ch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5px"
+                android:layout_marginTop="10px"
+                android:textColor="@color/colorPrimary"
+                android:textSize="13sp"
+                android:textStyle="italic" />
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewpager_highestrating_ch"
+                android:layout_width="match_parent"
+                android:layout_height="180px"
+                android:layout_gravity="center"
+                android:layout_marginLeft="115px"
+                android:layout_marginRight="115px"
+                android:layout_marginTop="10px"
+                android:clipChildren="false" />
+
         </LinearLayout>
 
     </LinearLayout>
