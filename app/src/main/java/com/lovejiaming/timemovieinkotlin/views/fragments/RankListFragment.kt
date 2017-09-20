@@ -13,6 +13,7 @@ import com.lovejiaming.timemovieinkotlin.R
 import com.lovejiaming.timemovieinkotlin.mTimeDisplayImage
 import com.lovejiaming.timemovieinkotlin.networkbusiness.NetWorkRealCall_Time
 import com.lovejiaming.timemovieinkotlin.networkbusiness.WeeklyMostFocusItem
+import com.lovejiaming.timemovieinkotlin.views.ownerdraw.MtimeViewPagerTransform
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_rank_list.*
@@ -80,7 +81,8 @@ class RankListFragment : Fragment() {
             }
         }
         viewpager_weeklyexpect.offscreenPageLimit = m_listWeeklyExpectCover.size
-        viewpager_weeklyexpect.pageMargin = 40
+        viewpager_weeklyexpect.pageMargin = 5
+        viewpager_weeklyexpect.setPageTransformer(false, MtimeViewPagerTransform())
         weeklyexpect_container.setOnTouchListener { _, motionEvent ->
             viewpager_weeklyexpect.dispatchTouchEvent(motionEvent)
         }
@@ -118,21 +120,9 @@ class RankListFragment : Fragment() {
             }
         }
         //
-        viewpager_weeklyfocus.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageScrollStateChanged(state: Int) {
-            }
-
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
-            }
-
-            override fun onPageSelected(position: Int) {
-                Log.i("onPageSelected == ", position.toString())//正中间的是被选中的
-            }
-        })
-        //
         viewpager_weeklyfocus.offscreenPageLimit = m_listWeeklyFocus.size
-        viewpager_weeklyfocus.pageMargin = 40
-//        viewpager_weeklyfocus.setPageTransformer(true, MtimeViewPagerTransform())
+        viewpager_weeklyfocus.pageMargin = 5
+        viewpager_weeklyfocus.setPageTransformer(false, MtimeViewPagerTransform())
         weeklyfocus_container.setOnTouchListener { _, motionEvent ->
             viewpager_weeklyfocus.dispatchTouchEvent(motionEvent)
         }
