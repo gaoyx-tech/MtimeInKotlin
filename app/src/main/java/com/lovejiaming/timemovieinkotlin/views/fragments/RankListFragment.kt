@@ -1,7 +1,5 @@
 package com.lovejiaming.timemovieinkotlin.views.fragments
 
-
-import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.view.PagerAdapter
@@ -12,8 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import com.lovejiaming.timemovieinkotlin.R
-import com.lovejiaming.timemovieinkotlin.R.id.title_weeklyfocus
-import com.lovejiaming.timemovieinkotlin.R.id.viewpager_weeklyfocus
 import com.lovejiaming.timemovieinkotlin.mTimeDisplayImage
 import com.lovejiaming.timemovieinkotlin.networkbusiness.NetWorkRealCall_Time
 import com.lovejiaming.timemovieinkotlin.networkbusiness.WeeklyMostFocusItem
@@ -29,13 +25,13 @@ import kotlinx.android.synthetic.main.fragment_rank_list.*
 class RankListFragment : Fragment() {
     //
     lateinit var m_listWeeklyFocus: MutableList<WeeklyMostFocusItem>
+    lateinit var m_listWeeklyExpect: MutableList<WeeklyMostFocusItem>
+    //
     val m_listWeeklyFocusCover: MutableList<ImageView> by lazy {
-        MutableList(m_listWeeklyFocus.size, {
-            ImageView(activity).apply {
-                //                layoutParams = ViewGroup.LayoutParams(150, ViewGroup.LayoutParams.MATCH_PARENT)
-//                scaleType = ImageView.ScaleType.CENTER_CROP
-            }
-        })
+        MutableList(m_listWeeklyFocus.size, { ImageView(activity) })
+    }
+    val m_listWeeklyExpectCover: MutableList <ImageView> by lazy {
+        MutableList(m_listWeeklyExpect.size, { ImageView(activity) })
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,6 +47,43 @@ class RankListFragment : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         requestWeeklyFocus()
+        requestWeeklyMostExpect()
+    }
+
+    fun requestWeeklyMostExpect() {
+        NetWorkRealCall_Time.newInstance().getRankListService()
+                .requestTopList(2069)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe {
+                    title_weeklyexpect.text = it.topList.summary
+                    m_listWeeklyExpect = it.movies
+                    initWeeklyExpectViews()
+                }
+    }
+
+    fun initWeeklyExpectViews() {
+        m_listWeeklyExpectCover.forEachIndexed { index, imageView ->
+            imageView.mTimeDisplayImage(activity, m_listWeeklyExpect[index].posterUrl)
+        }
+        //
+        viewpager_weeklyexpect.adapter = object : PagerAdapter() {
+            override fun isViewFromObject(view: View?, view1: Any?): Boolean = view == view1
+            override fun getCount(): Int = m_listWeeklyExpect.size
+            override fun destroyItem(container: ViewGroup?, position: Int, `object`: Any?) {
+                container?.removeView(m_listWeeklyExpectCover[position])
+            }
+
+            override fun instantiateItem(container: ViewGroup?, position: Int): Any {
+                container?.addView(m_listWeeklyExpectCover[position])
+                return m_listWeeklyExpectCover[position]
+            }
+        }
+        viewpager_weeklyexpect.offscreenPageLimit = m_listWeeklyExpectCover.size
+        viewpager_weeklyexpect.pageMargin = 40
+        weeklyexpect_container.setOnTouchListener { _, motionEvent ->
+            viewpager_weeklyexpect.dispatchTouchEvent(motionEvent)
+        }
     }
 
     fun requestWeeklyFocus() {
@@ -99,7 +132,8 @@ class RankListFragment : Fragment() {
         //
         viewpager_weeklyfocus.offscreenPageLimit = m_listWeeklyFocus.size
         viewpager_weeklyfocus.pageMargin = 40
-        allviewpagercontainer.setOnTouchListener { _, motionEvent ->
+//        viewpager_weeklyfocus.setPageTransformer(true, MtimeViewPagerTransform())
+        weeklyfocus_container.setOnTouchListener { _, motionEvent ->
             viewpager_weeklyfocus.dispatchTouchEvent(motionEvent)
         }
     }

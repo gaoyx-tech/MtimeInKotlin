@@ -1,30 +1,66 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/allviewpagercontainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clipChildren="false"
-    tools:context="com.lovejiaming.timemovieinkotlin.views.fragments.RankListFragment">
+    android:orientation="vertical"
+    tools:context="com.lovejiaming.timemovieinkotlin.views.fragments.RankListFragment"
+    tools:ignore="PxUsage">
 
-    <TextView
-        android:id="@+id/title_weeklyfocus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="2px"
-        android:layout_marginTop="20px"
-        android:textColor="@color/colorPrimary"
-        android:textSize="14sp"
-        android:textStyle="bold" />
-
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewpager_weeklyfocus"
+    <LinearLayout
+        android:id="@+id/weeklyfocus_container"
         android:layout_width="match_parent"
-        android:layout_height="200px"
-        android:layout_below="@id/title_weeklyfocus"
-        android:layout_gravity="center"
-        android:layout_marginLeft="115px"
-        android:layout_marginRight="115px"
-        android:layout_marginTop="10px"
-        android:clipChildren="false" />
+        android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:orientation="vertical">
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/title_weeklyfocus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5px"
+            android:layout_marginTop="10px"
+            android:textColor="@color/colorPrimary"
+            android:textSize="13sp"
+            android:textStyle="italic" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager_weeklyfocus"
+            android:layout_width="match_parent"
+            android:layout_height="170px"
+            android:layout_gravity="center"
+            android:layout_marginLeft="115px"
+            android:layout_marginRight="115px"
+            android:layout_marginTop="10px"
+            android:clipChildren="false" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/weeklyexpect_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title_weeklyexpect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5px"
+            android:layout_marginTop="10px"
+            android:textColor="@color/colorPrimary"
+            android:textSize="13sp"
+            android:textStyle="italic" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager_weeklyexpect"
+            android:layout_width="match_parent"
+            android:layout_height="170px"
+            android:layout_gravity="center"
+            android:layout_marginLeft="115px"
+            android:layout_marginRight="115px"
+            android:layout_marginTop="10px"
+            android:clipChildren="false" />
+    </LinearLayout>
+
+
+</LinearLayout>
