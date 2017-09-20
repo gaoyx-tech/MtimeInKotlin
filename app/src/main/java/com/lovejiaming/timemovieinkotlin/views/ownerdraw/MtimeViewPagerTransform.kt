@@ -2,10 +2,6 @@ package com.lovejiaming.timemovieinkotlin.views.ownerdraw
 
 import android.support.v4.view.ViewPager
 import android.view.View
-import android.support.v4.view.ViewCompat.setScaleY
-import android.support.v4.view.ViewCompat.setScaleX
-import android.util.Log
-
 
 /**
  * Created by gaoyx on 2017/9/19.
@@ -14,7 +10,7 @@ class MtimeViewPagerTransform : ViewPager.PageTransformer {
 
     override fun transformPage(page: View?, position: Float) {
         val MIN_SCALE = 0.90f
-        val MIN_ALPHA = 0.5f
+        val MIN_ALPHA = 0.4f
 
         if (position < -1 || position > 1) {
             page?.alpha = MIN_ALPHA
