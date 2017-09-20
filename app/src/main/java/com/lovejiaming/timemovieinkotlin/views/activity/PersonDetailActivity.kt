@@ -43,8 +43,7 @@ class PersonDetailActivity : AutoLayoutActivity() {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    PersonDetailAdapter.g_listAllMovies.clear()
-                    PersonDetailAdapter.g_listAllMovies = it
+                    mAdapter.insertAllMovies(it)
                     requestPersonDetail()
                 }, { Log.i("neterror", "neterror") })
     }

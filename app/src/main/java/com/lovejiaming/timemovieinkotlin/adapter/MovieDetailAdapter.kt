@@ -36,6 +36,12 @@ class MovieDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.V
     private val VIDEO_TYPE = 4
     private val PERSON_TYPE = 5
     private val COMMENT_TYPE = 6
+    var mPersonAll: PersonDetailAll? = null
+
+    //
+    fun addPersonList(personDetailAll: PersonDetailAll) {
+        this.mPersonAll = personDetailAll
+    }
     //
     fun insertDetailData(detail: MovieDetailInfo, movieId: Int) {
         this.mMovieDetail = detail
@@ -206,7 +212,7 @@ class MovieDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.V
         }
     }
 
-    class PersonRecyclerViewHolder(val ctx: Context, itemView: View?) : RecyclerView.ViewHolder(itemView) {
+    inner class PersonRecyclerViewHolder(val ctx: Context, itemView: View?) : RecyclerView.ViewHolder(itemView) {
         val recycler_persons = itemView?.findViewById<RecyclerView>(R.id.detail_recyclerview_persons)
         val more_person = itemView?.findViewById<TextView>(R.id.more_person)
         val mAdapter: PersonListAdapter by lazy { PersonListAdapter(ctx) }
@@ -218,21 +224,14 @@ class MovieDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.V
             //
             more_person?.setOnClickListener {
                 val intent = Intent(ctx, MovieDetailOfPersonActivity::class.java)
-                intent.putExtra("allperson", PersonListAdapter.mPersonAll)
+                intent.putExtra("allperson", mPersonAll)
                 ctx.startActivity(intent)
             }
         }
     }
 
     //person adapter
-    class PersonListAdapter(val ctx: Context) : RecyclerView.Adapter<PersonListAdapter.ViewHolder>() {
-        companion object {
-            var mPersonAll: PersonDetailAll? = null
-            fun addPersonList(personDetailAll: PersonDetailAll) {
-                this.mPersonAll = personDetailAll
-            }
-        }
-
+    inner class PersonListAdapter(val ctx: Context) : RecyclerView.Adapter<PersonListAdapter.ViewHolder>() {
         override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): PersonListAdapter.ViewHolder {
             val view = LayoutInflater.from(ctx).inflate(R.layout.item_detail_person_detail, null)
             AutoUtils.autoSize(view)
@@ -272,7 +271,7 @@ class MovieDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.V
         }
 
         //
-        class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
+        inner class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
             val job = itemView?.findViewById<TextView>(R.id.person_job)
             val head = itemView?.findViewById<ImageView>(R.id.person_head)
             val name = itemView?.findViewById<TextView>(R.id.person_name)

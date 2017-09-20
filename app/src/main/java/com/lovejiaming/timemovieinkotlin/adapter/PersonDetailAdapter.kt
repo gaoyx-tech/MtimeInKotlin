@@ -24,34 +24,36 @@ import com.zhy.autolayout.utils.AutoUtils
  * Created by xiaoxin on 2017/9/7.
  */
 class PersonDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    //内部类也要用的，但是不能inner OOM
-    companion object {
-        val HEAD_TYPE = 11
-        val HOTMOVIE_TYPE = 12
-        val ALLMOVIE_TYPE = 13
-        val WINAWARD_TYPE = 14
-        val NOMINATE_TYPE = 15
-        val CONTENT_TYPE = 16
-        //all winaward
-        var g_listWinAwards: ArrayList<AwardDetailItem> = arrayListOf()
-        //all nominate
-        var g_listNominageAwards: ArrayList<AwardDetailItem> = arrayListOf()
-        //all movies
-        var g_listAllMovies: ArrayList<PersonAllMovie> = arrayListOf()
-    }
-
+    //
+    private val HEAD_TYPE = 11
+    private val HOTMOVIE_TYPE = 12
+    private val ALLMOVIE_TYPE = 13
+    private val WINAWARD_TYPE = 14
+    private val NOMINATE_TYPE = 15
+    private val CONTENT_TYPE = 16
+    //all winaward
+    var m_listWinAwards: ArrayList<AwardDetailItem> = arrayListOf()
+    //all nominate
+    var m_listNominageAwards: ArrayList<AwardDetailItem> = arrayListOf()
+    //all movies
+    var m_listAllMovies: ArrayList<PersonAllMovie> = arrayListOf()
     //
     var mData: PersonDetailResponse? = null
+
+    //
+    fun insertAllMovies(data: ArrayList<PersonAllMovie>) {
+        m_listAllMovies = data
+    }
 
     //
     fun insertPersonDetailData(data: PersonDetailResponse) {
         this.mData = data
         //
-        g_listNominageAwards.clear()
-        g_listWinAwards.clear()
+        m_listNominageAwards.clear()
+        m_listWinAwards.clear()
         mData?.awards?.forEach {
-            g_listNominageAwards.addAll(it.nominateAwards)
-            g_listWinAwards.addAll(it.winAwards)
+            m_listNominageAwards.addAll(it.nominateAwards)
+            m_listWinAwards.addAll(it.winAwards)
         }
         notifyDataSetChanged()
     }
@@ -174,7 +176,7 @@ class PersonDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.
     }
 
     //所有movie，两个award (来自不同的adapter，也就是来自不同的数据集，可复用一个viewholder也就是一个布局)
-    class HorizontalViewHolder(val ctx: Context, val type: Int, itemView: View?) : RecyclerView.ViewHolder(itemView) {
+    inner class HorizontalViewHolder(val ctx: Context, val type: Int, itemView: View?) : RecyclerView.ViewHolder(itemView) {
         //
         val more_person by lazy { itemView?.findViewById<TextView>(R.id.more_person) }
         val recyclerview by lazy { itemView?.findViewById<RecyclerView>(R.id.detail_recyclerview_persons) }
@@ -186,15 +188,15 @@ class PersonDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.
             AutoUtils.autoSize(itemView)
             //
             when (type) {
-                PersonDetailAdapter.WINAWARD_TYPE -> {
+                WINAWARD_TYPE -> {
                     more_person?.text = "所有获奖 "
                     mAdapter = WinAwardAdapter(ctx)
                 }
-                PersonDetailAdapter.NOMINATE_TYPE -> {
+                NOMINATE_TYPE -> {
                     more_person?.text = "所有提名 "
                     mAdapter = NominatAwardAdapter(ctx)
                 }
-                PersonDetailAdapter.ALLMOVIE_TYPE -> {
+                ALLMOVIE_TYPE -> {
                     more_person?.text = "所有相关电影 "
                     mAdapter = AllMovieAdapter(ctx)
                 }
@@ -203,31 +205,31 @@ class PersonDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.
     }
 
     //winaward adapter
-    class WinAwardAdapter(val ctx: Context) : RecyclerView.Adapter<WinAwardAdapter.WinHolder>() {
+    inner class WinAwardAdapter(val ctx: Context) : RecyclerView.Adapter<WinAwardAdapter.WinHolder>() {
         override fun onBindViewHolder(holder: WinHolder?, position: Int) {
-            g_listWinAwards.let {
+            m_listWinAwards.let {
                 with(holder!!) {
-                    person_job?.text = g_listWinAwards[position].awardName ?: ""
-                    person_name?.text = g_listWinAwards[position].movieTitle ?: ""
-                    person_head?.mTimeDisplayImage(ctx, g_listWinAwards[position].image ?: "")
+                    person_job?.text = m_listWinAwards[position].awardName ?: ""
+                    person_name?.text = m_listWinAwards[position].movieTitle ?: ""
+                    person_head?.mTimeDisplayImage(ctx, m_listWinAwards[position].image ?: "")
                     itemView?.setOnClickListener {
                         val intent = Intent(ctx, MovieDetailActivity::class.java)
-                        intent.putExtra("movieid", g_listWinAwards[position].movieId)
-                        intent.putExtra("moviename", g_listWinAwards[position].movieTitle)
+                        intent.putExtra("movieid", m_listWinAwards[position].movieId)
+                        intent.putExtra("moviename", m_listWinAwards[position].movieTitle)
                         ctx.startActivity(intent)
                     }
                 }
             }
         }
 
-        override fun getItemCount(): Int = g_listWinAwards.size
+        override fun getItemCount(): Int = m_listWinAwards.size
 
         override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): WinHolder {
             val view = LayoutInflater.from(ctx).inflate(R.layout.item_detail_person_detail, null)
             return WinHolder(view)
         }
 
-        class WinHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
+        inner class WinHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
             init {
                 AutoUtils.autoSize(itemView)
             }
@@ -239,31 +241,31 @@ class PersonDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.
     }
 
     //nominate adapter
-    class NominatAwardAdapter(val ctx: Context) : RecyclerView.Adapter<NominatAwardAdapter.NominatHolder>() {
+    inner class NominatAwardAdapter(val ctx: Context) : RecyclerView.Adapter<NominatAwardAdapter.NominatHolder>() {
         override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): NominatAwardAdapter.NominatHolder {
             val view = LayoutInflater.from(ctx).inflate(R.layout.item_detail_person_detail, null)
             return NominatHolder(view)
         }
 
-        override fun getItemCount(): Int = g_listNominageAwards.size
+        override fun getItemCount(): Int = m_listNominageAwards.size
 
         override fun onBindViewHolder(holder: NominatAwardAdapter.NominatHolder?, position: Int) {
-            g_listNominageAwards[position].let {
+            m_listNominageAwards[position].let {
                 with(holder!!) {
-                    person_name?.text = g_listNominageAwards[position].movieTitle ?: ""
-                    person_job?.text = g_listNominageAwards[position].awardName ?: ""
-                    person_head?.mTimeDisplayImage(ctx, g_listNominageAwards[position].image ?: "")
+                    person_name?.text = m_listNominageAwards[position].movieTitle ?: ""
+                    person_job?.text = m_listNominageAwards[position].awardName ?: ""
+                    person_head?.mTimeDisplayImage(ctx, m_listNominageAwards[position].image ?: "")
                     itemView?.setOnClickListener {
                         val intent = Intent(ctx, MovieDetailActivity::class.java)
-                        intent.putExtra("movieid", g_listNominageAwards[position].movieId)
-                        intent.putExtra("moviename", g_listNominageAwards[position].movieTitle)
+                        intent.putExtra("movieid", m_listNominageAwards[position].movieId)
+                        intent.putExtra("moviename", m_listNominageAwards[position].movieTitle)
                         ctx.startActivity(intent)
                     }
                 }
             }
         }
 
-        class NominatHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
+        inner class NominatHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
             init {
                 AutoUtils.autoSize(itemView)
             }
@@ -275,29 +277,29 @@ class PersonDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.
     }
 
     //all movies
-    class AllMovieAdapter(val ctx: Context) : RecyclerView.Adapter<AllMovieAdapter.AllMovieViewHolder>() {
+    inner class AllMovieAdapter(val ctx: Context) : RecyclerView.Adapter<AllMovieAdapter.AllMovieViewHolder>() {
         override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): AllMovieViewHolder {
             val view = LayoutInflater.from(ctx).inflate(R.layout.item_detail_person_detail, null)
             return AllMovieViewHolder(view)
         }
 
-        override fun getItemCount(): Int = g_listAllMovies.size
+        override fun getItemCount(): Int = m_listAllMovies.size
 
         override fun onBindViewHolder(holder: AllMovieViewHolder?, position: Int) {
             with(holder!!) {
-                person_job?.text = g_listAllMovies[position].offices?.map { it.name }?.joinToString()
-                person_name?.text = g_listAllMovies[position].name ?: ""
-                person_head?.mTimeDisplayImage(ctx, g_listAllMovies[position].image ?: "")
+                person_job?.text = m_listAllMovies[position].offices?.map { it.name }?.joinToString()
+                person_name?.text = m_listAllMovies[position].name ?: ""
+                person_head?.mTimeDisplayImage(ctx, m_listAllMovies[position].image ?: "")
                 itemView?.setOnClickListener {
                     val intent = Intent(ctx, MovieDetailActivity::class.java)
-                    intent.putExtra("movieid", g_listAllMovies[position].id)
-                    intent.putExtra("moviename", g_listAllMovies[position].name)
+                    intent.putExtra("movieid", m_listAllMovies[position].id)
+                    intent.putExtra("moviename", m_listAllMovies[position].name)
                     ctx.startActivity(intent)
                 }
             }
         }
 
-        class AllMovieViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
+        inner class AllMovieViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
             init {
                 AutoUtils.autoSize(itemView)
             }

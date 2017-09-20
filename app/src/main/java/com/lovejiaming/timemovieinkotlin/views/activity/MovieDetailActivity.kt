@@ -48,7 +48,7 @@ class MovieDetailActivity : AutoLayoutActivity() {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
-                    MovieDetailAdapter.PersonListAdapter.addPersonList(it)
+                    mAdapter.addPersonList(it)
                     RequestMovieDetailShortComment()
                 }
     }
