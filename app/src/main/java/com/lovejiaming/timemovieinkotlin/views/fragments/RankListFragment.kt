@@ -3,12 +3,12 @@ package com.lovejiaming.timemovieinkotlin.views.fragments
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.view.PagerAdapter
-import android.support.v4.view.ViewPager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import com.baidu.platform.comapi.map.t
 import com.lovejiaming.timemovieinkotlin.R
 import com.lovejiaming.timemovieinkotlin.mTimeDisplayImage
 import com.lovejiaming.timemovieinkotlin.networkbusiness.NetWorkRealCall_Time
@@ -61,11 +61,11 @@ class RankListFragment : Fragment() {
                 .requestTopList(2066)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe {
+                .subscribe({
                     title_highestrating_ch.text = it.topList.summary
                     m_listChHighestRating = it.movies
                     initChHighestRatingViews()
-                }
+                }, { t -> Log.i("neterror", t.toString()) })
     }
 
     fun initChHighestRatingViews() {
@@ -73,9 +73,11 @@ class RankListFragment : Fragment() {
             view.mTimeDisplayImage(activity, m_listChHighestRating[index].posterUrl)
         }
         //
-        viewpager_highestrating_ch.pageMargin = 5
-        viewpager_highestrating_ch.offscreenPageLimit = 10
-        viewpager_highestrating_ch.setPageTransformer(false, MtimeViewPagerTransform())
+        viewpager_highestrating_ch.apply {
+            pageMargin = 5
+            offscreenPageLimit = 10
+            setPageTransformer(false, MtimeViewPagerTransform())
+        }
         highestrating_container_ch.setOnTouchListener { view, motionEvent ->
             viewpager_highestrating_ch.dispatchTouchEvent(motionEvent)
         }
@@ -101,11 +103,11 @@ class RankListFragment : Fragment() {
                 .requestTopList(2069)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe {
+                .subscribe({
                     title_weeklyexpect.text = it.topList.summary
                     m_listWeeklyExpect = it.movies
                     initWeeklyExpectViews()
-                }
+                }, { t -> Log.i("neterror", t.toString()) })
     }
 
     fun initWeeklyExpectViews() {
@@ -125,9 +127,11 @@ class RankListFragment : Fragment() {
                 return m_listWeeklyExpectCover[position]
             }
         }
-        viewpager_weeklyexpect.offscreenPageLimit = m_listWeeklyExpectCover.size
-        viewpager_weeklyexpect.pageMargin = 5
-        viewpager_weeklyexpect.setPageTransformer(false, MtimeViewPagerTransform())
+        viewpager_weeklyexpect.apply {
+            offscreenPageLimit = m_listWeeklyExpectCover.size
+            pageMargin = 5
+            setPageTransformer(false, MtimeViewPagerTransform())
+        }
         weeklyexpect_container.setOnTouchListener { _, motionEvent ->
             viewpager_weeklyexpect.dispatchTouchEvent(motionEvent)
         }
@@ -138,11 +142,11 @@ class RankListFragment : Fragment() {
                 .requestTopList(2067)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe {
+                .subscribe({
                     m_listWeeklyFocus = it.movies
                     title_weeklyfocus.text = it.topList.summary
                     initWeeklyFocusViews()
-                }
+                }, { t -> Log.i("neterror", t.toString()) })
     }
 
     fun initWeeklyFocusViews() {
@@ -165,9 +169,11 @@ class RankListFragment : Fragment() {
             }
         }
         //
-        viewpager_weeklyfocus.offscreenPageLimit = m_listWeeklyFocus.size
-        viewpager_weeklyfocus.pageMargin = 5
-        viewpager_weeklyfocus.setPageTransformer(false, MtimeViewPagerTransform())
+        viewpager_weeklyfocus.apply {
+            offscreenPageLimit = m_listWeeklyFocus.size
+            pageMargin = 5
+            setPageTransformer(false, MtimeViewPagerTransform())
+        }
         weeklyfocus_container.setOnTouchListener { _, motionEvent ->
             viewpager_weeklyfocus.dispatchTouchEvent(motionEvent)
         }

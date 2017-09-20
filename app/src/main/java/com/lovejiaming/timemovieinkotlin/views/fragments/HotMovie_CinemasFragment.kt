@@ -4,6 +4,7 @@ package com.lovejiaming.timemovieinkotlin.views.fragments
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +15,6 @@ import com.lovejiaming.timemovieinkotlin.networkbusiness.NetWorkRealCall_Time
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_hot_movie_cinemas.*
-
 
 /**
  * A simple [Fragment] subclass.
@@ -44,9 +44,9 @@ class HotMovie_CinemasFragment : Fragment() {
                 .requestAllCinemas("290")
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe {
+                .subscribe({
                     mAdapter.insertCinemaData(it.toMutableList())
-                }
+                }, { t -> Log.i("throwble == ", t.toString()) })
         //
         cinema_recyclerview.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         cinema_recyclerview.adapter = mAdapter

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -69,10 +70,10 @@ class HotMovie_SoonComeFragment : Fragment() {
                 .requestSoonComeHotMovie("290")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe {
+                .subscribe({
                     swipe_refresh.isRefreshing = false
                     mAdapter.addAllData(it)
-                }
+                }, { t -> Log.i("throwble == ", t.toString()) })
     }
 
     companion object {
