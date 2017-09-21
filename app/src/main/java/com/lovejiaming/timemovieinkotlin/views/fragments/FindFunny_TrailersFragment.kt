@@ -9,10 +9,9 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.lovejiaming.timemovieinkotlin.R
 import com.lovejiaming.timemovieinkotlin.adapter.FindFunnyTrailersAdapter
+import com.lovejiaming.timemovieinkotlin.chAllAsyncToMainThread
 import com.lovejiaming.timemovieinkotlin.networkbusiness.NetWorkRealCall_Time
 import com.lovejiaming.timemovieinkotlin.views.activity.SimpleItemDecorationVer
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_find_funny_trailers.*
 
 class FindFunny_TrailersFragment : Fragment() {
@@ -51,8 +50,7 @@ class FindFunny_TrailersFragment : Fragment() {
         if (isVisibleToUser) {
             NetWorkRealCall_Time.newInstance().getFindFunnyService()
                     .requestFunnyTrailerList()
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
+                    .chAllAsyncToMainThread()
                     .subscribe {
                         mAdapter.insertAllTrailers(it)
                         recycler_all_trailer.visibility = View.VISIBLE

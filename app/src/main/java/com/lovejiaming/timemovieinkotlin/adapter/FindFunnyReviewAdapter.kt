@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.lovejiaming.timemovieinkotlin.R
-import com.lovejiaming.timemovieinkotlin.mTimeDisplayImage
+import com.lovejiaming.timemovieinkotlin.chAllDisplayImage
 import com.lovejiaming.timemovieinkotlin.networkbusiness.ReviewItem
 import com.zhy.autolayout.utils.AutoUtils
 
@@ -33,9 +33,9 @@ class FindFunnyReviewAdapter(val ctx: Context) : RecyclerView.Adapter<FindFunnyR
                 //
                 funny_review_title?.text = "${objResult?.title} "
                 funny_review_summary?.text = objResult?.summary?.trim()
-                funny_review_movie_cover?.mTimeDisplayImage(ctx, objResult?.relatedObj?.image)
+                funny_review_movie_cover?.chAllDisplayImage(ctx, objResult?.relatedObj?.image)
                 funny_review_movie_nameyear?.text = "${objResult?.relatedObj?.title}  (${objResult?.relatedObj?.year})"
-                funny_review_person_head?.mTimeDisplayImage(ctx, objResult?.userImage)
+                funny_review_person_head?.chAllDisplayImage(ctx, objResult?.userImage)
                 funny_review_person_name?.text = objResult?.nickname
                 funny_review_person_rating?.text = "评分：${objResult?.rating}分"
             }

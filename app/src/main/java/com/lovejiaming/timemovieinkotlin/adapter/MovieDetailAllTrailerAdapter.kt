@@ -9,9 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import com.bumptech.glide.Glide
 import com.lovejiaming.timemovieinkotlin.R
-import com.lovejiaming.timemovieinkotlin.mTimeDisplayImage
+import com.lovejiaming.timemovieinkotlin.chAllDisplayImage
 import com.lovejiaming.timemovieinkotlin.networkbusiness.TrailersData
 import com.lovejiaming.timemovieinkotlin.networkbusiness.VideoList
 import com.lovejiaming.timemovieinkotlin.views.activity.PlayVideoActivity
@@ -39,7 +38,7 @@ class MovieDetailAllTrailerAdapter(val ctx: Context) : RecyclerView.Adapter<Movi
             holder?.apply {
                 alltrailer_name.text = "${m_arrAllTrailers[position].title} "
                 alltrailer_time.text = "${m_arrAllTrailers[position].length}秒 "
-                alltrailer_cover?.mTimeDisplayImage(ctx, m_arrAllTrailers[position].image)
+                alltrailer_cover?.chAllDisplayImage(ctx, m_arrAllTrailers[position].image)
                 itemView.setOnClickListener {
                     val intent = Intent(ctx, PlayVideoActivity::class.java)
                     intent.putExtra("path", m_arrAllTrailers[position].hightUrl)

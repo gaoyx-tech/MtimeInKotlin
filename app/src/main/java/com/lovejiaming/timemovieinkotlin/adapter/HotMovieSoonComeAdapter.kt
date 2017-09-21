@@ -12,6 +12,7 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.lovejiaming.timemovieinkotlin.MTimeInKotlinApp
 import com.lovejiaming.timemovieinkotlin.R
+import com.lovejiaming.timemovieinkotlin.chAllstartActivity
 import com.lovejiaming.timemovieinkotlin.databasebusiness.MovieRoomOperate
 import com.lovejiaming.timemovieinkotlin.networkbusiness.HotMovieSoonComeAllData
 import com.lovejiaming.timemovieinkotlin.networkbusiness.HotMovieSoonComeItemData
@@ -136,10 +137,7 @@ class HotMovieSoonComeAdapter(val ctx: Context, val wannaListener: (String) -> U
                             }
                             //
                             listCover?.get(i)?.setOnClickListener {
-                                val intent = Intent(ctx, MovieDetailActivity::class.java)
-                                intent.putExtra("movieid", mAttentionData?.get(i)?.id)
-                                intent.putExtra("moviename", mAttentionData?.get(i)?.title)
-                                ctx.startActivity(intent)
+                                ctx.chAllstartActivity(mapOf("movieid" to mAttentionData?.get(i)?.id!!.toString(), "moviename" to mAttentionData?.get(i)?.title!!), MovieDetailActivity::class.java)
                             }
                             tv_comemore.visibility = View.GONE//关注不做更多处理
                         }
@@ -185,9 +183,7 @@ class HotMovieSoonComeAdapter(val ctx: Context, val wannaListener: (String) -> U
                             //
                             tv_comemore.setOnClickListener {
                                 (ctx.applicationContext as MTimeInKotlinApp).mComeSoonMonData = listAllMonth//缓存到app中
-                                val intent = Intent(ctx, AllComeSoonMovieActivity::class.java)
-                                intent.putExtra("month", mArrMonthNum[position - 1])
-                                ctx.startActivity(intent)
+                                ctx.chAllstartActivity(mapOf("month" to mArrMonthNum[position - 1].toString()), AllComeSoonMovieActivity::class.java)
                             }
                             listIwanna?.get(i)?.setOnClickListener {
                                 if (bIsWant) {
@@ -199,10 +195,7 @@ class HotMovieSoonComeAdapter(val ctx: Context, val wannaListener: (String) -> U
                                 }
                             }
                             listCover?.get(i)?.setOnClickListener {
-                                val intent = Intent(ctx, MovieDetailActivity::class.java)
-                                intent.putExtra("movieid", listAllMonth[i].id)
-                                intent.putExtra("moviename", listAllMonth[i].title)
-                                ctx.startActivity(intent)
+                                ctx.chAllstartActivity(mapOf("movieid" to listAllMonth[i].id.toString(), "moviename" to listAllMonth[i].title!!), MovieDetailActivity::class.java)
                             }
                         }
                     }

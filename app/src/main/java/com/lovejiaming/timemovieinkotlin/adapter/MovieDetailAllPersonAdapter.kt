@@ -3,15 +3,13 @@ package com.lovejiaming.timemovieinkotlin.adapter
 import android.content.Context
 import android.content.Intent
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import com.bumptech.glide.Glide
 import com.lovejiaming.timemovieinkotlin.R
-import com.lovejiaming.timemovieinkotlin.mTimeDisplayImage
+import com.lovejiaming.timemovieinkotlin.chAllDisplayImage
 import com.lovejiaming.timemovieinkotlin.networkbusiness.PersonDetail
 import com.lovejiaming.timemovieinkotlin.networkbusiness.PersonDetailAll
 import com.lovejiaming.timemovieinkotlin.views.activity.PersonDetailActivity
@@ -81,7 +79,7 @@ class MovieDetailAllPersonAdapter(val ctx: Context, person: PersonDetailAll) : R
                     val forsize = m_arrTypeNameIndex.filter { position > it }
                     name?.text = m_arrRealPersonInfo[position - forsize.size].name
                     nameEn?.text = m_arrRealPersonInfo[position - forsize.size].nameEn
-                    head?.mTimeDisplayImage(ctx, m_arrRealPersonInfo[position - forsize.size].image)
+                    head?.chAllDisplayImage(ctx, m_arrRealPersonInfo[position - forsize.size].image)
                     //
                     itemView.setOnClickListener {
                         val intent = Intent(ctx, PersonDetailActivity::class.java)

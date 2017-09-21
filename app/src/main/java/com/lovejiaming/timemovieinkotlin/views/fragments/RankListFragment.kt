@@ -9,7 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import com.lovejiaming.timemovieinkotlin.R
-import com.lovejiaming.timemovieinkotlin.mTimeDisplayImage
+import com.lovejiaming.timemovieinkotlin.chAllDisplayImage
 import com.lovejiaming.timemovieinkotlin.networkbusiness.NetWorkRealCall_Time
 import com.lovejiaming.timemovieinkotlin.networkbusiness.WeeklyMostFocusItem
 import com.lovejiaming.timemovieinkotlin.views.ownerdraw.MtimeViewPagerTransform
@@ -69,7 +69,7 @@ class RankListFragment : Fragment() {
 
     fun initChHighestRatingViews() {
         m_listChHighestRatingCover.forEachIndexed { index, view ->
-            view.mTimeDisplayImage(activity, m_listChHighestRating[index].posterUrl)
+            view.chAllDisplayImage(activity, m_listChHighestRating[index].posterUrl)
         }
         //
         viewpager_highestrating_ch.apply {
@@ -111,7 +111,7 @@ class RankListFragment : Fragment() {
 
     fun initWeeklyExpectViews() {
         m_listWeeklyExpectCover.forEachIndexed { index, imageView ->
-            imageView.mTimeDisplayImage(activity, m_listWeeklyExpect[index].posterUrl)
+            imageView.chAllDisplayImage(activity, m_listWeeklyExpect[index].posterUrl)
         }
         //
         viewpager_weeklyexpect.adapter = object : PagerAdapter() {
@@ -150,7 +150,7 @@ class RankListFragment : Fragment() {
 
     fun initWeeklyFocusViews() {
         m_listWeeklyFocusCover.forEachIndexed { index, view ->
-            view.mTimeDisplayImage(activity, m_listWeeklyFocus[index].posterUrl)
+            view.chAllDisplayImage(activity, m_listWeeklyFocus[index].posterUrl)
         }
         //
         viewpager_weeklyfocus.adapter = object : PagerAdapter() {

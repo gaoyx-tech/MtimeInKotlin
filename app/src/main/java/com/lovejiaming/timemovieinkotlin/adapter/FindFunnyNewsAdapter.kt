@@ -13,7 +13,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.lovejiaming.timemovieinkotlin.R
-import com.lovejiaming.timemovieinkotlin.mTimeDisplayImage
+import com.lovejiaming.timemovieinkotlin.chAllDisplayImage
 import com.lovejiaming.timemovieinkotlin.networkbusiness.AdvertiseItem
 import com.lovejiaming.timemovieinkotlin.networkbusiness.NewsArray
 import com.lovejiaming.timemovieinkotlin.networkbusiness.NewsItem
@@ -44,7 +44,7 @@ class FindFunnyNewsAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView
         (0 until data.size).forEachIndexed { index, _ ->
             //
             val iv_adv = ImageView(ctx)
-            iv_adv.mTimeDisplayImage(ctx, data[index].img)
+            iv_adv.chAllDisplayImage(ctx, data[index].img)
             iv_adv.scaleType = ImageView.ScaleType.CENTER_CROP
             BannerViewHolder.g_listAdvertiseImages.add(iv_adv)
             //
@@ -98,7 +98,7 @@ class FindFunnyNewsAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView
         when (getItemViewType(position)) {
             PICS_ONE -> {
                 with(holder!! as PicOneViewHolder) {
-                    iv_pic1_newscover1?.mTimeDisplayImage(ctx, m_listNewsData?.get(position - 1)?.image)
+                    iv_pic1_newscover1?.chAllDisplayImage(ctx, m_listNewsData?.get(position - 1)?.image)
                     tv_pic1_newstitle?.text = m_listNewsData?.get(position - 1)?.title
                     tv_pic1_newstitle2?.text = m_listNewsData?.get(position - 1)?.title2
                     tv_pic1_newstime?.text = "${SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss").format(Date(m_listNewsData?.get(position)?.publishTime?.times(1000)!!))}"
@@ -106,9 +106,9 @@ class FindFunnyNewsAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView
             }
             PICS_THREE -> {
                 with(holder!! as PicThreeViewHolder) {
-                    iv_pic3_newscover1?.mTimeDisplayImage(ctx, m_listNewsData?.get(position - 1)?.images?.get(0)?.url1 ?: "")
-                    iv_pic3_newscover2?.mTimeDisplayImage(ctx, m_listNewsData?.get(position - 1)?.images?.get(1)?.url1 ?: "")
-                    iv_pic3_newscover3?.mTimeDisplayImage(ctx, m_listNewsData?.get(position - 1)?.images?.get(2)?.url1 ?: "")
+                    iv_pic3_newscover1?.chAllDisplayImage(ctx, m_listNewsData?.get(position - 1)?.images?.get(0)?.url1 ?: "")
+                    iv_pic3_newscover2?.chAllDisplayImage(ctx, m_listNewsData?.get(position - 1)?.images?.get(1)?.url1 ?: "")
+                    iv_pic3_newscover3?.chAllDisplayImage(ctx, m_listNewsData?.get(position - 1)?.images?.get(2)?.url1 ?: "")
                     tv_pic3_newstitle?.text = m_listNewsData?.get(position - 1)?.title
                     tv_pic3_newstitle2?.text = m_listNewsData?.get(position - 1)?.title2
                     tv_pic3_newstime?.text = "${SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss").format(Date(m_listNewsData?.get(position - 1)?.publishTime?.times(1000)!!))}"

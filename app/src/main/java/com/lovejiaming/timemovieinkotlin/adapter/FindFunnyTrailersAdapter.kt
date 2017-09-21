@@ -11,7 +11,7 @@ import android.view.animation.AnticipateOvershootInterpolator
 import android.widget.ImageView
 import android.widget.TextView
 import com.lovejiaming.timemovieinkotlin.R
-import com.lovejiaming.timemovieinkotlin.mTimeDisplayImage
+import com.lovejiaming.timemovieinkotlin.chAllDisplayImage
 import com.lovejiaming.timemovieinkotlin.networkbusiness.TrailerItem
 import com.lovejiaming.timemovieinkotlin.networkbusiness.TrailersDataArray
 import com.lovejiaming.timemovieinkotlin.views.activity.PlayVideoActivity
@@ -34,7 +34,7 @@ class FindFunnyTrailersAdapter(val ctx: Context) : RecyclerView.Adapter<FindFunn
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         m_listTrailers?.let {
             with(holder!!) {
-                funnytrailer_cover?.mTimeDisplayImage(ctx, m_listTrailers?.get(position)?.coverImg)
+                funnytrailer_cover?.chAllDisplayImage(ctx, m_listTrailers?.get(position)?.coverImg)
                 funnytrailer_allinfo?.text = "<< ${m_listTrailers?.get(position)?.videoTitle} >>——${m_listTrailers?.get(position)?.summary} "
                 //
                 itemView.setOnClickListener {

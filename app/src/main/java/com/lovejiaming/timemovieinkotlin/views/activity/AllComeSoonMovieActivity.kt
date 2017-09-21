@@ -23,7 +23,7 @@ class AllComeSoonMovieActivity : AutoLayoutActivity() {
     }
 
     fun initViews() {
-        allcometoolbar.title = "${intent.getIntExtra("month", -1)}月即将上映电影"
+        allcometoolbar.title = "${intent.getStringExtra("month")}月即将上映电影"
         setSupportActionBar(allcometoolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         allcometoolbar.setNavigationOnClickListener { finish() }

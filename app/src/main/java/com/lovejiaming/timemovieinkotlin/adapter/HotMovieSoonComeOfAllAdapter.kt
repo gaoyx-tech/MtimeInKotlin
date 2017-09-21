@@ -10,9 +10,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import com.bumptech.glide.Glide
 import com.lovejiaming.timemovieinkotlin.R
-import com.lovejiaming.timemovieinkotlin.mTimeDisplayImage
+import com.lovejiaming.timemovieinkotlin.chAllDisplayImage
+import com.lovejiaming.timemovieinkotlin.chAllstartActivity
 import com.lovejiaming.timemovieinkotlin.networkbusiness.HotMovieSoonComeItemData
 import com.lovejiaming.timemovieinkotlin.views.activity.MovieDetailActivity
 import com.zhy.autolayout.utils.AutoUtils
@@ -70,19 +70,16 @@ class HotMovieSoonComeOfAllAdapter(val ctx: Context) : RecyclerView.Adapter<Recy
                     comeallname?.text = "<< ${mAllListData[position - exclude.size].title} >> "
                     comeallwannacount?.text = "${mAllListData[position - exclude.size].wantedCount}人想看 "
                     comealltype?.text = "${mAllListData[position - exclude.size].type} "
-                    comeallcover?.mTimeDisplayImage(ctx, mAllListData[position - exclude.size].image ?: "")
+                    comeallcover?.chAllDisplayImage(ctx, mAllListData[position - exclude.size].image ?: "")
                     //
                     itemView.setOnClickListener {
-                        val intent = Intent(ctx, MovieDetailActivity::class.java)
-                        intent.putExtra("movieid", mAllListData[position - exclude.size].id)
-                        intent.putExtra("moviename", mAllListData[position - exclude.size].title)
-                        ctx.startActivity(intent)
+                        ctx.chAllstartActivity(mapOf("movieid" to mAllListData[position - exclude.size].id.toString(), "moviename" to mAllListData[position - exclude.size].title!!),
+                                MovieDetailActivity::class.java)
                     }
                 }
             }
             DATE_TYPE -> {
                 with(holder as ComeAllHolderDate) {
-                    Log.i("DATE_TYPE == ", position.toString())
                     m_arrListSumSize.forEachIndexed {
                         index, value ->
                         if (value == position)

@@ -3,25 +3,22 @@ package com.lovejiaming.timemovieinkotlin.adapter
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import com.bumptech.glide.Glide
 import com.lovejiaming.timemovieinkotlin.R
+import com.lovejiaming.timemovieinkotlin.chAllAsyncToMainThread
 import com.lovejiaming.timemovieinkotlin.databasebusiness.MovieRoomOperate
-import com.lovejiaming.timemovieinkotlin.mTimeDisplayImage
+import com.lovejiaming.timemovieinkotlin.chAllDisplayImage
+import com.lovejiaming.timemovieinkotlin.chAllstartActivity
 import com.lovejiaming.timemovieinkotlin.networkbusiness.HotMovieNowadaysItemData
 import com.lovejiaming.timemovieinkotlin.views.activity.MovieDetailActivity
-import com.lovejiaming.timemovieinkotlin.views.fragments.HotMovie_NowadaysFragment
 import com.zhy.autolayout.utils.AutoUtils
 import io.reactivex.Observable
 import io.reactivex.ObservableOnSubscribe
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 
 /**
  * Created by xiaoxin on 2017/8/24.
@@ -47,8 +44,7 @@ class HotMovieNowadaysAdapter(val ctx: Context, val actionListener: (String) -> 
             e ->
             e.onNext(MovieRoomOperate.newInstance(ctx).queryAllHaveSeen().map { it.movieId })
             e.onComplete()
-        }).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+        }).chAllAsyncToMainThread()
                 .subscribe {
                     m_listHaveSeen = it
                     if (m_nClickChangePos == -1)
@@ -64,7 +60,7 @@ class HotMovieNowadaysAdapter(val ctx: Context, val actionListener: (String) -> 
             MovieRoomOperate.newInstance(ctx).deleteOneHaveSeen(movieId)
             e.onNext("")
             e.onComplete()
-        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe {
+        }).chAllAsyncToMainThread().subscribe {
             loadHaveSeenFromDataBase()
         }
     }
@@ -75,7 +71,7 @@ class HotMovieNowadaysAdapter(val ctx: Context, val actionListener: (String) -> 
             MovieRoomOperate.newInstance(ctx).insertOneHaveSeen(movieId)
             e.onNext("")
             e.onComplete()
-        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe {
+        }).chAllAsyncToMainThread().subscribe {
             loadHaveSeenFromDataBase()
         }
     }
@@ -94,7 +90,7 @@ class HotMovieNowadaysAdapter(val ctx: Context, val actionListener: (String) -> 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: InnerViewHolder?, position: Int) {
         with(holder!!) {
-            iv_Cover.mTimeDisplayImage(ctx, m_listHotNowadays[position].img)
+            iv_Cover.chAllDisplayImage(ctx, m_listHotNowadays[position].img)
             tv_Name.text = "片名：<< ${m_listHotNowadays[position].tCn} >>"
             tv_Actor.text = "演员：${m_listHotNowadays[position].actors} "
             tv_Score.text = "评分：${m_listHotNowadays[position].r} 分 "
@@ -120,10 +116,7 @@ class HotMovieNowadaysAdapter(val ctx: Context, val actionListener: (String) -> 
                 }
             }
             itemView.setOnClickListener {
-                val intent = Intent(ctx, MovieDetailActivity::class.java)
-                intent.putExtra("movieid", m_listHotNowadays[position].id)
-                intent.putExtra("moviename", m_listHotNowadays[position].tCn)
-                ctx.startActivity(intent)
+                ctx.chAllstartActivity(mapOf("movieid" to m_listHotNowadays[position].id.toString(), "moviename" to m_listHotNowadays[position].tCn!!), MovieDetailActivity::class.java)
             }
             if (position > m_nLastPosition) {
                 m_nLastPosition = position

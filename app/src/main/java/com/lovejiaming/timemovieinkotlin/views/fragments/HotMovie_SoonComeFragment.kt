@@ -13,9 +13,8 @@ import android.widget.TextView
 
 import com.lovejiaming.timemovieinkotlin.R
 import com.lovejiaming.timemovieinkotlin.adapter.HotMovieSoonComeAdapter
+import com.lovejiaming.timemovieinkotlin.chAllAsyncToMainThread
 import com.lovejiaming.timemovieinkotlin.networkbusiness.NetWorkRealCall_Time
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_hot_movie_sooncome.*
 
 /**
@@ -66,8 +65,7 @@ class HotMovie_SoonComeFragment : Fragment() {
         NetWorkRealCall_Time.newInstance()
                 .getHotMovieService()
                 .requestSoonComeHotMovie("290")
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .chAllAsyncToMainThread()
                 .subscribe({
                     swipe_refresh.isRefreshing = false
                     mAdapter.addAllData(it)

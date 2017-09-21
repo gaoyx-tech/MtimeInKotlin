@@ -12,10 +12,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.lovejiaming.timemovieinkotlin.R
 import com.lovejiaming.timemovieinkotlin.adapter.HotMovieNowadaysAdapter
+import com.lovejiaming.timemovieinkotlin.chAllAsyncToMainThread
 import com.lovejiaming.timemovieinkotlin.networkbusiness.HotMovieNowadaysItemData
 import com.lovejiaming.timemovieinkotlin.networkbusiness.NetWorkRealCall_Time
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_hot_movie_nowadays.*
 
 /**
@@ -61,8 +60,7 @@ class HotMovie_NowadaysFragment : Fragment() {
         NetWorkRealCall_Time.newInstance()
                 .getHotMovieService()
                 .requestNowadaysHotMovie("290")
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .chAllAsyncToMainThread()
                 .subscribe({ t ->
                     swipe_refresh.isRefreshing = false
                     //it是解析成对象后的

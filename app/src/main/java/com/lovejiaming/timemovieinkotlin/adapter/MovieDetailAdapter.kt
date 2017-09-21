@@ -12,7 +12,7 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import com.lovejiaming.timemovieinkotlin.R
-import com.lovejiaming.timemovieinkotlin.mTimeDisplayImage
+import com.lovejiaming.timemovieinkotlin.chAllDisplayImage
 import com.lovejiaming.timemovieinkotlin.networkbusiness.DetailCommentItem
 import com.lovejiaming.timemovieinkotlin.networkbusiness.MovieDetailInfo
 import com.lovejiaming.timemovieinkotlin.networkbusiness.PersonDetailAll
@@ -28,7 +28,7 @@ import java.util.*
 class MovieDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     //detail数据
     var mMovieDetail: MovieDetailInfo? = null
-    var m_nMovieId = -1
+    var m_sMovieId = ""
     //ITEMTYPE
     private val HEAD_TYPE = 1
     private val CONTENT_TYPE = 2
@@ -43,9 +43,9 @@ class MovieDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.V
         this.mPersonAll = personDetailAll
     }
     //
-    fun insertDetailData(detail: MovieDetailInfo, movieId: Int) {
+    fun insertDetailData(detail: MovieDetailInfo, movieId: String) {
         this.mMovieDetail = detail
-        m_nMovieId = movieId
+        m_sMovieId = movieId
         notifyDataSetChanged()
     }
 
@@ -69,7 +69,7 @@ class MovieDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.V
                     head_director?.text = "导演：${mMovieDetail?.director?.directorName} "
                     head_runtime?.text = "时长：${mMovieDetail?.runTime} "
                     head_year?.text = "年代：${mMovieDetail?.year} "
-                    head_cover?.mTimeDisplayImage(ctx, mMovieDetail?.image)
+                    head_cover?.chAllDisplayImage(ctx, mMovieDetail?.image)
                     //
                     rating?.setRating(mMovieDetail?.rating?.toFloat()?.times(10f) ?: 0f)
                     //
@@ -84,7 +84,7 @@ class MovieDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.V
                 mMovieDetail?.let {
                     val size = mMovieDetail?.images?.size ?: 0
                     (0 until minOf(size, 4)).forEach {
-                        (holder as ImageInfoViewHolder).listImages[it]?.mTimeDisplayImage(ctx, mMovieDetail?.images?.get(it))
+                        (holder as ImageInfoViewHolder).listImages[it]?.chAllDisplayImage(ctx, mMovieDetail?.images?.get(it))
                     }
                 }
             }
@@ -94,7 +94,7 @@ class MovieDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.V
                     with(holder as VideoInfoViewHolder) {
                         (0 until minOf(size, 3)).forEach {
                             listVLayouts[it]?.visibility = View.VISIBLE
-                            listVImages[it]?.mTimeDisplayImage(ctx, mMovieDetail?.videos?.get(it)?.image)
+                            listVImages[it]?.chAllDisplayImage(ctx, mMovieDetail?.videos?.get(it)?.image)
                             listVNames[it]?.text = mMovieDetail?.videos?.get(it)?.title
                             //跳转
                             val strPath = mMovieDetail?.videos?.get(it)?.url
@@ -107,7 +107,7 @@ class MovieDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.V
                             }
                             moretrailer?.setOnClickListener {
                                 val intent = Intent(ctx, MovieDetailOfTrailerActivity::class.java)
-                                intent.putExtra("movieid", m_nMovieId)
+                                intent.putExtra("movieid", m_sMovieId)
                                 ctx.startActivity(intent)
                             }
                         }
@@ -245,7 +245,7 @@ class MovieDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.V
             with(holder!!) {
                 when (position) {
                     0 -> {
-                        head?.mTimeDisplayImage(ctx, mPersonAll?.types?.get(0)?.persons?.get(0)?.image)
+                        head?.chAllDisplayImage(ctx, mPersonAll?.types?.get(0)?.persons?.get(0)?.image)
                         job?.text = "${mPersonAll?.types?.get(0)?.typeName}: "
                         name?.text = "${mPersonAll?.types?.get(0)?.persons?.get(0)?.name} "
                         itemView.setOnClickListener {
@@ -256,7 +256,7 @@ class MovieDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.V
                         }
                     }
                     else -> {
-                        head?.mTimeDisplayImage(ctx, mPersonAll?.types?.get(1)?.persons?.get(position - 1)?.image)
+                        head?.chAllDisplayImage(ctx, mPersonAll?.types?.get(1)?.persons?.get(position - 1)?.image)
                         job?.text = "${mPersonAll?.types?.get(1)?.typeName}: "
                         name?.text = "${mPersonAll?.types?.get(1)?.persons?.get(position - 1)?.name} "
                         itemView.setOnClickListener {
@@ -304,7 +304,7 @@ class MovieDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.V
         @SuppressLint("SetTextI18n")
         override fun onBindViewHolder(holder: MovieDetailCommentAdapter.ViewHolder?, position: Int) {
             holder?.apply {
-                comment_head?.mTimeDisplayImage(ctx, m_listComment?.get(position)?.caimg)
+                comment_head?.chAllDisplayImage(ctx, m_listComment?.get(position)?.caimg)
                 comment_name_address?.text = "${m_listComment?.get(position)?.ca}    (${m_listComment?.get(position)?.cal})"
                 comment_info?.text = m_listComment?.get(position)?.ce
                 comment_score?.text = "打分 ${m_listComment?.get(position)?.cr}"

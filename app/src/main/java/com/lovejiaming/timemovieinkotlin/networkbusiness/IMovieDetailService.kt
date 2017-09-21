@@ -41,11 +41,11 @@ interface IMovieDetailService {
     fun requestMovieDetail(@Query("locationId") locationId: String, @Query("movieId") movieId: String): Observable<MovieDetailInfo>
 
     @GET("Movie/MovieCreditsWithTypes.api?")
-    fun requestMovieDetailPersonlList(@Query("movieId") movieId: Int): Observable<PersonDetailAll>
+    fun requestMovieDetailPersonlList(@Query("movieId") movieId: String): Observable<PersonDetailAll>
 
     @GET("Movie/Video.api?")
-    fun requestMovieAllTrailers(@Query("movieId") movieId: Int, @Query("pageIndex") pageIndex: Int): Observable<TrailersData>
+    fun requestMovieAllTrailers(@Query("movieId") movieId: String, @Query("pageIndex") pageIndex: Int): Observable<TrailersData>
 
     @GET("Showtime/HotMovieComments.api?")
-    fun requestMovieAllComment(@Query("movieId") movieId: Int, @Query("pageIndex") pageIndex: Int = 1): Observable<CommentAll>
+    fun requestMovieAllComment(@Query("movieId") movieId: String, @Query("pageIndex") pageIndex: Int = 1): Observable<CommentAll>
 }

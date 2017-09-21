@@ -11,7 +11,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.lovejiaming.timemovieinkotlin.R
-import com.lovejiaming.timemovieinkotlin.mTimeDisplayImage
+import com.lovejiaming.timemovieinkotlin.chAllDisplayImage
+import com.lovejiaming.timemovieinkotlin.chAllstartActivity
 import com.lovejiaming.timemovieinkotlin.networkbusiness.AwardDetailItem
 import com.lovejiaming.timemovieinkotlin.networkbusiness.PersonAllMovie
 import com.lovejiaming.timemovieinkotlin.networkbusiness.PersonDetailResponse
@@ -98,7 +99,7 @@ class PersonDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.
             when (getItemViewType(position)) {
                 HEAD_TYPE -> {
                     with(holder as HeadViewHolder) {
-                        head?.mTimeDisplayImage(ctx, mData?.image)
+                        head?.chAllDisplayImage(ctx, mData?.image)
                         name?.text = mData?.nameCn ?: mData?.nameEn
                         birthday?.text = "${mData?.birthYear}-${mData?.birthMonth}-${mData?.birthDay} "
                         job?.text = mData?.profession
@@ -116,13 +117,10 @@ class PersonDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.
                         person_hotmovie_name?.text = "${mData?.hotMovie?.movieTitleCn} "
                         person_hotmovie_rating?.text = "${mData?.hotMovie?.ratingFinal.toString()}分 "
                         person_hotmovie_type?.text = "${mData?.hotMovie?.type} "
-                        person_hotmovie_cover?.mTimeDisplayImage(ctx, mData?.hotMovie?.movieCover ?: "")
+                        person_hotmovie_cover?.chAllDisplayImage(ctx, mData?.hotMovie?.movieCover ?: "")
                         //
                         itemView.setOnClickListener {
-                            val intent = Intent(ctx, MovieDetailActivity::class.java)
-                            intent.putExtra("moviename", mData?.hotMovie?.movieTitleCn)
-                            intent.putExtra("movieid", mData?.hotMovie?.movieId)
-                            ctx.startActivity(intent)
+                            ctx.chAllstartActivity(mapOf("moviename" to mData?.hotMovie?.movieTitleCn!!, "movieid" to mData?.hotMovie?.movieId!!.toString()), MovieDetailActivity::class.java)
                         }
                     }
                 }
@@ -211,12 +209,9 @@ class PersonDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.
                 with(holder!!) {
                     person_job?.text = m_listWinAwards[position].awardName ?: ""
                     person_name?.text = m_listWinAwards[position].movieTitle ?: ""
-                    person_head?.mTimeDisplayImage(ctx, m_listWinAwards[position].image ?: "")
+                    person_head?.chAllDisplayImage(ctx, m_listWinAwards[position].image ?: "")
                     itemView?.setOnClickListener {
-                        val intent = Intent(ctx, MovieDetailActivity::class.java)
-                        intent.putExtra("movieid", m_listWinAwards[position].movieId)
-                        intent.putExtra("moviename", m_listWinAwards[position].movieTitle)
-                        ctx.startActivity(intent)
+                        ctx.chAllstartActivity(mapOf("movieid" to m_listWinAwards[position].movieId!!.toString(), "moviename" to m_listWinAwards[position].movieTitle!!), MovieDetailActivity::class.java)
                     }
                 }
             }
@@ -254,12 +249,9 @@ class PersonDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.
                 with(holder!!) {
                     person_name?.text = m_listNominageAwards[position].movieTitle ?: ""
                     person_job?.text = m_listNominageAwards[position].awardName ?: ""
-                    person_head?.mTimeDisplayImage(ctx, m_listNominageAwards[position].image ?: "")
+                    person_head?.chAllDisplayImage(ctx, m_listNominageAwards[position].image ?: "")
                     itemView?.setOnClickListener {
-                        val intent = Intent(ctx, MovieDetailActivity::class.java)
-                        intent.putExtra("movieid", m_listNominageAwards[position].movieId)
-                        intent.putExtra("moviename", m_listNominageAwards[position].movieTitle)
-                        ctx.startActivity(intent)
+                        ctx.chAllstartActivity(mapOf("movieid" to m_listNominageAwards[position].movieId!!.toString(), "moviename" to m_listNominageAwards[position].movieTitle!!), MovieDetailActivity::class.java)
                     }
                 }
             }
@@ -289,12 +281,9 @@ class PersonDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.
             with(holder!!) {
                 person_job?.text = m_listAllMovies[position].offices?.map { it.name }?.joinToString()
                 person_name?.text = m_listAllMovies[position].name ?: ""
-                person_head?.mTimeDisplayImage(ctx, m_listAllMovies[position].image ?: "")
+                person_head?.chAllDisplayImage(ctx, m_listAllMovies[position].image ?: "")
                 itemView?.setOnClickListener {
-                    val intent = Intent(ctx, MovieDetailActivity::class.java)
-                    intent.putExtra("movieid", m_listAllMovies[position].id)
-                    intent.putExtra("moviename", m_listAllMovies[position].name)
-                    ctx.startActivity(intent)
+                    ctx.chAllstartActivity(mapOf("movieid" to m_listAllMovies[position].id!!.toString(), "moviename" to m_listAllMovies[position].name!!), MovieDetailActivity::class.java)
                 }
             }
         }

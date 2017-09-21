@@ -24,8 +24,8 @@ class MovieDetailActivity : AutoLayoutActivity() {
     }
     lateinit var m_DiposableDetail: Disposable
     lateinit var m_DisposblePerson: Disposable
-    val m_nMovieId: Int by lazy {
-        intent.getIntExtra("movieid", 1)
+    val m_sMovieId: String by lazy {
+        intent.getStringExtra("movieid")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +44,7 @@ class MovieDetailActivity : AutoLayoutActivity() {
 
     fun RequestDetaiOfAllPerson() {
         m_DisposblePerson = NetWorkRealCall_Time.newInstance().getMovieDetailService()
-                .requestMovieDetailPersonlList(m_nMovieId)
+                .requestMovieDetailPersonlList(m_sMovieId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
@@ -55,19 +55,18 @@ class MovieDetailActivity : AutoLayoutActivity() {
 
     fun RequestMovieDetailInfo() {
         m_DiposableDetail = NetWorkRealCall_Time.newInstance().getMovieDetailService()
-                .requestMovieDetail("290", m_nMovieId.toString())
+                .requestMovieDetail("290", m_sMovieId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    Log.i("movieurl == ", it.url)
-                    mAdapter.insertDetailData(it, movieId = m_nMovieId)
+                    mAdapter.insertDetailData(it, movieId = m_sMovieId)
                     swipe_detail.isRefreshing = false
                 }, { Log.i("neterror", "neterrr") })
     }
 
     fun RequestMovieDetailShortComment() {
         NetWorkRealCall_Time.newInstance().getMovieDetailService()
-                .requestMovieAllComment(m_nMovieId)
+                .requestMovieAllComment(m_sMovieId)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe({
@@ -79,7 +78,7 @@ class MovieDetailActivity : AutoLayoutActivity() {
     fun initView() {
         swipe_detail.isRefreshing = true
         //
-        detail_toolbar.title = "<< ${intent.getStringExtra("moviename")} >> (MTIME) "
+        detail_toolbar.title = "<< ${intent.getStringExtra("moviename")} >>  MTIME "
         setSupportActionBar(detail_toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         detail_toolbar.setNavigationOnClickListener { finish() }

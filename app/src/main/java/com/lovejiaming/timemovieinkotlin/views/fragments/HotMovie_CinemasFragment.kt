@@ -11,9 +11,8 @@ import android.view.ViewGroup
 
 import com.lovejiaming.timemovieinkotlin.R
 import com.lovejiaming.timemovieinkotlin.adapter.HotMovieCinemaAdapter
+import com.lovejiaming.timemovieinkotlin.chAllAsyncToMainThread
 import com.lovejiaming.timemovieinkotlin.networkbusiness.NetWorkRealCall_Time
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_hot_movie_cinemas.*
 
 /**
@@ -42,8 +41,7 @@ class HotMovie_CinemasFragment : Fragment() {
         NetWorkRealCall_Time.newInstance()
                 .getHotMovieService()
                 .requestAllCinemas("290")
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
+                .chAllAsyncToMainThread()
                 .subscribe({
                     mAdapter.insertCinemaData(it.toMutableList())
                 }, { t -> Log.i("throwble == ", t.toString()) })

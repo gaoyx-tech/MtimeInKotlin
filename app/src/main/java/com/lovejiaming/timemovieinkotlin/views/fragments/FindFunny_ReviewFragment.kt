@@ -3,16 +3,14 @@ package com.lovejiaming.timemovieinkotlin.views.fragments
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.lovejiaming.timemovieinkotlin.R
 import com.lovejiaming.timemovieinkotlin.adapter.FindFunnyReviewAdapter
+import com.lovejiaming.timemovieinkotlin.chAllAsyncToMainThread
 import com.lovejiaming.timemovieinkotlin.networkbusiness.NetWorkRealCall_Time
 import com.lovejiaming.timemovieinkotlin.views.activity.SimpleItemDecorationVer
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_find_funny_review.*
 
 /**
@@ -62,8 +60,7 @@ class FindFunny_ReviewFragment : Fragment() {
         if (isVisibleToUser) {
             NetWorkRealCall_Time.newInstance().getFindFunnyService()
                     .requestFunnyReview()
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribeOn(Schedulers.io())
+                    .chAllAsyncToMainThread()
                     .subscribe {
                         swipe_refresh_funnyreview.isRefreshing = false
                         recyclerview_funnyreview.visibility = View.VISIBLE

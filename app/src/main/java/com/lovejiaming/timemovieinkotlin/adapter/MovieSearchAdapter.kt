@@ -8,13 +8,11 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
-import com.bumptech.glide.Glide
 import com.lovejiaming.timemovieinkotlin.R
-import com.lovejiaming.timemovieinkotlin.mTimeDisplayImage
+import com.lovejiaming.timemovieinkotlin.chAllDisplayImage
 import com.lovejiaming.timemovieinkotlin.networkbusiness.MovieSearchResultList
 import com.zhy.autolayout.utils.AutoUtils
 import kotlinx.android.synthetic.main.item_search_result_content.view.*
-import java.lang.StringBuilder
 
 /**
  * Created by xiaoxin on 2017/8/29.
@@ -57,7 +55,7 @@ class MovieSearchAdapter(val ctx: Context) : BaseAdapter() {
             convertView?.tag = holder
         }
         holder.apply {
-            iv_Cover.mTimeDisplayImage(ctx, m_listResult[p0].images.large)
+            iv_Cover.chAllDisplayImage(ctx, m_listResult[p0].images.large)
             tv_Name.text = "<< ${m_listResult[p0].title} >>"
             tv_Score.text = "${m_listResult[p0].rating.average}分  ${m_listResult[p0].year}年"
             //

@@ -32,7 +32,7 @@ class MovieDetailOfTrailerActivity : AutoLayoutActivity() {
 
     fun startRequestAllTrailers() {
         NetWorkRealCall_Time.newInstance().getMovieDetailService()
-                .requestMovieAllTrailers(intent.getIntExtra("movieid", -1), m_nCurrentPageIndex)
+                .requestMovieAllTrailers(intent.getStringExtra("movieid"), m_nCurrentPageIndex)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
