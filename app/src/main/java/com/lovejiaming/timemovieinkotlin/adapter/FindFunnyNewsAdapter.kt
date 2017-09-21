@@ -35,33 +35,36 @@ class FindFunnyNewsAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView
     var m_listNewsData: List<NewsItem>? = null
     //
     private var mLastPosition = -1
+    //
+    var m_nPlayIndex = 0
+    var m_listAdvertiseImages: MutableList<ImageView> = mutableListOf()
+    var m_listViews: MutableList<View> = mutableListOf()
 
     fun insertAdvertiseData(data: MutableList<AdvertiseItem>) {
         //
-        BannerViewHolder.g_listAdvertiseImages.clear()
-        BannerViewHolder.g_listViews.clear()
+        m_listAdvertiseImages.clear()
+        m_listViews.clear()
         //
         (0 until data.size).forEachIndexed { index, _ ->
             //
             val iv_adv = ImageView(ctx)
             iv_adv.chAllDisplayImage(ctx, data[index].img)
             iv_adv.scaleType = ImageView.ScaleType.CENTER_CROP
-            BannerViewHolder.g_listAdvertiseImages.add(iv_adv)
+            m_listAdvertiseImages.add(iv_adv)
             //
             val view = View(ctx)
             view.layoutParams = LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT, 1f)
             view.setBackgroundColor(Color.BLACK)
-            BannerViewHolder.g_listViews.add(view)
+            m_listViews.add(view)
         }
         //初始化第一个为白
-        BannerViewHolder.g_listViews[0].setBackgroundColor(Color.WHITE)
+        m_listViews[0].setBackgroundColor(Color.WHITE)
     }
 
     fun insertNewsData(data: NewsArray) {
         this.m_listNewsData = data.newsList
         mLastPosition = -1
         notifyDataSetChanged()
-        BannerViewHolder.gAdapter.notifyDataSetChanged()
     }
 
     //
@@ -117,10 +120,11 @@ class FindFunnyNewsAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView
             BANNER_ADVERTISE -> {
                 with(holder!! as BannerViewHolder) {
                     layout_indcator?.removeAllViews()
-                    BannerViewHolder.g_listViews.forEachIndexed { _, view ->
+                    m_listViews.forEachIndexed { _, view ->
                         if (view.parent == null)
                             layout_indcator?.addView(view)
                     }
+                    mAdapter.notifyDataSetChanged()
                 }
             }
 
@@ -159,47 +163,41 @@ class FindFunnyNewsAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView
         val tv_pic1_newstime = itemView?.findViewById<TextView>(R.id.tv_pic1_newstime)
     }
 
-    class BannerViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
+    inner class BannerViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
         //
         val news_vp_advertise = itemView?.findViewById<ViewPager>(R.id.news_vp_advertise)
         //
         val layout_indcator = itemView?.findViewById<LinearLayout>(R.id.layout_indcator)
 
-        companion object {
-            //
-            var g_nPlayIndex = 0
-            var g_listAdvertiseImages: MutableList<ImageView> = mutableListOf()
-            var g_listViews: MutableList<View> = mutableListOf()
-            //
-            val gAdapter = object : PagerAdapter() {
-                override fun isViewFromObject(view: View?, view1: Any?): Boolean = view == view1
+        //
+        val mAdapter = object : PagerAdapter() {
+            override fun isViewFromObject(view: View?, view1: Any?): Boolean = view == view1
 
-                override fun destroyItem(container: ViewGroup?, position: Int, `object`: Any?) {
-                    container?.removeView(g_listAdvertiseImages[position])
-                }
+            override fun destroyItem(container: ViewGroup?, position: Int, `object`: Any?) {
+                container?.removeView(m_listAdvertiseImages[position])
+            }
 
-                override fun instantiateItem(container: ViewGroup?, position: Int): Any {
-                    if (g_listAdvertiseImages[position].parent == null) {
-                        (container as? ViewPager)?.addView(g_listAdvertiseImages[position])
-                    } else
-                        (container as? ViewPager)?.removeView(g_listAdvertiseImages[position])
-                    return g_listAdvertiseImages[position]
-                }
+            override fun instantiateItem(container: ViewGroup?, position: Int): Any {
+                if (m_listAdvertiseImages[position].parent == null) {
+                    (container as? ViewPager)?.addView(m_listAdvertiseImages[position])
+                } else
+                    (container as? ViewPager)?.removeView(m_listAdvertiseImages[position])
+                return m_listAdvertiseImages[position]
+            }
 
-                override fun getCount(): Int {
-                    return g_listAdvertiseImages.size
-                }
+            override fun getCount(): Int {
+                return m_listAdvertiseImages.size
             }
         }
 
         init {
             AutoUtils.autoSize(itemView)
-            news_vp_advertise?.adapter = gAdapter
+            news_vp_advertise?.adapter = mAdapter
             //只create一次
             Observable.interval(2, TimeUnit.SECONDS).observeOn(AndroidSchedulers.mainThread()).subscribe {
-                news_vp_advertise?.currentItem = BannerViewHolder.g_nPlayIndex
-                if (++BannerViewHolder.g_nPlayIndex == BannerViewHolder.g_listAdvertiseImages.size) {
-                    BannerViewHolder.g_nPlayIndex = 0
+                news_vp_advertise?.currentItem = m_nPlayIndex
+                if (++m_nPlayIndex == m_listAdvertiseImages.size) {
+                    m_nPlayIndex = 0
                 }
             }
             //
@@ -211,7 +209,7 @@ class FindFunnyNewsAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView
                 }
 
                 override fun onPageSelected(position: Int) {
-                    g_listViews.forEachIndexed { index, view ->
+                    m_listViews.forEachIndexed { index, view ->
                         if (index == position)
                             view.setBackgroundColor(Color.WHITE)
                         else
