@@ -6,7 +6,7 @@ import android.arch.persistence.room.*
  * Created by xiaoxin on 2017/8/31.
  */
 @Entity(tableName = "HaveSeen")
-data class HaveSeenEntity(@PrimaryKey(autoGenerate = true) var id: Long? = null, var movieId: Int = 0) {
+data class HaveSeenEntity(@PrimaryKey(autoGenerate = true) var id: Long? = null, var movieId: Int = 0, var movieName: String = "", var movieCoverUrl: String = "") {
     constructor() : this(0)
 }
 

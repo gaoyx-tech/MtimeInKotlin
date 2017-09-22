@@ -72,10 +72,10 @@ class HotMovieSoonComeAdapter(val ctx: Context, val wannaListener: (String) -> U
         }
     }
 
-    fun insertIWantSeeEntity(movieId: Int) {
+    fun insertIWantSeeEntity(movieId: Int, movieName: String, movieCoverUrl: String) {
         Observable.create(ObservableOnSubscribe<String> {
             e ->
-            MovieRoomOperate.newInstance(ctx).insertOneMovieWantSee(movieId)
+            MovieRoomOperate.newInstance(ctx).insertOneMovieWantSee(movieId, movieName, movieCoverUrl)
             e.onNext("")
         }).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io()).subscribe {
@@ -131,7 +131,7 @@ class HotMovieSoonComeAdapter(val ctx: Context, val wannaListener: (String) -> U
                                     deleteIWantSeeEntity(mAttentionData?.get(i)?.id!!)
                                     wannaListener("影片：<< ${mAttentionData?.get(i)?.title!!} >> 已取消想看")
                                 } else {
-                                    insertIWantSeeEntity(mAttentionData?.get(i)?.id!!)
+                                    insertIWantSeeEntity(mAttentionData?.get(i)?.id!!, mAttentionData?.get(i)?.title!!, mAttentionData?.get(i)?.image!!)
                                     wannaListener("影片：<< ${mAttentionData?.get(i)?.title!!} >> 已加入想看")
                                 }
                             }
@@ -190,7 +190,7 @@ class HotMovieSoonComeAdapter(val ctx: Context, val wannaListener: (String) -> U
                                     deleteIWantSeeEntity(listAllMonth[i].id!!)
                                     wannaListener("影片：<< ${listAllMonth[i].title!!} >> 已取消想看")
                                 } else {
-                                    insertIWantSeeEntity(listAllMonth[i].id!!)
+                                    insertIWantSeeEntity(listAllMonth[i].id!!, listAllMonth[i].title!!, listAllMonth[i].image!!)
                                     wannaListener("影片：<< ${listAllMonth[i].title!!} >> 已加入想看")
                                 }
                             }

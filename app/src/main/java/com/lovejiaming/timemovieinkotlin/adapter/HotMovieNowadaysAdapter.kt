@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,9 +12,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.lovejiaming.timemovieinkotlin.R
 import com.lovejiaming.timemovieinkotlin.chAllAsyncToMainThread
-import com.lovejiaming.timemovieinkotlin.databasebusiness.MovieRoomOperate
 import com.lovejiaming.timemovieinkotlin.chAllDisplayImage
 import com.lovejiaming.timemovieinkotlin.chAllstartActivity
+import com.lovejiaming.timemovieinkotlin.databasebusiness.MovieRoomOperate
 import com.lovejiaming.timemovieinkotlin.networkbusiness.HotMovieNowadaysItemData
 import com.lovejiaming.timemovieinkotlin.views.activity.MovieDetailActivity
 import com.zhy.autolayout.utils.AutoUtils
@@ -42,6 +43,7 @@ class HotMovieNowadaysAdapter(val ctx: Context, val actionListener: (String) -> 
     fun loadHaveSeenFromDataBase() {
         Observable.create(ObservableOnSubscribe<List<Int>> {
             e ->
+            Log.i("HaveSeen db = ", MovieRoomOperate.newInstance(ctx).queryAllHaveSeen().toString())
             e.onNext(MovieRoomOperate.newInstance(ctx).queryAllHaveSeen().map { it.movieId })
             e.onComplete()
         }).chAllAsyncToMainThread()
@@ -65,10 +67,10 @@ class HotMovieNowadaysAdapter(val ctx: Context, val actionListener: (String) -> 
         }
     }
 
-    fun insertHaveSeenRecord(movieId: Int) {
+    fun insertHaveSeenRecord(movieId: Int, movieName: String, movieCoverUrl: String) {
         Observable.create(ObservableOnSubscribe<String> {
             e ->
-            MovieRoomOperate.newInstance(ctx).insertOneHaveSeen(movieId)
+            MovieRoomOperate.newInstance(ctx).insertOneHaveSeen(movieId, movieName, movieCoverUrl)
             e.onNext("")
             e.onComplete()
         }).chAllAsyncToMainThread().subscribe {
@@ -112,7 +114,7 @@ class HotMovieNowadaysAdapter(val ctx: Context, val actionListener: (String) -> 
                     deleteHaveSeenRecord(m_listHotNowadays[position].id!!)
                 } else {
                     actionListener("影片：<< ${m_listHotNowadays[position].tCn} >> 已加入看过")
-                    insertHaveSeenRecord(m_listHotNowadays[position].id!!)
+                    insertHaveSeenRecord(m_listHotNowadays[position].id!!, m_listHotNowadays[position].tCn!!, m_listHotNowadays[position].img!!)
                 }
             }
             itemView.setOnClickListener {

@@ -34,8 +34,8 @@ class MovieRoomOperate private constructor(ctx: Context) {
     }
 
     //插入一条数据
-    fun insertOneMovieWantSee(movieId: Int) =
-            appDataBase.WantSeeDao().insertWantSee(WantSeeEntity(movieId = movieId))
+    fun insertOneMovieWantSee(movieId: Int, movieName: String, movieCoverUrl: String) =
+            appDataBase.WantSeeDao().insertWantSee(WantSeeEntity(movieId = movieId, movieName = movieName, movieCoverUrl = movieCoverUrl))
 
     //查询所有数据
     fun queryAllMovieWantSee() = appDataBase.WantSeeDao().queryAllWantSeeData()
@@ -46,7 +46,8 @@ class MovieRoomOperate private constructor(ctx: Context) {
         appDataBase.WantSeeDao().deleteOneWantSee(WantSeeEntity(id = id))
     }
 
-    fun insertOneHaveSeen(movieId: Int) = appDataBase.HaveSeenDao().insertHaveSeen(HaveSeenEntity(movieId = movieId))
+    fun insertOneHaveSeen(movieId: Int, movieName: String, movieCoverUrl: String) =
+            appDataBase.HaveSeenDao().insertHaveSeen(HaveSeenEntity(movieId = movieId, movieName = movieName, movieCoverUrl = movieCoverUrl))
 
     fun queryAllHaveSeen() = appDataBase.HaveSeenDao().queryAllHaveSeenData()
 

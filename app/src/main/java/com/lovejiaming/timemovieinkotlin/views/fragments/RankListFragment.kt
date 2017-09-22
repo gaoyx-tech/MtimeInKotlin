@@ -10,8 +10,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import com.lovejiaming.timemovieinkotlin.R
 import com.lovejiaming.timemovieinkotlin.chAllDisplayImage
+import com.lovejiaming.timemovieinkotlin.chAllstartActivity
 import com.lovejiaming.timemovieinkotlin.networkbusiness.NetWorkRealCall_Time
 import com.lovejiaming.timemovieinkotlin.networkbusiness.WeeklyMostFocusItem
+import com.lovejiaming.timemovieinkotlin.views.activity.MovieDetailActivity
 import com.lovejiaming.timemovieinkotlin.views.ownerdraw.MtimeViewPagerTransform
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -70,6 +72,9 @@ class RankListFragment : Fragment() {
     fun initChHighestRatingViews() {
         m_listChHighestRatingCover.forEachIndexed { index, view ->
             view.chAllDisplayImage(activity, m_listChHighestRating[index].posterUrl)
+            view.setOnClickListener {
+                activity.chAllstartActivity(mapOf("movieid" to m_listChHighestRating[index].id!!.toString(), "moviename" to m_listChHighestRating[index].name!!), MovieDetailActivity::class.java)
+            }
         }
         //
         viewpager_highestrating_ch.apply {
@@ -112,6 +117,9 @@ class RankListFragment : Fragment() {
     fun initWeeklyExpectViews() {
         m_listWeeklyExpectCover.forEachIndexed { index, imageView ->
             imageView.chAllDisplayImage(activity, m_listWeeklyExpect[index].posterUrl)
+            imageView.setOnClickListener {
+                activity.chAllstartActivity(mapOf("movieid" to m_listWeeklyExpect[index].id!!.toString(), "moviename" to m_listWeeklyExpect[index].name!!), MovieDetailActivity::class.java)
+            }
         }
         //
         viewpager_weeklyexpect.adapter = object : PagerAdapter() {
@@ -151,6 +159,9 @@ class RankListFragment : Fragment() {
     fun initWeeklyFocusViews() {
         m_listWeeklyFocusCover.forEachIndexed { index, view ->
             view.chAllDisplayImage(activity, m_listWeeklyFocus[index].posterUrl)
+            view.setOnClickListener {
+                activity.chAllstartActivity(mapOf("movieid" to m_listWeeklyExpect[index].id!!.toString(), "moviename" to m_listWeeklyFocus[index].name!!), MovieDetailActivity::class.java)
+            }
         }
         //
         viewpager_weeklyfocus.adapter = object : PagerAdapter() {

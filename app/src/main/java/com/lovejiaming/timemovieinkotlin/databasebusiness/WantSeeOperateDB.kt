@@ -8,8 +8,7 @@ import android.arch.persistence.room.*
 
 @Entity(tableName = "WantSee")
 data class WantSeeEntity(
-        @PrimaryKey(autoGenerate = true) var id: Long? = null,
-        var movieId: Int = 0) {
+        @PrimaryKey(autoGenerate = true) var id: Long? = null, var movieId: Int = 0, var movieName: String = "", var movieCoverUrl: String = "") {
     constructor() : this(0)
 }
 
