@@ -120,7 +120,7 @@ class PersonDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.
                         person_hotmovie_cover?.chAllDisplayImage(ctx, mData?.hotMovie?.movieCover ?: "")
                         //
                         itemView.setOnClickListener {
-                            ctx.chAllstartActivity(mapOf("moviename" to mData?.hotMovie?.movieTitleCn!!, "movieid" to mData?.hotMovie?.movieId!!.toString()), MovieDetailActivity::class.java)
+                            ctx.chAllstartActivity<MovieDetailActivity>(mapOf("moviename" to mData?.hotMovie?.movieTitleCn!!, "movieid" to mData?.hotMovie?.movieId!!.toString()))
                         }
                     }
                 }
@@ -211,7 +211,7 @@ class PersonDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.
                     person_name?.text = m_listWinAwards[position].movieTitle ?: ""
                     person_head?.chAllDisplayImage(ctx, m_listWinAwards[position].image ?: "")
                     itemView?.setOnClickListener {
-                        ctx.chAllstartActivity(mapOf("movieid" to m_listWinAwards[position].movieId!!.toString(), "moviename" to m_listWinAwards[position].movieTitle!!), MovieDetailActivity::class.java)
+                        ctx.chAllstartActivity<MovieDetailActivity>(mapOf("movieid" to m_listWinAwards[position].movieId!!.toString(), "moviename" to m_listWinAwards[position].movieTitle!!))
                     }
                 }
             }
@@ -251,7 +251,7 @@ class PersonDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.
                     person_job?.text = m_listNominageAwards[position].awardName ?: ""
                     person_head?.chAllDisplayImage(ctx, m_listNominageAwards[position].image ?: "")
                     itemView?.setOnClickListener {
-                        ctx.chAllstartActivity(mapOf("movieid" to m_listNominageAwards[position].movieId!!.toString(), "moviename" to m_listNominageAwards[position].movieTitle!!), MovieDetailActivity::class.java)
+                        ctx.chAllstartActivity<MovieDetailActivity>(mapOf("movieid" to m_listNominageAwards[position].movieId!!.toString(), "moviename" to m_listNominageAwards[position].movieTitle!!))
                     }
                 }
             }
@@ -283,7 +283,7 @@ class PersonDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.
                 person_name?.text = m_listAllMovies[position].name ?: ""
                 person_head?.chAllDisplayImage(ctx, m_listAllMovies[position].image ?: "")
                 itemView?.setOnClickListener {
-                    ctx.chAllstartActivity(mapOf("movieid" to m_listAllMovies[position].id!!.toString(), "moviename" to m_listAllMovies[position].name!!), MovieDetailActivity::class.java)
+                    ctx.chAllstartActivity<MovieDetailActivity>(mapOf("movieid" to m_listAllMovies[position].id!!.toString(), "moviename" to m_listAllMovies[position].name!!))
                 }
             }
         }

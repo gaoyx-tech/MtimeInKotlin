@@ -73,7 +73,7 @@ class RankListFragment : Fragment() {
         m_listChHighestRatingCover.forEachIndexed { index, view ->
             view.chAllDisplayImage(activity, m_listChHighestRating[index].posterUrl)
             view.setOnClickListener {
-                activity.chAllstartActivity(mapOf("movieid" to m_listChHighestRating[index].id!!.toString(), "moviename" to m_listChHighestRating[index].name!!), MovieDetailActivity::class.java)
+                activity.chAllstartActivity<MovieDetailActivity>(mapOf("movieid" to m_listChHighestRating[index].id!!.toString(), "moviename" to m_listChHighestRating[index].name!!))
             }
         }
         //
@@ -118,7 +118,7 @@ class RankListFragment : Fragment() {
         m_listWeeklyExpectCover.forEachIndexed { index, imageView ->
             imageView.chAllDisplayImage(activity, m_listWeeklyExpect[index].posterUrl)
             imageView.setOnClickListener {
-                activity.chAllstartActivity(mapOf("movieid" to m_listWeeklyExpect[index].id!!.toString(), "moviename" to m_listWeeklyExpect[index].name!!), MovieDetailActivity::class.java)
+                activity.chAllstartActivity<MovieDetailActivity>(mapOf("movieid" to m_listWeeklyExpect[index].id!!.toString(), "moviename" to m_listWeeklyExpect[index].name!!))
             }
         }
         //
@@ -160,7 +160,7 @@ class RankListFragment : Fragment() {
         m_listWeeklyFocusCover.forEachIndexed { index, view ->
             view.chAllDisplayImage(activity, m_listWeeklyFocus[index].posterUrl)
             view.setOnClickListener {
-                activity.chAllstartActivity(mapOf("movieid" to m_listWeeklyExpect[index].id!!.toString(), "moviename" to m_listWeeklyFocus[index].name!!), MovieDetailActivity::class.java)
+                activity.chAllstartActivity<MovieDetailActivity>(mapOf("movieid" to m_listWeeklyExpect[index].id!!.toString(), "moviename" to m_listWeeklyFocus[index].name!!))
             }
         }
         //

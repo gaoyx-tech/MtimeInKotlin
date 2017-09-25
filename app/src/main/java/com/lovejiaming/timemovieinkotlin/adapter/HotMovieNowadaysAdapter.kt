@@ -106,7 +106,6 @@ class HotMovieNowadaysAdapter(val ctx: Context, val actionListener: (String) -> 
                 bIsHaveSeen = false
                 iv_HaveSeen.setImageResource(R.drawable.haveseen_unselect)
             }
-            itemView.setOnClickListener { }
             iv_HaveSeen.setOnClickListener {
                 m_nClickChangePos = position
                 if (bIsHaveSeen) {
@@ -118,7 +117,7 @@ class HotMovieNowadaysAdapter(val ctx: Context, val actionListener: (String) -> 
                 }
             }
             itemView.setOnClickListener {
-                ctx.chAllstartActivity(mapOf("movieid" to m_listHotNowadays[position].id.toString(), "moviename" to m_listHotNowadays[position].tCn!!), MovieDetailActivity::class.java)
+                ctx.chAllstartActivity<MovieDetailActivity>(mapOf("movieid" to m_listHotNowadays[position].id.toString(), "moviename" to m_listHotNowadays[position].tCn!!))
             }
             if (position > m_nLastPosition) {
                 m_nLastPosition = position

@@ -1,8 +1,10 @@
 package com.lovejiaming.timemovieinkotlin
 
+import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.content.Intent
+import android.support.v4.content.ContextCompat.startActivity
 import android.widget.ImageView
 import com.baidu.mapapi.CoordType
 import com.baidu.mapapi.SDKInitializer
@@ -25,8 +27,8 @@ fun <T : Any?> Observable<T>.chAllAsyncToMainThread(): Observable<T> {
 }
 
 //context启动活动ext
-fun <T : Any?> Context.chAllstartActivity(supportParam: Map<String, String>, classObj: java.lang.Class<T>): Unit {
-    val intent = Intent(this, classObj)
+inline fun <reified T : Activity> Context.chAllstartActivity(supportParam: Map<String, String>): Unit {
+    val intent = Intent(this, T::class.java)
     for ((key, value) in supportParam) {
         intent.putExtra(key, value)
     }

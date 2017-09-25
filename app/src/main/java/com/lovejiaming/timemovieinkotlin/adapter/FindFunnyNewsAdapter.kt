@@ -1,5 +1,6 @@
 package com.lovejiaming.timemovieinkotlin.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.support.v4.view.PagerAdapter
@@ -91,12 +92,13 @@ class FindFunnyNewsAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView
     override fun getItemViewType(position: Int): Int {
         if (position == 0)
             return BANNER_ADVERTISE
-        else if (m_listNewsData?.get(position - 1)?.images?.size!! > 0)
+        else if (m_listNewsData?.get(position - 1)?.images?.size!! == 3)
             return PICS_THREE
         else
             return PICS_ONE
     }
 
+    @SuppressLint("SimpleDateFormat")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
         when (getItemViewType(position)) {
             PICS_ONE -> {

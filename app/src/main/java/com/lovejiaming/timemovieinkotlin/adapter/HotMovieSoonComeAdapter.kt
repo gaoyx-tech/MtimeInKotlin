@@ -137,7 +137,7 @@ class HotMovieSoonComeAdapter(val ctx: Context, val wannaListener: (String) -> U
                             }
                             //
                             listCover?.get(i)?.setOnClickListener {
-                                ctx.chAllstartActivity(mapOf("movieid" to mAttentionData?.get(i)?.id!!.toString(), "moviename" to mAttentionData?.get(i)?.title!!), MovieDetailActivity::class.java)
+                                ctx.chAllstartActivity<MovieDetailActivity>(mapOf("movieid" to mAttentionData?.get(i)?.id!!.toString(), "moviename" to mAttentionData?.get(i)?.title!!))
                             }
                             tv_comemore.visibility = View.GONE//关注不做更多处理
                         }
@@ -183,7 +183,7 @@ class HotMovieSoonComeAdapter(val ctx: Context, val wannaListener: (String) -> U
                             //
                             tv_comemore.setOnClickListener {
                                 (ctx.applicationContext as MTimeInKotlinApp).mComeSoonMonData = listAllMonth//缓存到app中
-                                ctx.chAllstartActivity(mapOf("month" to mArrMonthNum[position - 1].toString()), AllComeSoonMovieActivity::class.java)
+                                ctx.chAllstartActivity<AllComeSoonMovieActivity>(mapOf("month" to mArrMonthNum[position - 1].toString()))
                             }
                             listIwanna?.get(i)?.setOnClickListener {
                                 if (bIsWant) {
@@ -195,7 +195,7 @@ class HotMovieSoonComeAdapter(val ctx: Context, val wannaListener: (String) -> U
                                 }
                             }
                             listCover?.get(i)?.setOnClickListener {
-                                ctx.chAllstartActivity(mapOf("movieid" to listAllMonth[i].id.toString(), "moviename" to listAllMonth[i].title!!), MovieDetailActivity::class.java)
+                                ctx.chAllstartActivity<MovieDetailActivity>(mapOf("movieid" to listAllMonth[i].id.toString(), "moviename" to listAllMonth[i].title!!))
                             }
                         }
                     }

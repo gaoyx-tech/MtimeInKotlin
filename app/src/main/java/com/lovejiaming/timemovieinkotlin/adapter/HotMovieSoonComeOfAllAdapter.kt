@@ -73,8 +73,7 @@ class HotMovieSoonComeOfAllAdapter(val ctx: Context) : RecyclerView.Adapter<Recy
                     comeallcover?.chAllDisplayImage(ctx, mAllListData[position - exclude.size].image ?: "")
                     //
                     itemView.setOnClickListener {
-                        ctx.chAllstartActivity(mapOf("movieid" to mAllListData[position - exclude.size].id.toString(), "moviename" to mAllListData[position - exclude.size].title!!),
-                                MovieDetailActivity::class.java)
+                        ctx.chAllstartActivity<MovieDetailActivity>(mapOf("movieid" to mAllListData[position - exclude.size].id.toString(), "moviename" to mAllListData[position - exclude.size].title!!))
                     }
                 }
             }
