@@ -24,16 +24,14 @@
         android:layout_marginTop="3px"
         android:text="电影类型："
         android:textColor="#fff"
-        android:textSize="14sp"
-        android:textStyle="bold|italic" />
+        android:textSize="13sp" />
 
     <GridView
         android:id="@+id/gridview_type"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/types"
         android:layout_centerHorizontal="true"
-        android:layout_marginLeft="10px"
         android:layout_marginTop="3px"
         android:horizontalSpacing="1dp"
         android:numColumns="8"
@@ -49,16 +47,14 @@
         android:layout_marginTop="3px"
         android:text="电影年代："
         android:textColor="#fff"
-        android:textSize="14sp"
-        android:textStyle="bold|italic" />
+        android:textSize="13sp" />
 
     <GridView
         android:id="@+id/gridview_year"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/years"
         android:layout_centerHorizontal="true"
-        android:layout_marginLeft="10px"
         android:layout_marginTop="3px"
         android:horizontalSpacing="1dp"
         android:numColumns="8"

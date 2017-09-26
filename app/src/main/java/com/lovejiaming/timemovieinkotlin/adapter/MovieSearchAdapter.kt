@@ -10,7 +10,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.lovejiaming.timemovieinkotlin.R
 import com.lovejiaming.timemovieinkotlin.chAllDisplayImage
+import com.lovejiaming.timemovieinkotlin.chAllstartActivity
 import com.lovejiaming.timemovieinkotlin.networkbusiness.MovieSearchResultItem
+import com.lovejiaming.timemovieinkotlin.networkbusiness.TagMovieSearchItem
+import com.lovejiaming.timemovieinkotlin.views.activity.MovieDetailActivity
 import com.zhy.autolayout.utils.AutoUtils
 import kotlinx.android.synthetic.main.item_search_result_content.view.*
 
@@ -19,7 +22,9 @@ import kotlinx.android.synthetic.main.item_search_result_content.view.*
  */
 class MovieSearchAdapter(val ctx: Context) : BaseAdapter() {
     //
-    var m_listResult: List<MovieSearchResultItem> = mutableListOf()
+    var m_listResultOfName: MutableList<MovieSearchResultItem> = mutableListOf()
+    var m_listResultOfTag: MutableList<TagMovieSearchItem> = mutableListOf()
+
     //
     class ViewHolder {
         lateinit var iv_Cover: ImageView
@@ -30,7 +35,14 @@ class MovieSearchAdapter(val ctx: Context) : BaseAdapter() {
 
     //
     fun addSearchResultData(listResult: List<MovieSearchResultItem>) {
-        this.m_listResult = listResult
+        this.m_listResultOfName = listResult.toMutableList()
+        this.m_listResultOfTag.clear()
+        notifyDataSetChanged()
+    }
+
+    fun addSearchResultDataOfTag(listResult: List<TagMovieSearchItem>) {
+        this.m_listResultOfTag = listResult.toMutableList()
+        this.m_listResultOfName.clear()
         notifyDataSetChanged()
     }
 
@@ -52,20 +64,31 @@ class MovieSearchAdapter(val ctx: Context) : BaseAdapter() {
             convertView?.tag = holder
         }
         holder.apply {
-            iv_Cover.chAllDisplayImage(ctx, m_listResult[p0].img)
-            tv_Name.text = "<< ${m_listResult[p0].name} >>"
-            tv_Score.text = "${m_listResult[p0].rating}分  ${m_listResult[p0].rYear}年"
-            //
-            val strType = m_listResult[p0].movieType
-            tv_Type.text = "$strType"
+            if (m_listResultOfName.size > 0) {
+                iv_Cover.chAllDisplayImage(ctx, m_listResultOfName[p0].img)
+                tv_Name.text = "<< ${m_listResultOfName[p0].name} >>"
+                tv_Score.text = "${m_listResultOfName[p0].rating}分  ${m_listResultOfName[p0].rYear}年"
+                tv_Type.text = m_listResultOfName[p0].movieType
+                convertView?.setOnClickListener {
+                    ctx.chAllstartActivity<MovieDetailActivity>(mapOf("moviename" to m_listResultOfName[p0].name!!, "movieid" to m_listResultOfName[p0].id.toString()))
+                }
+            } else {
+                iv_Cover.chAllDisplayImage(ctx, m_listResultOfTag[p0].img)
+                tv_Name.text = "<< ${m_listResultOfTag[p0].titleCn} >>"
+                tv_Score.text = "${m_listResultOfTag[p0].ratingFinal}分  ${m_listResultOfTag[p0].rYear}年"
+                tv_Type.text = m_listResultOfTag[p0].type
+                convertView?.setOnClickListener {
+                    ctx.chAllstartActivity<MovieDetailActivity>(mapOf("moviename" to m_listResultOfTag[p0].titleCn!!, "movieid" to m_listResultOfTag[p0].movieId.toString()))
+                }
+            }
         }
         AutoUtils.autoSize(convertView)
         return convertView!!
     }
 
-    override fun getItem(p0: Int): Any = m_listResult[p0]
+    override fun getItem(p0: Int): Any = m_listResultOfName[p0]
 
     override fun getItemId(p0: Int): Long = p0.toLong()
 
-    override fun getCount(): Int = m_listResult.size
+    override fun getCount(): Int = if (m_listResultOfName.size > 0) m_listResultOfName.size else m_listResultOfTag.size
 }

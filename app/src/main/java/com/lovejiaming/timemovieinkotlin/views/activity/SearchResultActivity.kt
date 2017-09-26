@@ -2,7 +2,6 @@ package com.lovejiaming.timemovieinkotlin.views.activity
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.widget.ArrayAdapter
 import android.widget.TextView
@@ -10,6 +9,7 @@ import com.lovejiaming.timemovieinkotlin.R
 import com.lovejiaming.timemovieinkotlin.adapter.MovieSearchAdapter
 import com.lovejiaming.timemovieinkotlin.networkbusiness.MovieSearchResultItem
 import com.lovejiaming.timemovieinkotlin.networkbusiness.NetWorkRealCallMtime
+import com.lovejiaming.timemovieinkotlin.networkbusiness.TagMovieSearchItem
 import com.zhy.autolayout.AutoLayoutActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -29,9 +29,12 @@ class SearchResultActivity : AutoLayoutActivity() {
         MovieSearchAdapter(this)
     }
     //最后一次获取的所有数据缓存，作为排序
-    private lateinit var mLastResponseList: List<MovieSearchResultItem>
+    private lateinit var mResponseListOfName: List<MovieSearchResultItem>
+    private lateinit var mResponseListOfTag: List<TagMovieSearchItem>
+    //
     private var mLastYears: String = "-1"//year
     private var mLastTypes: String = "-1"//types
+    private var mRequestType = "name"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,16 +51,17 @@ class SearchResultActivity : AutoLayoutActivity() {
 
     private fun setListeners() {
         gridview_year.setOnItemClickListener { adapterView, view, i, _ ->
-            (view as? TextView)?.setTextColor(Color.parseColor("#bf360c"))
-            mLastYears = "${(view as? TextView)?.text.toString()}-${(view as? TextView)?.text.toString()}"
+            (view as TextView).setTextColor(Color.parseColor("#bf360c"))
+            mLastYears = "${view.text}-${view.text}"
             (0 until adapterView.count)
                     .filter { i != it }
                     .forEach { (adapterView.getChildAt(it) as? TextView)?.setTextColor(Color.WHITE) }//智能转换
             netRequestByTag()
         }
+        //
         gridview_type.setOnItemClickListener { adapterView, view, i, _ ->
-            (view as? TextView)?.setTextColor(Color.parseColor("#bf360c"))
-            mLastTypes = (view as? TextView)?.text.toString()
+            (view as TextView).setTextColor(Color.parseColor("#bf360c"))
+            mLastTypes = view.text.toString()
             (0 until adapterView.count)
                     .filter { it != i }
                     .forEach { (adapterView.getChildAt(it) as? TextView)?.setTextColor(Color.WHITE) }
@@ -78,11 +82,11 @@ class SearchResultActivity : AutoLayoutActivity() {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
+                    mRequestType = "tag"
                     swipe_search.isRefreshing = false
                     gridview_result_content.smoothScrollToPosition(0)
-                    Log.i("tagtag == ", it.data.movieModelList.toString())
-//                    mLastResponseList = it.movies
-//                    mAdapter.addSearchResultData(it.movies)
+                    mResponseListOfTag = it.data.movieModelList
+                    mAdapter.addSearchResultDataOfTag(mResponseListOfTag)
                 }
     }
 
@@ -94,8 +98,9 @@ class SearchResultActivity : AutoLayoutActivity() {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
+                    mRequestType = "name"
                     swipe_search.isRefreshing = false
-                    mLastResponseList = it.movies
+                    mResponseListOfName = it.movies
                     gridview_result_content.adapter = mAdapter
                     mAdapter.addSearchResultData(it.movies)
                 }
@@ -107,16 +112,18 @@ class SearchResultActivity : AutoLayoutActivity() {
             when (item.itemId) {
                 R.id.searchitem_sortscore -> {
                     swipe_search.isRefreshing = true
-                    mAdapter.addSearchResultData(mLastResponseList.sortedByDescending {
-                        it.rating?.toDouble()
-                    })
+                    if (mRequestType == "name")
+                        mAdapter.addSearchResultData(mResponseListOfName.sortedByDescending { it.rating?.toDouble() })
+                    else
+                        mAdapter.addSearchResultDataOfTag(mResponseListOfTag.sortedByDescending { it.ratingFinal })
                     swipe_search.isRefreshing = false
                 }
                 R.id.searchitem_sortyear -> {
                     swipe_search.isRefreshing = true
-                    mAdapter.addSearchResultData(mLastResponseList.sortedByDescending {
-                        it.rYear
-                    })
+                    if (mRequestType == "name")
+                        mAdapter.addSearchResultData(mResponseListOfName.sortedByDescending { it.rYear })
+                    else
+                        mAdapter.addSearchResultDataOfTag(mResponseListOfTag.sortedByDescending { it.rYear })
                     swipe_search.isRefreshing = false
                 }
             }
@@ -124,5 +131,4 @@ class SearchResultActivity : AutoLayoutActivity() {
         }
         return true
     }
-
 }
