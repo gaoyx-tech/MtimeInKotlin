@@ -20,11 +20,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/toolbar"
-        android:layout_marginLeft="10px"
         android:layout_marginTop="3px"
-        android:text="电影类型："
+        android:text="类型："
         android:textColor="#fff"
-        android:textSize="13sp" />
+        android:textSize="12sp"
+        android:textStyle="italic|bold" />
 
     <GridView
         android:id="@+id/gridview_type"
@@ -33,21 +33,19 @@
         android:layout_below="@id/types"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="3px"
-        android:horizontalSpacing="1dp"
-        android:numColumns="8"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="1dp" />
+        android:numColumns="6"
+        android:stretchMode="columnWidth" />
 
     <TextView
         android:id="@+id/years"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/gridview_type"
-        android:layout_marginLeft="10px"
         android:layout_marginTop="3px"
-        android:text="电影年代："
+        android:text="年代："
         android:textColor="#fff"
-        android:textSize="13sp" />
+        android:textSize="12sp"
+        android:textStyle="italic|bold" />
 
     <GridView
         android:id="@+id/gridview_year"
@@ -56,17 +54,14 @@
         android:layout_below="@id/years"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="3px"
-        android:horizontalSpacing="1dp"
-        android:numColumns="8"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="1dp" />
+        android:numColumns="6"
+        android:stretchMode="columnWidth" />
 
     <View
         android:id="@+id/line"
         android:layout_width="match_parent"
-        android:layout_height="4px"
+        android:layout_height="2px"
         android:layout_below="@id/gridview_year"
-        android:layout_marginTop="2px"
         android:background="@color/colorPrimary" />
 
     <android.support.v4.widget.SwipeRefreshLayout
