@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory
  *
  */
 @Suppress("SENSELESS_COMPARISON")
-class NetWorkRealCall_Time private constructor() {
+class NetWorkRealCallMtime private constructor() {
     //retrofit实例
     private var mRetrofit: Retrofit
 
@@ -40,17 +40,19 @@ class NetWorkRealCall_Time private constructor() {
     //
     fun getRankListService() = mRetrofit.create(IRankListService::class.java)!!
 
+    fun getSearchMovieService() = mRetrofit.create(ISearchMovieService::class.java)!!
+
     //single instance
     companion object {
         //
         var BASE_URL = "https://api-m.mtime.cn/"
         //
-        val objectInstance: NetWorkRealCall_Time by lazy {
-            NetWorkRealCall_Time()
+        val OBJECT_INSTANCE: NetWorkRealCallMtime by lazy {
+            NetWorkRealCallMtime()
         }
 
-        fun newInstance(): NetWorkRealCall_Time {
-            return objectInstance
+        fun newInstance(): NetWorkRealCallMtime {
+            return OBJECT_INSTANCE
         }
     }
 

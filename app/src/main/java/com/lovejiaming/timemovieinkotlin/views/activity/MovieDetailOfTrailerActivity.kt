@@ -3,11 +3,9 @@ package com.lovejiaming.timemovieinkotlin.views.activity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
-import android.view.View
 import com.lovejiaming.timemovieinkotlin.R
 import com.lovejiaming.timemovieinkotlin.adapter.MovieDetailAllTrailerAdapter
-import com.lovejiaming.timemovieinkotlin.networkbusiness.NetWorkRealCall_Time
+import com.lovejiaming.timemovieinkotlin.networkbusiness.NetWorkRealCallMtime
 import com.zhy.autolayout.AutoLayoutActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -31,7 +29,7 @@ class MovieDetailOfTrailerActivity : AutoLayoutActivity() {
     }
 
     fun startRequestAllTrailers() {
-        NetWorkRealCall_Time.newInstance().getMovieDetailService()
+        NetWorkRealCallMtime.newInstance().getMovieDetailService()
                 .requestMovieAllTrailers(intent.getStringExtra("movieid"), m_nCurrentPageIndex)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

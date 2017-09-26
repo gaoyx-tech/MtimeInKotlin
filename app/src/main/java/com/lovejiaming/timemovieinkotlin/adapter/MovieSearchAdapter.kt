@@ -10,7 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.lovejiaming.timemovieinkotlin.R
 import com.lovejiaming.timemovieinkotlin.chAllDisplayImage
-import com.lovejiaming.timemovieinkotlin.networkbusiness.MovieSearchResultList
+import com.lovejiaming.timemovieinkotlin.networkbusiness.MovieSearchResultItem
 import com.zhy.autolayout.utils.AutoUtils
 import kotlinx.android.synthetic.main.item_search_result_content.view.*
 
@@ -19,19 +19,17 @@ import kotlinx.android.synthetic.main.item_search_result_content.view.*
  */
 class MovieSearchAdapter(val ctx: Context) : BaseAdapter() {
     //
-    var m_listResult: List<MovieSearchResultList> = mutableListOf()
-
+    var m_listResult: List<MovieSearchResultItem> = mutableListOf()
     //
     class ViewHolder {
         lateinit var iv_Cover: ImageView
         lateinit var tv_Name: TextView
-        lateinit var tv_Director: TextView
         lateinit var tv_Type: TextView
         lateinit var tv_Score: TextView
     }
 
     //
-    fun addSearchResultData(listResult: List<MovieSearchResultList>) {
+    fun addSearchResultData(listResult: List<MovieSearchResultItem>) {
         this.m_listResult = listResult
         notifyDataSetChanged()
     }
@@ -48,22 +46,18 @@ class MovieSearchAdapter(val ctx: Context) : BaseAdapter() {
             with(holder) {
                 iv_Cover = convertView?.search_cover as ImageView
                 tv_Name = convertView?.search_name as TextView
-                tv_Director = convertView?.search_director as TextView
                 tv_Type = convertView?.search_type as TextView
                 tv_Score = convertView?.search_score as TextView
             }
             convertView?.tag = holder
         }
         holder.apply {
-            iv_Cover.chAllDisplayImage(ctx, m_listResult[p0].images.large)
-            tv_Name.text = "<< ${m_listResult[p0].title} >>"
-            tv_Score.text = "${m_listResult[p0].rating.average}分  ${m_listResult[p0].year}年"
+            iv_Cover.chAllDisplayImage(ctx, m_listResult[p0].img)
+            tv_Name.text = "<< ${m_listResult[p0].name} >>"
+            tv_Score.text = "${m_listResult[p0].rating}分  ${m_listResult[p0].rYear}年"
             //
-            val strDire = m_listResult[p0].directors.map { it.name }.joinToString(",", "", "")
-            tv_Director.text = "导演 $strDire"
-            //
-            val strType = m_listResult[p0].genres.joinToString(separator = ",")
-            tv_Type.text = "类型 $strType"
+            val strType = m_listResult[p0].movieType
+            tv_Type.text = "$strType"
         }
         AutoUtils.autoSize(convertView)
         return convertView!!

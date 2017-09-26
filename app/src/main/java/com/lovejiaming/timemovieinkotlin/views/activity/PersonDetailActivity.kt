@@ -4,9 +4,8 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import com.lovejiaming.timemovieinkotlin.R
-import com.lovejiaming.timemovieinkotlin.R.id.*
 import com.lovejiaming.timemovieinkotlin.adapter.PersonDetailAdapter
-import com.lovejiaming.timemovieinkotlin.networkbusiness.NetWorkRealCall_Time
+import com.lovejiaming.timemovieinkotlin.networkbusiness.NetWorkRealCallMtime
 import com.zhy.autolayout.AutoLayoutActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -26,7 +25,7 @@ class PersonDetailActivity : AutoLayoutActivity() {
     }
 
     fun requestPersonDetail() {
-        NetWorkRealCall_Time.newInstance().getPersonDetailService()
+        NetWorkRealCallMtime.newInstance().getPersonDetailService()
                 .requestPersonDetail(intent.getIntExtra("personid", -1))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -38,7 +37,7 @@ class PersonDetailActivity : AutoLayoutActivity() {
     }
 
     fun requestPersonMovies() {
-        NetWorkRealCall_Time.newInstance().getPersonDetailService()
+        NetWorkRealCallMtime.newInstance().getPersonDetailService()
                 .requestPersonAllMovie(intent.getIntExtra("personid", -1))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

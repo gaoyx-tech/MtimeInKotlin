@@ -10,7 +10,7 @@ import android.view.View
 import com.bumptech.glide.Glide
 import com.lovejiaming.timemovieinkotlin.R
 import com.lovejiaming.timemovieinkotlin.adapter.MovieDetailAdapter
-import com.lovejiaming.timemovieinkotlin.networkbusiness.NetWorkRealCall_Time
+import com.lovejiaming.timemovieinkotlin.networkbusiness.NetWorkRealCallMtime
 import com.zhy.autolayout.AutoLayoutActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -43,7 +43,7 @@ class MovieDetailActivity : AutoLayoutActivity() {
     }
 
     fun RequestDetaiOfAllPerson() {
-        m_DisposblePerson = NetWorkRealCall_Time.newInstance().getMovieDetailService()
+        m_DisposblePerson = NetWorkRealCallMtime.newInstance().getMovieDetailService()
                 .requestMovieDetailPersonlList(m_sMovieId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -54,7 +54,7 @@ class MovieDetailActivity : AutoLayoutActivity() {
     }
 
     fun RequestMovieDetailInfo() {
-        m_DiposableDetail = NetWorkRealCall_Time.newInstance().getMovieDetailService()
+        m_DiposableDetail = NetWorkRealCallMtime.newInstance().getMovieDetailService()
                 .requestMovieDetail("290", m_sMovieId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -65,7 +65,7 @@ class MovieDetailActivity : AutoLayoutActivity() {
     }
 
     fun RequestMovieDetailShortComment() {
-        NetWorkRealCall_Time.newInstance().getMovieDetailService()
+        NetWorkRealCallMtime.newInstance().getMovieDetailService()
                 .requestMovieAllComment(m_sMovieId)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())

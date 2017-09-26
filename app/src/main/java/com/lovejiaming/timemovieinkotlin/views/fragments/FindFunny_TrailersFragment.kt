@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.lovejiaming.timemovieinkotlin.R
 import com.lovejiaming.timemovieinkotlin.adapter.FindFunnyTrailersAdapter
 import com.lovejiaming.timemovieinkotlin.chAllAsyncToMainThread
-import com.lovejiaming.timemovieinkotlin.networkbusiness.NetWorkRealCall_Time
+import com.lovejiaming.timemovieinkotlin.networkbusiness.NetWorkRealCallMtime
 import com.lovejiaming.timemovieinkotlin.views.activity.SimpleItemDecorationVer
 import kotlinx.android.synthetic.main.fragment_find_funny_trailers.*
 
@@ -48,7 +48,7 @@ class FindFunny_TrailersFragment : Fragment() {
         }
 
         if (isVisibleToUser) {
-            NetWorkRealCall_Time.newInstance().getFindFunnyService()
+            NetWorkRealCallMtime.newInstance().getFindFunnyService()
                     .requestFunnyTrailerList()
                     .chAllAsyncToMainThread()
                     .subscribe {

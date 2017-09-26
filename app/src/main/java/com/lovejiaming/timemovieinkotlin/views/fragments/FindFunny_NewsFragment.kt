@@ -9,7 +9,7 @@ import android.view.ViewGroup
 
 import com.lovejiaming.timemovieinkotlin.R
 import com.lovejiaming.timemovieinkotlin.adapter.FindFunnyNewsAdapter
-import com.lovejiaming.timemovieinkotlin.networkbusiness.NetWorkRealCall_Time
+import com.lovejiaming.timemovieinkotlin.networkbusiness.NetWorkRealCallMtime
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_find_funny_news.*
@@ -47,7 +47,7 @@ class FindFunny_NewsFragment : Fragment() {
     }
 
     fun startRequestNewsList() {
-        NetWorkRealCall_Time.newInstance().getFindFunnyService()
+        NetWorkRealCallMtime.newInstance().getFindFunnyService()
                 .requestFunnyNewsList(1)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -59,7 +59,7 @@ class FindFunny_NewsFragment : Fragment() {
     }
 
     fun startRequestAdvertisementList() {
-        NetWorkRealCall_Time.newInstance().getFindFunnyService()
+        NetWorkRealCallMtime.newInstance().getFindFunnyService()
                 .requestFunnyAdvertise()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())

@@ -11,7 +11,7 @@ import android.widget.ImageView
 import com.lovejiaming.timemovieinkotlin.R
 import com.lovejiaming.timemovieinkotlin.chAllDisplayImage
 import com.lovejiaming.timemovieinkotlin.chAllstartActivity
-import com.lovejiaming.timemovieinkotlin.networkbusiness.NetWorkRealCall_Time
+import com.lovejiaming.timemovieinkotlin.networkbusiness.NetWorkRealCallMtime
 import com.lovejiaming.timemovieinkotlin.networkbusiness.WeeklyMostFocusItem
 import com.lovejiaming.timemovieinkotlin.views.activity.MovieDetailActivity
 import com.lovejiaming.timemovieinkotlin.views.ownerdraw.MtimeViewPagerTransform
@@ -58,7 +58,7 @@ class RankListFragment : Fragment() {
     }
 
     fun requestChHighestRating() {
-        NetWorkRealCall_Time.newInstance().getRankListService()
+        NetWorkRealCallMtime.newInstance().getRankListService()
                 .requestTopList(2066)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -103,7 +103,7 @@ class RankListFragment : Fragment() {
     }
 
     fun requestWeeklyMostExpect() {
-        NetWorkRealCall_Time.newInstance().getRankListService()
+        NetWorkRealCallMtime.newInstance().getRankListService()
                 .requestTopList(2069)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -145,7 +145,7 @@ class RankListFragment : Fragment() {
     }
 
     fun requestWeeklyFocus() {
-        NetWorkRealCall_Time.newInstance().getRankListService()
+        NetWorkRealCallMtime.newInstance().getRankListService()
                 .requestTopList(2067)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())

@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import com.lovejiaming.timemovieinkotlin.R
 import com.lovejiaming.timemovieinkotlin.adapter.FindFunnyReviewAdapter
 import com.lovejiaming.timemovieinkotlin.chAllAsyncToMainThread
-import com.lovejiaming.timemovieinkotlin.networkbusiness.NetWorkRealCall_Time
+import com.lovejiaming.timemovieinkotlin.networkbusiness.NetWorkRealCallMtime
 import com.lovejiaming.timemovieinkotlin.views.activity.SimpleItemDecorationVer
 import kotlinx.android.synthetic.main.fragment_find_funny_review.*
 
@@ -58,7 +58,7 @@ class FindFunny_ReviewFragment : Fragment() {
         }
         //
         if (isVisibleToUser) {
-            NetWorkRealCall_Time.newInstance().getFindFunnyService()
+            NetWorkRealCallMtime.newInstance().getFindFunnyService()
                     .requestFunnyReview()
                     .chAllAsyncToMainThread()
                     .subscribe {

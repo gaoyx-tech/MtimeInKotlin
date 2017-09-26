@@ -1,32 +1,30 @@
 package com.lovejiaming.timemovieinkotlin.networkbusiness
 
 import io.reactivex.Observable
-import retrofit2.http.GET
-import retrofit2.http.Query
+import retrofit2.http.*
 
 /**
  * Created by xiaoxin on 2017/8/28.
- * douban search movie interface
- * http://api.douban.com/v2/movie/search?q=战狼
- * http://api.douban.com/v2/movie/search?tag=惊悚 or 2017
  **/
-//
-data class Rating(val average: Double?)
 
 //
-data class Directors(val name: String?)
+data class MovieSearchResultItem(val id: Int, val name: String?, val img: String?, val movieType: String?, val realTime: String?, val rating: String?, val rYear: Int?)
 
-//
-data class Images(val large: String?)
+data class MovieSearchResult(val movies: List<MovieSearchResultItem>)
 
-//
-data class MovieSearchResultList(val rating: Rating, val genres: List<String>, val title: String?, val directors: List<Directors>, val images: Images, val id: String?, val year: String?)
+//tag
+data class TagMovieSearchItem(val img: String?, val titleCn: String?, val type: String?, val ratingFinal: Double?, val movieId: Int?)
 
-data class MovieSearchResult(val subjects: List<MovieSearchResultList>, val start: Int?)
+data class TagMovieResultSubResult(val movieModelList: List<TagMovieSearchItem>, val pageNum: Int, val totalCount: Int)
+data class TagMovieSearchResult(val data: TagMovieResultSubResult)
+
 interface ISearchMovieService {
-    @GET("movie/search")
-    fun requestSearchMovieFromName(@Query("q") q: String, @Query("start") start: Int = 0): Observable<MovieSearchResult>
+    @FormUrlEncoded
+    @POST("Showtime/SearchVoice.api")
+    fun requestSearchMovieFromName(@Field("searchType") searchType: Int = 3, @Field("Keyword") Keyword: String, @Field("pageIndex") pageIndex: Int = 1, @Field("locationId") locationId: Int = 290)
+            : Observable<MovieSearchResult>
 
-    @GET("movie/search")
-    fun requesSearchMovieFromTag(@Query("tag") tag: String, @Query("start") start: Int = 0): Observable<MovieSearchResult>
+    @GET("Movie/SearchMovie.api")
+    fun requesSearchMovieFromTag(@Query("years") years: String, @Query("genreTypes") genreTypes: String?, @Query("areas") areas: String = "-1",
+                                 @Query("sortType") sortType: Int = 3, @Query("sortMethod") sortMethod: Int = 1, @Query("pageIndex") pageIndex: Int = 1): Observable<TagMovieSearchResult>
 }

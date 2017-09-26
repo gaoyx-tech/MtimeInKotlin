@@ -14,7 +14,7 @@ import android.widget.TextView
 import com.lovejiaming.timemovieinkotlin.R
 import com.lovejiaming.timemovieinkotlin.adapter.HotMovieSoonComeAdapter
 import com.lovejiaming.timemovieinkotlin.chAllAsyncToMainThread
-import com.lovejiaming.timemovieinkotlin.networkbusiness.NetWorkRealCall_Time
+import com.lovejiaming.timemovieinkotlin.networkbusiness.NetWorkRealCallMtime
 import kotlinx.android.synthetic.main.fragment_hot_movie_sooncome.*
 
 /**
@@ -62,7 +62,7 @@ class HotMovie_SoonComeFragment : Fragment() {
     }
 
     fun requestNetWorkData() {
-        NetWorkRealCall_Time.newInstance()
+        NetWorkRealCallMtime.newInstance()
                 .getHotMovieService()
                 .requestSoonComeHotMovie("290")
                 .chAllAsyncToMainThread()
