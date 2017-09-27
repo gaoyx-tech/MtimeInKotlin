@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_search_result.*
 class SearchResultActivity : AutoLayoutActivity() {
     //电影类型
     private val mArrTypes: Array<String> by lazy {
-        arrayOf("剧情", "爱情", "喜剧", "科幻", "动作", "悬疑", "犯罪", "惊悚", "动画", "恐怖", "战争", "历史", "奇幻", "传记", "音乐", "家庭", "纪录片")
+        arrayOf("剧情 ", "爱情 ", "喜剧 ", "科幻 ", "动作 ", "悬疑 ", "犯罪 ", "惊悚 ", "动画 ", "恐怖 ", "战争 ", "历史 ", "奇幻 ", "传记 ", "音乐 ", "家庭 ", "纪录片 ")
     }
     //year
     private val mArrYears: MutableList<Int> by lazy {

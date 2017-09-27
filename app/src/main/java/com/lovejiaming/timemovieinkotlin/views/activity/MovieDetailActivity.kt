@@ -78,7 +78,7 @@ class MovieDetailActivity : AutoLayoutActivity() {
     fun initView() {
         swipe_detail.isRefreshing = true
         //
-        detail_toolbar.title = "<< ${intent.getStringExtra("moviename")} >>  MTIME "
+        detail_toolbar.title = "<< ${intent.getStringExtra("moviename")} >>  "
         setSupportActionBar(detail_toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         detail_toolbar.setNavigationOnClickListener { finish() }

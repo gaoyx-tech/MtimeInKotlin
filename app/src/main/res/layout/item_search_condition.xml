@@ -8,4 +8,5 @@
     android:includeFontPadding="false"
     android:padding="2dp"
     android:textColor="#fff"
-    android:textSize="12sp" />
+    android:textSize="13sp"
+    android:textStyle="italic|bold" />
