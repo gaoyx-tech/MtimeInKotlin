@@ -4,6 +4,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 /**
  * Created by xiaoxin on 2017/8/24.
@@ -16,7 +17,10 @@ class NetWorkRealCallMtime private constructor() {
 
     //主构造初始化块
     init {
-        val okhttpClient = OkHttpClient.Builder().build()
+        val okhttpClient = OkHttpClient.Builder().
+                connectTimeout(3000, TimeUnit.MILLISECONDS)
+                .readTimeout(3000, TimeUnit.MILLISECONDS)
+                .writeTimeout(3000, TimeUnit.MILLISECONDS).build()
         mRetrofit = Retrofit.Builder().
                 baseUrl(BASE_URL).
                 addCallAdapterFactory(RxJava2CallAdapterFactory.create()).
