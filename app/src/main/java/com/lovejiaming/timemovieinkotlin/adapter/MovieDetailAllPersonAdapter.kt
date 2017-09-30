@@ -54,21 +54,20 @@ class MovieDetailAllPersonAdapter(val ctx: Context, person: PersonDetailAll) : R
 
     override fun getItemCount(): Int = m_nShouldDisplayCount
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
-        if (viewType == JOB_TEXT_TYPE) {
-            val view = LayoutInflater.from(ctx).inflate(R.layout.item_hot_movie_come_ofalldate, null)
-            return PersonJobTextViewHolder(view)
-        } else {
-            val view = LayoutInflater.from(ctx).inflate(R.layout.item_hot_movie_come_ofall, null)
-            return PersonViewHolder(view)
-        }
-    }
+    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder =
+            if (viewType == JOB_TEXT_TYPE) {
+                val view = LayoutInflater.from(ctx).inflate(R.layout.item_hot_movie_come_ofalldate, null)
+                PersonJobTextViewHolder(view)
+            } else {
+                val view = LayoutInflater.from(ctx).inflate(R.layout.item_hot_movie_come_ofall, null)
+                PersonViewHolder(view)
+            }
+
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
         when (getItemViewType(position)) {
             JOB_TEXT_TYPE -> {
-                m_arrTypeNameIndex.forEachIndexed {
-                    index, value ->
+                m_arrTypeNameIndex.forEachIndexed { index, value ->
                     if (value == position) {
                         (holder as PersonJobTextViewHolder).apply { textJob?.text = m_arrTypeNames[index] }
                     }

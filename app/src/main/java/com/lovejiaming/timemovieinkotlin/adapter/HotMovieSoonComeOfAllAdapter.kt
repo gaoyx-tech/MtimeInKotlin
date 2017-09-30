@@ -2,7 +2,6 @@ package com.lovejiaming.timemovieinkotlin.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -79,8 +78,7 @@ class HotMovieSoonComeOfAllAdapter(val ctx: Context) : RecyclerView.Adapter<Recy
             }
             DATE_TYPE -> {
                 with(holder as ComeAllHolderDate) {
-                    m_arrListSumSize.forEachIndexed {
-                        index, value ->
+                    m_arrListSumSize.forEachIndexed { index, value ->
                         if (value == position)
                             releasedate?.text = m_arrListRD[index]
                     }
@@ -91,26 +89,24 @@ class HotMovieSoonComeOfAllAdapter(val ctx: Context) : RecyclerView.Adapter<Recy
 
     override fun getItemCount(): Int = m_nLoadCount
 
-    override fun getItemViewType(position: Int): Int {
-        if (position == 0 || position in m_arrListSumSize) {
-            return DATE_TYPE
-        } else
-            return INFO_TYPE
-    }
+    override fun getItemViewType(position: Int): Int =
+            when (position) {
+                0, in m_arrListSumSize -> DATE_TYPE
+                else -> INFO_TYPE
+            }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
-        when (viewType) {
-            INFO_TYPE -> {
-                val view = LayoutInflater.from(ctx).inflate(R.layout.item_hot_movie_come_ofall, null)
-                return ComeAllHolderInfo(view)
+    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder =
+            when (viewType) {
+                INFO_TYPE -> {
+                    val view = LayoutInflater.from(ctx).inflate(R.layout.item_hot_movie_come_ofall, null)
+                    ComeAllHolderInfo(view)
+                }
+                DATE_TYPE -> {
+                    val view = LayoutInflater.from(ctx).inflate(R.layout.item_hot_movie_come_ofalldate, null)
+                    ComeAllHolderDate(view)
+                }
+                else -> null!!
             }
-            DATE_TYPE -> {
-                val view = LayoutInflater.from(ctx).inflate(R.layout.item_hot_movie_come_ofalldate, null)
-                return ComeAllHolderDate(view)
-            }
-        }
-        return null!!
-    }
 
     class ComeAllHolderInfo(itemView: View?) : RecyclerView.ViewHolder(itemView) {
         init {

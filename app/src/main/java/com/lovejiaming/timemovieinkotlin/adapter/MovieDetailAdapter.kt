@@ -42,6 +42,7 @@ class MovieDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.V
     fun addPersonList(personDetailAll: PersonDetailAll) {
         this.mPersonAll = personDetailAll
     }
+
     //
     fun insertDetailData(detail: MovieDetailInfo, movieId: String) {
         this.mMovieDetail = detail
@@ -120,42 +121,42 @@ class MovieDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.V
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
-        val view: View?
-        when (viewType) {
-            HEAD_TYPE -> {
-                view = LayoutInflater.from(ctx).inflate(R.layout.item_detail_headinfo, null)
-                AutoUtils.autoSize(view)
-                return HeadInfoViewHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder =
+            when (viewType) {
+                HEAD_TYPE -> {
+                    val view: View? = LayoutInflater.from(ctx).inflate(R.layout.item_detail_headinfo, null)
+                    AutoUtils.autoSize(view)
+                    HeadInfoViewHolder(view)
+                }
+                CONTENT_TYPE -> {
+                    val view: View? = LayoutInflater.from(ctx).inflate(R.layout.item_detail_contentinfo, null)
+                    AutoUtils.autoSize(view)
+                    ContentViewHolder(view)
+                }
+                IMAGE_TYPE -> {
+                    val view: View? = LayoutInflater.from(ctx).inflate(R.layout.item_detail_imageinfo, null)
+                    AutoUtils.autoSize(view)
+                    ImageInfoViewHolder(view)
+                }
+                VIDEO_TYPE -> {
+                    val view: View? = LayoutInflater.from(ctx).inflate(R.layout.item_detail_videoinfo, null)
+                    AutoUtils.autoSize(view)
+                    VideoInfoViewHolder(view)
+                }
+                PERSON_TYPE -> {
+                    val view: View? = LayoutInflater.from(ctx).inflate(R.layout.item_detail_recyclerperson, null)
+                    AutoUtils.autoSize(view)
+                    PersonRecyclerViewHolder(ctx, view)
+                }
+                COMMENT_TYPE -> {
+                    val view: View? = LayoutInflater.from(ctx).inflate(R.layout.item_detail_recyclerperson, null)
+                    AutoUtils.autoSize(view)
+                    CommentViewHolder(ctx, view)
+                }
+                else -> {
+                    null!!
+                }
             }
-            CONTENT_TYPE -> {
-                view = LayoutInflater.from(ctx).inflate(R.layout.item_detail_contentinfo, null)
-                AutoUtils.autoSize(view)
-                return ContentViewHolder(view)
-            }
-            IMAGE_TYPE -> {
-                view = LayoutInflater.from(ctx).inflate(R.layout.item_detail_imageinfo, null)
-                AutoUtils.autoSize(view)
-                return ImageInfoViewHolder(view)
-            }
-            VIDEO_TYPE -> {
-                view = LayoutInflater.from(ctx).inflate(R.layout.item_detail_videoinfo, null)
-                AutoUtils.autoSize(view)
-                return VideoInfoViewHolder(view)
-            }
-            PERSON_TYPE -> {
-                view = LayoutInflater.from(ctx).inflate(R.layout.item_detail_recyclerperson, null)
-                AutoUtils.autoSize(view)
-                return PersonRecyclerViewHolder(ctx, view)
-            }
-            COMMENT_TYPE -> {
-                view = LayoutInflater.from(ctx).inflate(R.layout.item_detail_recyclerperson, null)
-                AutoUtils.autoSize(view)
-                return CommentViewHolder(ctx, view)
-            }
-        }
-        return null!!
-    }
 
     override fun getItemCount(): Int = 6
 

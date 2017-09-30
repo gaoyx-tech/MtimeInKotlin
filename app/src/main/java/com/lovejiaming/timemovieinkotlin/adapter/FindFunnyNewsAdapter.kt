@@ -69,34 +69,32 @@ class FindFunnyNewsAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView
     }
 
     //
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
-        when (viewType) {
-            PICS_ONE -> {
-                val view = LayoutInflater.from(ctx).inflate(R.layout.item_findfunny_news_pic1, null)
-                return PicOneViewHolder(view)
+    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder =
+            when (viewType) {
+                PICS_ONE -> {
+                    val view = LayoutInflater.from(ctx).inflate(R.layout.item_findfunny_news_pic1, null)
+                    PicOneViewHolder(view)
+                }
+                PICS_THREE -> {
+                    val view = LayoutInflater.from(ctx).inflate(R.layout.item_findfunny_news_pic3, null)
+                    PicThreeViewHolder(view)
+                }
+                BANNER_ADVERTISE -> {
+                    val view = LayoutInflater.from(ctx).inflate(R.layout.item_findfunny_news_banner, null)
+                    BannerViewHolder(view)
+                }
+                else -> null!!
             }
-            PICS_THREE -> {
-                val view = LayoutInflater.from(ctx).inflate(R.layout.item_findfunny_news_pic3, null)
-                return PicThreeViewHolder(view)
-            }
-            BANNER_ADVERTISE -> {
-                val view = LayoutInflater.from(ctx).inflate(R.layout.item_findfunny_news_banner, null)
-                return BannerViewHolder(view)
-            }
-        }
-        return null!!
-    }
 
     override fun getItemCount(): Int = m_listNewsData?.size ?: 0 + 1
 
-    override fun getItemViewType(position: Int): Int {
-        if (position == 0)
-            return BANNER_ADVERTISE
-        else if (m_listNewsData?.get(position - 1)?.images?.size!! == 3)
-            return PICS_THREE
-        else
-            return PICS_ONE
-    }
+    override fun getItemViewType(position: Int): Int =
+            if (position == 0)
+                BANNER_ADVERTISE
+            else if (m_listNewsData?.get(position - 1)?.images?.size!! == 3)
+                PICS_THREE
+            else
+                PICS_ONE
 
     @SuppressLint("SimpleDateFormat")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {

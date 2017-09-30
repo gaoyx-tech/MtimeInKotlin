@@ -25,14 +25,14 @@ import io.reactivex.ObservableOnSubscribe
  * Created by xiaoxin on 2017/8/24.
  */
 
-class HotMovieNowadaysAdapter(val ctx: Context, val actionListener: (String) -> Unit/*HotMovie_NowadaysFragment.IClickHaveSeenBtn*/) : RecyclerView.Adapter<HotMovieNowadaysAdapter.InnerViewHolder>() {
+class HotMovieNowadaysAdapter(val ctx: Context, private val actionListener: (String) -> Unit/*HotMovie_NowadaysFragment.IClickHaveSeenBtn*/) : RecyclerView.Adapter<HotMovieNowadaysAdapter.InnerViewHolder>() {
     //数据集
-    var m_listHotNowadays: MutableList<HotMovieNowadaysItemData> = mutableListOf()
+    private var m_listHotNowadays: MutableList<HotMovieNowadaysItemData> = mutableListOf()
     //看过数据
-    var m_listHaveSeen: List<Int?> = mutableListOf()
+    private var m_listHaveSeen: List<Int?> = mutableListOf()
     //点击了某一个看过
-    var m_nClickChangePos = -1
-    var m_nLastPosition = -1
+    private var m_nClickChangePos = -1
+    private var m_nLastPosition = -1
 
     fun insertDatas(list: MutableList<HotMovieNowadaysItemData>) {
         m_listHotNowadays = list

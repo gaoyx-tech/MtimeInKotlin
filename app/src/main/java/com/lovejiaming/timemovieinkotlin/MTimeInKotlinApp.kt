@@ -4,7 +4,8 @@ import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.content.Intent
-import android.support.v4.content.ContextCompat.startActivity
+import android.view.LayoutInflater
+import android.view.View
 import android.widget.ImageView
 import com.baidu.mapapi.CoordType
 import com.baidu.mapapi.SDKInitializer
@@ -34,6 +35,11 @@ inline fun <reified T : Activity> Context.chAllstartActivity(supportParam: Map<S
     }
     startActivity(intent)
 }
+
+//
+fun chAllInflateView(ctx: Context, nResId: Int): View =
+        LayoutInflater.from(ctx).inflate(nResId, null)
+
 
 class MTimeInKotlinApp : Application() {
     //
