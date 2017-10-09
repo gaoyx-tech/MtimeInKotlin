@@ -10,11 +10,10 @@ import android.view.View
 import com.bumptech.glide.Glide
 import com.lovejiaming.timemovieinkotlin.R
 import com.lovejiaming.timemovieinkotlin.adapter.MovieDetailAdapter
+import com.lovejiaming.timemovieinkotlin.chAllAsyncToMainThread
 import com.lovejiaming.timemovieinkotlin.networkbusiness.NetWorkRealCallMtime
 import com.zhy.autolayout.AutoLayoutActivity
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_movie_detail.*
 
 class MovieDetailActivity : AutoLayoutActivity() {
@@ -32,7 +31,7 @@ class MovieDetailActivity : AutoLayoutActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie_detail)
         initView()
-        RequestDetaiOfAllPerson()
+        requestDetaiOfAllPerson()
     }
 
     override fun onDestroy() {
@@ -42,40 +41,37 @@ class MovieDetailActivity : AutoLayoutActivity() {
         Glide.get(this).clearMemory()
     }
 
-    fun RequestDetaiOfAllPerson() {
+    private fun requestDetaiOfAllPerson() {
         m_DisposblePerson = NetWorkRealCallMtime.newInstance().getMovieDetailService()
                 .requestMovieDetailPersonlList(m_sMovieId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .chAllAsyncToMainThread()
                 .subscribe {
                     mAdapter.addPersonList(it)
-                    RequestMovieDetailShortComment()
+                    requestMovieDetailShortComment()
                 }
     }
 
-    fun RequestMovieDetailInfo() {
+    private fun requestMovieDetailInfo() {
         m_DiposableDetail = NetWorkRealCallMtime.newInstance().getMovieDetailService()
                 .requestMovieDetail("290", m_sMovieId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .chAllAsyncToMainThread()
                 .subscribe({
                     mAdapter.insertDetailData(it, movieId = m_sMovieId)
                     swipe_detail.isRefreshing = false
                 }, { Log.i("neterror", "neterrr") })
     }
 
-    fun RequestMovieDetailShortComment() {
+    private fun requestMovieDetailShortComment() {
         NetWorkRealCallMtime.newInstance().getMovieDetailService()
                 .requestMovieAllComment(m_sMovieId)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
+                .chAllAsyncToMainThread()
                 .subscribe({
-                    MovieDetailAdapter.MovieDetailCommentAdapter.insertAllComment(it.data?.cts!!)
-                    RequestMovieDetailInfo()
+                    mAdapter.insertAllComment(it.data?.cts!!)
+                    requestMovieDetailInfo()
                 }, { Log.i("ctscts === ", "error") })
     }
 
-    fun initView() {
+    private fun initView() {
         swipe_detail.isRefreshing = true
         //
         detail_toolbar.title = "<< ${intent.getStringExtra("moviename")} >>  "

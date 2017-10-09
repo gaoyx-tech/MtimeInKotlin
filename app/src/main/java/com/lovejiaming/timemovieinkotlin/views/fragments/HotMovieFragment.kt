@@ -54,6 +54,7 @@ class HotMovieFragment : Fragment() {
             override fun getPageTitle(position: Int): CharSequence = mArrTitles[position]
         }
         titletablayout.setupWithViewPager(titleviewpager)
+        titleviewpager.currentItem = 1
     }
 
     companion object {

@@ -37,6 +37,12 @@ class MovieDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.V
     private val PERSON_TYPE = 5
     private val COMMENT_TYPE = 6
     var mPersonAll: PersonDetailAll? = null
+    var mlistComment: ArrayList<DetailCommentItem>? = null
+
+    //
+    fun insertAllComment(cts: ArrayList<DetailCommentItem>) {
+        mlistComment = cts
+    }
 
     //
     fun addPersonList(personDetailAll: PersonDetailAll) {
@@ -117,6 +123,9 @@ class MovieDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.V
             }
             PERSON_TYPE -> {
 
+            }
+            COMMENT_TYPE -> {
+                (holder as CommentViewHolder).mAdapter.notifyDataSetChanged()
             }
         }
     }
@@ -213,6 +222,7 @@ class MovieDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.V
         }
     }
 
+    //Person viewholder
     inner class PersonRecyclerViewHolder(val ctx: Context, itemView: View?) : RecyclerView.ViewHolder(itemView) {
         val recycler_persons = itemView?.findViewById<RecyclerView>(R.id.detail_recyclerview_persons)
         val more_person = itemView?.findViewById<TextView>(R.id.more_person)
@@ -280,7 +290,7 @@ class MovieDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.V
     }
 
     //comment list
-    class CommentViewHolder(val ctx: Context, itemView: View?) : RecyclerView.ViewHolder(itemView) {
+    inner class CommentViewHolder(val ctx: Context, itemView: View?) : RecyclerView.ViewHolder(itemView) {
         val recyclerView by lazy { itemView?.findViewById<RecyclerView>(R.id.detail_recyclerview_persons) }
         val more_person by lazy { itemView?.findViewById<TextView>(R.id.more_person) }
         val mAdapter: MovieDetailCommentAdapter by lazy {
@@ -294,28 +304,33 @@ class MovieDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.V
         }
     }
 
-    class MovieDetailCommentAdapter(val ctx: Context) : RecyclerView.Adapter<MovieDetailCommentAdapter.ViewHolder>() {
-        companion object {
-            var m_listComment: ArrayList<DetailCommentItem>? = null
-            fun insertAllComment(cts: ArrayList<DetailCommentItem>) {
-                m_listComment = cts
-            }
-        }
-
+    inner class MovieDetailCommentAdapter(val ctx: Context) : RecyclerView.Adapter<MovieDetailCommentAdapter.ViewHolder>() {
         @SuppressLint("SetTextI18n")
         override fun onBindViewHolder(holder: MovieDetailCommentAdapter.ViewHolder?, position: Int) {
             holder?.apply {
-                comment_head?.chAllDisplayImage(ctx, m_listComment?.get(position)?.caimg)
-                comment_name_address?.text = "${m_listComment?.get(position)?.ca}    (${m_listComment?.get(position)?.cal})"
-                comment_info?.text = m_listComment?.get(position)?.ce
-                comment_score?.text = "打分 ${m_listComment?.get(position)?.cr}"
-                //
-                val strTime = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Date(m_listComment?.get(position)?.cd!!.times(1000)))//乘以1000，from70y
-                comment_time?.text = strTime
+                if (position == mlistComment?.size) {
+                    comment_head?.visibility = View.GONE
+                    comment_name_address?.visibility = View.GONE
+                    comment_score?.visibility = View.GONE
+                    comment_time?.visibility = View.GONE
+                    //
+                    val rlparam = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT)
+                    rlparam.addRule(RelativeLayout.CENTER_IN_PARENT)
+                    comment_info?.layoutParams = rlparam
+                    comment_info?.text = "查看更多短评论"
+                } else {
+                    comment_head?.chAllDisplayImage(ctx, mlistComment?.get(position)?.caimg)
+                    comment_name_address?.text = "${mlistComment?.get(position)?.ca}    (${mlistComment?.get(position)?.cal})"
+                    comment_info?.text = mlistComment?.get(position)?.ce
+                    comment_score?.text = "打分 ${mlistComment?.get(position)?.cr}"
+                    //
+                    val strTime = SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Date(mlistComment?.get(position)?.cd!!.times(1000)))//乘以1000，from70y
+                    comment_time?.text = strTime
+                }
             }
         }
 
-        override fun getItemCount(): Int = m_listComment?.size ?: 0
+        override fun getItemCount(): Int = (mlistComment?.size ?: 0).plus(1)
 
         override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
             val view = LayoutInflater.from(ctx).inflate(R.layout.item_detail_comment, null)
@@ -323,7 +338,7 @@ class MovieDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.V
             return ViewHolder(view)
         }
 
-        class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
+        inner class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
             val comment_head by lazy { itemView?.findViewById<ImageView>(R.id.comment_head) }
             val comment_name_address by lazy { itemView?.findViewById<TextView>(R.id.comment_name_address) }
             val comment_info by lazy { itemView?.findViewById<TextView>(R.id.comment_info) }
