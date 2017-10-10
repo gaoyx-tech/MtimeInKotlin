@@ -6,8 +6,8 @@
 
     <ImageView
         android:id="@+id/comment_head"
-        android:layout_width="35px"
-        android:layout_height="35px"
+        android:layout_width="40px"
+        android:layout_height="40px"
         android:layout_marginLeft="10px"
         android:layout_marginTop="10px" />
 

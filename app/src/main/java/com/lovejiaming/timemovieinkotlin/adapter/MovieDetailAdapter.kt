@@ -13,6 +13,7 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import com.lovejiaming.timemovieinkotlin.R
 import com.lovejiaming.timemovieinkotlin.chAllDisplayImage
+import com.lovejiaming.timemovieinkotlin.chAllstartActivity
 import com.lovejiaming.timemovieinkotlin.networkbusiness.DetailCommentItem
 import com.lovejiaming.timemovieinkotlin.networkbusiness.MovieDetailInfo
 import com.lovejiaming.timemovieinkotlin.networkbusiness.PersonDetailAll
@@ -318,6 +319,10 @@ class MovieDetailAdapter(val ctx: Context) : RecyclerView.Adapter<RecyclerView.V
                     rlparam.addRule(RelativeLayout.CENTER_IN_PARENT)
                     comment_info?.layoutParams = rlparam
                     comment_info?.text = "查看更多短评论"
+                    //
+                    itemView.setOnClickListener {
+                        ctx.chAllstartActivity<MovieDetailOfCommentActivity>(mapOf("movieid" to m_sMovieId))
+                    }
                 } else {
                     comment_head?.chAllDisplayImage(ctx, mlistComment?.get(position)?.caimg)
                     comment_name_address?.text = "${mlistComment?.get(position)?.ca}    (${mlistComment?.get(position)?.cal})"

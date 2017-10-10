@@ -74,6 +74,9 @@
         <activity
             android:name=".views.activity.PersonDetailActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.activity.MovieDetailOfCommentActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
