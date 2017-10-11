@@ -4,7 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    buildToolsVersion '26.0.2'
     defaultConfig {
         applicationId "com.lovejiaming.timemovieinkotlin"
         minSdkVersion 21
@@ -46,7 +46,6 @@ dependencies {
     //autolayout
     implementation 'com.zhy:autolayout:1.4.5'
     //Rx
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'io.reactivex.rxjava2:rxjava:2.1.4'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     //Net
