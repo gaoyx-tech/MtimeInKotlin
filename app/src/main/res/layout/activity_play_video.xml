@@ -85,5 +85,5 @@
         android:layout_marginBottom="26px"
         android:layout_toLeftOf="@id/alltime"
         android:layout_toRightOf="@id/currenttime"
-        android:maxHeight="2px" />
+        android:maxHeight="10px" />
 </RelativeLayout>

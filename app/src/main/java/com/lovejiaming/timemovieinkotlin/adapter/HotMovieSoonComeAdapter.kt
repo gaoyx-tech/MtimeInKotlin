@@ -1,12 +1,13 @@
 package com.lovejiaming.timemovieinkotlin.adapter
 
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
@@ -23,6 +24,7 @@ import io.reactivex.Observable
 import io.reactivex.ObservableOnSubscribe
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import java.util.concurrent.TimeUnit
 
 /**
  * Created by xiaoxin on 2017/8/25.
@@ -62,8 +64,7 @@ class HotMovieSoonComeAdapter(val ctx: Context, val wannaListener: (String) -> U
     }
 
     fun loadAllWantSeeDataFromDataBase() {
-        Observable.create(ObservableOnSubscribe<List<Int>> {
-            e ->
+        Observable.create(ObservableOnSubscribe<List<Int>> { e ->
             e.onNext(MovieRoomOperate.newInstance(ctx).queryAllMovieWantSee().map { it.movieId })//过滤id
         }).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io()).subscribe {
@@ -73,8 +74,7 @@ class HotMovieSoonComeAdapter(val ctx: Context, val wannaListener: (String) -> U
     }
 
     fun insertIWantSeeEntity(movieId: Int, movieName: String, movieCoverUrl: String) {
-        Observable.create(ObservableOnSubscribe<String> {
-            e ->
+        Observable.create(ObservableOnSubscribe<String> { e ->
             MovieRoomOperate.newInstance(ctx).insertOneMovieWantSee(movieId, movieName, movieCoverUrl)
             e.onNext("")
         }).observeOn(AndroidSchedulers.mainThread())
@@ -84,8 +84,7 @@ class HotMovieSoonComeAdapter(val ctx: Context, val wannaListener: (String) -> U
     }
 
     fun deleteIWantSeeEntity(movieId: Int) {
-        Observable.create(ObservableOnSubscribe<String> {
-            e ->
+        Observable.create(ObservableOnSubscribe<String> { e ->
             MovieRoomOperate.newInstance(ctx).deleteOneMovieWantSee(movieId)
             e.onNext("")
         }).observeOn(AndroidSchedulers.mainThread())
@@ -248,6 +247,8 @@ class HotMovieSoonComeAdapter(val ctx: Context, val wannaListener: (String) -> U
         val tv_wanna6: TextView by lazy { itemView.findViewById<TextView>(R.id.tv_wanna6) }
         //
         val tv_comemore: TextView by lazy { itemView.findViewById<TextView>(R.id.come_more) }
+        //
+        var m_nAlphaIndex: Int = 0;
 
         init {
             AutoUtils.autoSize(itemView)
@@ -256,6 +257,26 @@ class HotMovieSoonComeAdapter(val ctx: Context, val wannaListener: (String) -> U
             listName = arrayListOf(tv_name1, tv_name2, tv_name3, tv_name4, tv_name5, tv_name6)
             listWannaCount = arrayListOf(tv_wanna1, tv_wanna2, tv_wanna3, tv_wanna4, tv_wanna5, tv_wanna6)
             listIwanna = arrayListOf(iv_iwannasee1, iv_iwannasee2, iv_iwannasee3, iv_iwannasee4, iv_iwannasee5, iv_iwannasee6)
+
+            Observable.interval(2, TimeUnit.SECONDS).observeOn(AndroidSchedulers.mainThread()).subscribe {
+                listCover?.forEachIndexed { index, imageView ->
+                    when (index) {
+                        m_nAlphaIndex -> {
+                            ObjectAnimator.ofFloat(imageView, "alpha", 0.2f, 1f).apply {
+                                duration = 1000
+                                interpolator = AccelerateDecelerateInterpolator()
+                                start()
+                            }
+                        }
+                        else -> {
+                            imageView.alpha = 0.2f
+                        }
+                    }
+                }
+                ++m_nAlphaIndex
+                if (m_nAlphaIndex == listCover?.size)
+                    m_nAlphaIndex = 0
+            }
         }
     }
 }

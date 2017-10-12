@@ -18,9 +18,9 @@ class NetWorkRealCallMtime private constructor() {
     //主构造初始化块
     init {
         val okhttpClient = OkHttpClient.Builder().
-                connectTimeout(3000, TimeUnit.MILLISECONDS)
-                .readTimeout(3000, TimeUnit.MILLISECONDS)
-                .writeTimeout(3000, TimeUnit.MILLISECONDS).build()
+                connectTimeout(6000, TimeUnit.MILLISECONDS)
+                .readTimeout(6000, TimeUnit.MILLISECONDS)
+                .writeTimeout(6000, TimeUnit.MILLISECONDS).build()
         mRetrofit = Retrofit.Builder().
                 baseUrl(BASE_URL).
                 addCallAdapterFactory(RxJava2CallAdapterFactory.create()).
