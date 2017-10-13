@@ -1,13 +1,11 @@
 package com.lovejiaming.timemovieinkotlin.adapter
 
-import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
@@ -24,7 +22,6 @@ import io.reactivex.Observable
 import io.reactivex.ObservableOnSubscribe
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import java.util.concurrent.TimeUnit
 
 /**
  * Created by xiaoxin on 2017/8/25.
@@ -112,7 +109,7 @@ class HotMovieSoonComeAdapter(val ctx: Context, val wannaListener: (String) -> U
                             listWannaCount?.get(i)?.visibility = View.VISIBLE
                             listIwanna?.get(i)?.visibility = View.VISIBLE
                             //
-                            Glide.with(ctx).load(mAttentionData?.get(i)?.image).centerCrop().skipMemoryCache(false).into(listCover?.get(i)).onDestroy()
+                            Glide.with(ctx).load(mAttentionData?.get(i)?.image).into(listCover?.get(i)).onDestroy()
                             listName?.get(i)?.text = "<< ${mAttentionData?.get(i)?.title} >>"
                             listWannaCount?.get(i)?.text = "${mAttentionData?.get(i)?.wantedCount} 人想看"
                             //想看
@@ -165,7 +162,7 @@ class HotMovieSoonComeAdapter(val ctx: Context, val wannaListener: (String) -> U
                             listWannaCount?.get(i)?.visibility = View.VISIBLE
                             listIwanna?.get(i)?.visibility = View.VISIBLE
                             //
-                            Glide.with(ctx).load(listAllMonth[i].image).centerCrop().skipMemoryCache(false).into(listCover?.get(i)).onDestroy()
+                            Glide.with(ctx).load(listAllMonth[i].image).into(listCover?.get(i)).onDestroy()
                             listName?.get(i)?.text = "<< ${listAllMonth[i].title} >>"
                             listWannaCount?.get(i)?.text = "${listAllMonth[i].wantedCount} 人想看"
                             //想看按钮
@@ -258,25 +255,25 @@ class HotMovieSoonComeAdapter(val ctx: Context, val wannaListener: (String) -> U
             listWannaCount = arrayListOf(tv_wanna1, tv_wanna2, tv_wanna3, tv_wanna4, tv_wanna5, tv_wanna6)
             listIwanna = arrayListOf(iv_iwannasee1, iv_iwannasee2, iv_iwannasee3, iv_iwannasee4, iv_iwannasee5, iv_iwannasee6)
 
-            Observable.interval(2, TimeUnit.SECONDS).observeOn(AndroidSchedulers.mainThread()).subscribe {
-                listCover?.forEachIndexed { index, imageView ->
-                    when (index) {
-                        m_nAlphaIndex -> {
-                            ObjectAnimator.ofFloat(imageView, "alpha", 0.2f, 1f).apply {
-                                duration = 1000
-                                interpolator = AccelerateDecelerateInterpolator()
-                                start()
-                            }
-                        }
-                        else -> {
-                            imageView.alpha = 0.2f
-                        }
-                    }
-                }
-                ++m_nAlphaIndex
-                if (m_nAlphaIndex == listCover?.size)
-                    m_nAlphaIndex = 0
-            }
+//            Observable.interval(2, TimeUnit.SECONDS).observeOn(AndroidSchedulers.mainThread()).subscribe {
+//                listCover?.forEachIndexed { index, imageView ->
+//                    when (index) {
+//                        m_nAlphaIndex -> {
+//                            ObjectAnimator.ofFloat(imageView, "alpha", 0.2f, 1f).apply {
+//                                duration = 1000
+//                                interpolator = AccelerateDecelerateInterpolator()
+//                                start()
+//                            }
+//                        }
+//                        else -> {
+//                            imageView.alpha = 0.2f
+//                        }
+//                    }
+//                }
+//                ++m_nAlphaIndex
+//                if (m_nAlphaIndex == listCover?.size)
+//                    m_nAlphaIndex = 0
+//            }
         }
     }
 }

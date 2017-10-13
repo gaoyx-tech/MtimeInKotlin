@@ -119,10 +119,10 @@ class HotMovieNowadaysAdapter(val ctx: Context, private val actionListener: (Str
             itemView.setOnClickListener {
                 ctx.chAllstartActivity<MovieDetailActivity>(mapOf("movieid" to m_listHotNowadays[position].id.toString(), "moviename" to m_listHotNowadays[position].tCn!!))
             }
-            if (position > m_nLastPosition) {
-                m_nLastPosition = position
-                addAnimations(itemView)
-            }
+//            if (position > m_nLastPosition) {
+//                m_nLastPosition = position
+//                addAnimations(itemView)
+//            }
         }
     }
 

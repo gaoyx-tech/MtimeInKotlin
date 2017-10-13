@@ -10,16 +10,22 @@ import android.widget.ImageView
 import com.baidu.mapapi.CoordType
 import com.baidu.mapapi.SDKInitializer
 import com.bumptech.glide.Glide
+import com.bumptech.glide.Priority
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.RequestOptions.centerCropTransform
 import com.lovejiaming.timemovieinkotlin.networkbusiness.HotMovieSoonComeItemData
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
+
 
 /**
  * Created by xiaoxin on 2017/8/28.
  */
 //ImageView扩展函数
 fun ImageView.chAllDisplayImage(activity: Context, strUrl: String?) {
-    Glide.with(activity).load(strUrl).skipMemoryCache(true).centerCrop().into(this).onDestroy()
+    Glide.with(activity).load(strUrl).transition(DrawableTransitionOptions().crossFade(500)).apply {
+        centerCropTransform().skipMemoryCache(true).priority(Priority.HIGH)
+    }.into(this).onDestroy()
 }
 
 //异步网络请求扩展函数
